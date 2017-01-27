@@ -66,11 +66,5 @@ void Player::Draw(sf::RenderWindow* window)
 	window->draw(m_playerBody);
 }
 
-void Player::ApplyForce(sf::Vector2f force)
-{
-	//Scaling the vector down by the mass
-	force /= m_mass;
-	m_accel += force;
-}
 
 
