@@ -10,6 +10,7 @@ public:
 	void ApplyForce(sf::Vector2f force);
 	float Magnitude(sf::Vector2f vector);
 	sf::Vector2f Normalize(sf::Vector2f vector);
+	void CalculateFriction();
 
 
 protected:
@@ -24,6 +25,7 @@ protected:
 	float frictionCoeff;
 	sf::Vector2f m_friction;
 	float m_moveSpeed;
+	float m_maxMoveSpeed;
 	float m_mass;
 };
 
