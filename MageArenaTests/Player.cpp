@@ -8,11 +8,12 @@ Player::Player()
 	m_playerBody.setFillColor(sf::Color::Red);
 	m_aimer.setFillColor(sf::Color::Blue);
 	m_moveSpeed = 1000;
-	m_mass = 2.0f;
+	m_mass = 2.0f;  //Previously 2
 	m_upForce = sf::Vector2f(0, -m_moveSpeed);
 	m_downForce = sf::Vector2f(0, m_moveSpeed);
 	m_rightForce = sf::Vector2f(m_moveSpeed, 0);
 	m_leftForce = sf::Vector2f(-m_moveSpeed, 0);
+	m_velocity = sf::Vector2f(0, 0);
 	normalForce = 1.0f;
 	frictionCoeff = 0.5f;
 }
@@ -50,8 +51,12 @@ void Player::Update(sf::RenderWindow* window, sf::Clock* clock)
 		
 		float frictionMag = frictionCoeff * normalForce;
 		m_friction = m_velocity;
+		
+
+		m_friction = Normalize(m_velocity);
+		//printf("NORMALIZED: (%f,%f)\n", m_velocity.x, m_velocity.y);
 		m_friction *= -1.f;
-		m_friction *= frictionMag;
+		m_friction *= frictionMag; //was friction mag, changed for testing
 		printf("Friction.x:%f\nFriction.y:%f\n", m_friction.x, m_friction.y);
 		ApplyForce(m_friction);
 		m_velocity += m_accel * dt.asSeconds();

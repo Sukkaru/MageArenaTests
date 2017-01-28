@@ -5,7 +5,11 @@ class PhysicsObject : public GameObject
 public:
 	PhysicsObject();
 	~PhysicsObject();
+	void virtual Update(sf::RenderWindow* window);
+	void virtual Draw(sf::RenderWindow* window);
 	void ApplyForce(sf::Vector2f force);
+	float Magnitude(sf::Vector2f vector);
+	sf::Vector2f Normalize(sf::Vector2f vector);
 
 
 protected:
