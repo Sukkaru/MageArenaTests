@@ -11,7 +11,7 @@ PhysicsObject::~PhysicsObject()
 {
 }
 
-void PhysicsObject::Update(sf::RenderWindow * window)
+void PhysicsObject::Update(sf::RenderWindow * window, sf::Clock* clock)
 {
 }
 

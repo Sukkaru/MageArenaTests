@@ -21,12 +21,14 @@ void GameManager::Update(sf::RenderWindow * window, sf::Clock * clock)
 			window->close();
 	}
 	m_mage.Update(window,clock);
+	m_enemy.Update(window,clock);
 }
 
 void GameManager::Draw(sf::RenderWindow * window)
 {
 	window->clear();
 	m_mage.Draw(window);
+	m_enemy.Draw(window);
 	window->display();
 }
 

@@ -55,8 +55,8 @@ void Player::Update(sf::RenderWindow* window, sf::Clock* clock)
 	CalculateFriction();
 	ApplyForce(m_friction);
 	m_velocity += m_accel * dt.asSeconds();
-	printf("Accel.x:%f\nAccel.y:%f\n", m_accel.x, m_accel.y);
-	printf("Velocity.x:%f\nVelocity.y:%f\n", m_velocity.x, m_velocity.y);
+	//printf("Accel.x:%f\nAccel.y:%f\n", m_accel.x, m_accel.y);
+	//printf("Velocity.x:%f\nVelocity.y:%f\n", m_velocity.x, m_velocity.y);
 	m_playerBody.setPosition(m_playerBody.getPosition() + m_velocity * dt.asSeconds());
 	//printf("Position.x:%f\nPosition.y:%f\n", m_playerBody.getPosition().x, m_playerBody.getPosition().y);
 }
