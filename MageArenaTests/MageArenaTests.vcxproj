@@ -155,7 +155,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseSpell.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Fireball.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="PhysicsObject.h" />
@@ -164,7 +166,9 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BaseSpell.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Fireball.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="PhysicsObject.cpp" />

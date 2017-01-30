@@ -1,5 +1,6 @@
 #pragma once
 #include "PhysicsObject.h"
+#include "Fireball.h"
 #include <SFML/Graphics.hpp>
 class Player : public PhysicsObject
 {

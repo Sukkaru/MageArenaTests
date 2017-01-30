@@ -52,6 +52,19 @@ void Player::Update(sf::RenderWindow* window, sf::Clock* clock)
 	{
 		ApplyForce(m_rightForce);
 	}
+	//Fireball spell test
+	//Don't think this will work, probably need to use mouse events
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		//Calculate mousePos vector in relation to playerPos
+		//Cast mousePos from a Vector2I to a Vector2f
+		sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window));
+		sf::Vector2f direction = mousePos - m_playerBody.getPosition();
+		//Normalize the direction vector 
+		direction = Normalize(direction);
+		//Create the Fireball 
+		Fireball fireball(direction);
+	}
 	CalculateFriction();
 	ApplyForce(m_friction);
 	m_velocity += m_accel * dt.asSeconds();
