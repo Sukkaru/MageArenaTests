@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "Enemy.h"
+#include "CollisionManager.h"
 class GameManager
 {
 public:
@@ -12,5 +13,6 @@ public:
 private:
 	Player m_mage;
 	Enemy m_enemy;
+	CollisionManager m_collisionManager;
 };
 
