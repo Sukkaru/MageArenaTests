@@ -5,7 +5,7 @@ class PhysicsObject : public GameObject
 public:
 	PhysicsObject();
 	~PhysicsObject();
-	void virtual Update(sf::RenderWindow* window, sf::Clock* clock);
+	void virtual Update(sf::RenderWindow* window, sf::Time* dt);
 	void virtual Draw(sf::RenderWindow* window);
 	void ApplyForce(sf::Vector2f force);
 	float Magnitude(sf::Vector2f vector);

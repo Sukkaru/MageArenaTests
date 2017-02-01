@@ -7,7 +7,7 @@ class Player : public PhysicsObject
 public:
 	Player();
 	~Player();
-	void virtual Update(sf::RenderWindow* window, sf::Clock* clock);
+	void virtual Update(sf::RenderWindow* window, sf::Time* dt);
 	void virtual Draw(sf::RenderWindow* window);
 
 private:

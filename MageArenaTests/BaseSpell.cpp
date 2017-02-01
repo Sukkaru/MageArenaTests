@@ -11,7 +11,7 @@ BaseSpell::~BaseSpell()
 {
 }
 
-void BaseSpell::Update(sf::RenderWindow * window, sf::Clock * clock)
+void BaseSpell::Update(sf::RenderWindow * window, sf::Time* dt)
 {
 }
 

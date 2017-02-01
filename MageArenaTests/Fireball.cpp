@@ -16,10 +16,9 @@ Fireball::~Fireball()
 {
 }
 
-void Fireball::Update(sf::RenderWindow * window, sf::Clock * clock)
+void Fireball::Update(sf::RenderWindow * window, sf::Time* dt)
 {
-	sf::Time dt = clock->restart();
-	m_spellBody.setPosition(m_spellBody.getPosition() + m_velocity * dt.asSeconds());
+	m_spellBody.setPosition(m_spellBody.getPosition() + m_velocity * dt->asSeconds());
 }
 
 void Fireball::Draw(sf::RenderWindow * window)

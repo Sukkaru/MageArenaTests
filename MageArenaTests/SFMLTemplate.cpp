@@ -15,7 +15,8 @@ int main()
 	GameManager gameManager;
 	while (window.isOpen())
 	{
-		gameManager.Update(&window,&clock);
+		sf::Time dt = clock.restart();
+		gameManager.Update(&window,&dt);
 		gameManager.Draw(&window);
 
 	}

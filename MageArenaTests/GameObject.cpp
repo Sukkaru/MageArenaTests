@@ -10,7 +10,7 @@ GameObject::~GameObject()
 {
 }
 
-void GameObject::Update(sf::RenderWindow* window)
+void GameObject::Update(sf::RenderWindow* window, sf::Time* dt)
 {
 }
 

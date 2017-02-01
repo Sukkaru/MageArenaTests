@@ -8,7 +8,7 @@ class GameManager
 public:
 	GameManager();
 	~GameManager();
-	void Update(sf::RenderWindow* window, sf::Clock * clock);
+	void Update(sf::RenderWindow* window, sf::Time* dt);
 	void Draw(sf::RenderWindow* window);
 private:
 	Player m_mage;

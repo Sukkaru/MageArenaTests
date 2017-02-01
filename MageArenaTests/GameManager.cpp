@@ -12,7 +12,7 @@ GameManager::~GameManager()
 {
 }
 
-void GameManager::Update(sf::RenderWindow * window, sf::Clock * clock)
+void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 {
 	sf::Event event;
 	while (window->pollEvent(event))
@@ -20,8 +20,9 @@ void GameManager::Update(sf::RenderWindow * window, sf::Clock * clock)
 		if (event.type == sf::Event::Closed)
 			window->close();
 	}
-	m_mage.Update(window,clock);
-	m_enemy.Update(window,clock);
+
+	m_mage.Update(window,dt);
+	m_enemy.Update(window,dt);
 }
 
 void GameManager::Draw(sf::RenderWindow * window)

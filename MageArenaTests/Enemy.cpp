@@ -23,16 +23,15 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::Update(sf::RenderWindow * window, sf::Clock * clock)
+void Enemy::Update(sf::RenderWindow * window, sf::Time* dt)
 {
-	sf::Time dt = clock->restart();
 	//Reset acceleration so it doesn't add on itself
 	m_accel = sf::Vector2f(0, 0);
 
 	CalculateFriction();
 	ApplyForce(m_friction);
-	m_velocity += m_accel * dt.asSeconds();
-	m_enemyBody.setPosition(m_enemyBody.getPosition() + m_velocity * dt.asSeconds());
+	m_velocity += m_accel * dt->asSeconds();
+	m_enemyBody.setPosition(m_enemyBody.getPosition() + m_velocity * dt->asSeconds());
 }
 
 void Enemy::Draw(sf::RenderWindow * window)
