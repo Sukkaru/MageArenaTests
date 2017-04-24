@@ -2,7 +2,7 @@
 #include "Player.h"
 
 
-Player::Player(std::vector<std::unique_ptr<GameObject>>* p_vec)
+Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec)
 {
 	myvec = p_vec;
 	m_playerBody.setSize(sf::Vector2f(50, 50));
@@ -73,16 +73,16 @@ void Player::castSpell(sf::RenderWindow* window)
 	//Calculate mousePos vector in relation to playerPos
 	//Cast mousePos from a Vector2I to a Vector2f
 	printf("Left Mouse Pressed\n");
-	sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window));
-	sf::Vector2f direction = mousePos - m_playerBody.getPosition();
+	//sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
+	//sf::Vector2f direction = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)) - m_playerBody.getPosition();
 	//Normalize the direction vector 
-	direction = Normalize(direction);
+	//direction = Normalize(direction);
 	//Create the Fireball 
 	//Fireball fireball(direction);
-	std::unique_ptr<GameObject> fball(new Fireball(direction));
-	printf("Fireball address: %x\n", fball);
+	//std::shared_ptr<GameObject> fball(new Fireball(direction));
+	//printf("Fireball address: %x\n", fball);
 	//printf("myvec size in player: %d", myvec->size());
-	myvec->push_back(fball);
+	//myvec->push_back(fball);
 }
 
 

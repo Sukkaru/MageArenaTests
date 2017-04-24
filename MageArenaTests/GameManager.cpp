@@ -6,7 +6,7 @@ GameManager::GameManager()
 {
 	//go = &player;
 	player.reset(new Player(&addvector));
-	addvector.push_back(player);
+	//addvector.push_back(player);
 	//myvector.push_back(m_enemy);
 }
 
@@ -27,7 +27,7 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 			if (event.mouseButton.button == sf::Mouse::Left)
 			{
 
-				player->castSpell(window,&addvector);
+				player->castSpell(window);
 			}
 		}
 	}
@@ -41,7 +41,7 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 	//Then iterate over the vector
 	if (addvector.size() > 0)
 	{
-		for (std::vector<std::unique_ptr<GameObject>>::iterator it = addvector.begin(); it != addvector.end(); ++it)
+		for (std::vector<std::shared_ptr<GameObject>>::iterator it = addvector.begin(); it != addvector.end(); ++it)
 		{
 			//printf("Dude: %x", *it);
 			myvector.push_back(*it);
@@ -51,11 +51,11 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 		addvector.clear();
 		printf("Size of addvector: %d\n", addvector.size());
 	}
-	for (std::vector<std::unique_ptr<GameObject>>::iterator it = myvector.begin(); it != myvector.end(); ++it)
+	for (std::vector<std::shared_ptr<GameObject>>::iterator it = myvector.begin(); it != myvector.end(); ++it)
 	{
 		printf("In the for loop: %d.\n",myvector.size());
-		GameObject* go = *it;
-		printf("Pointed to by it: %x\n", go);
+		//std::shared_ptr<GameObject> go = *it;
+		//printf("Pointed to by it: %x\n", go);
 		//go->Update(window, dt);
 		(*it)->Update(window, dt);
 	}
@@ -66,13 +66,13 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 void GameManager::Draw(sf::RenderWindow * window)
 {
 	window->clear();
-	for (std::vector<std::unique_ptr<GameObject>>::iterator it = myvector.begin(); it != myvector.end(); ++it)
+	for (std::vector<std::shared_ptr<GameObject>>::iterator it = myvector.begin(); it != myvector.end(); ++it)
 	{
 		//printf("In the for loop.\n");
 		//(*it)->Draw(window);
-		GameObject* go = *it;
+		//std::shared_ptr<GameObject> go = *it;
 		//printf("Pointed to by it: \n", go);
-		go->Draw(window);
+		(*it)->Draw(window);
 	}
 	//m_enemy->Draw(window);
 	window->display();
