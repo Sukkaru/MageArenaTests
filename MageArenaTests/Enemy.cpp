@@ -2,7 +2,7 @@
 #include "Enemy.h"
 
 
-Enemy::Enemy()
+Enemy::Enemy(std::vector<GameObject*>* p_vec)
 {
 	m_enemyBody.setSize(sf::Vector2f(50, 50));
 	m_enemyBody.setFillColor(sf::Color::Blue);

@@ -2,8 +2,9 @@
 #include "Player.h"
 
 
-Player::Player()
+Player::Player(std::vector<GameObject*>* p_vec)
 {
+	myvec = p_vec;
 	m_playerBody.setSize(sf::Vector2f(50, 50));
 	m_playerBody.setFillColor(sf::Color::Red);
 	m_aimer.setFillColor(sf::Color::Blue);
@@ -59,12 +60,14 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	{
 		//Calculate mousePos vector in relation to playerPos
 		//Cast mousePos from a Vector2I to a Vector2f
+		printf("Left Mouse Pressed\n");
 		sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window));
 		sf::Vector2f direction = mousePos - m_playerBody.getPosition();
 		//Normalize the direction vector 
 		direction = Normalize(direction);
 		//Create the Fireball 
-		Fireball fireball(direction);
+		//Fireball fireball(direction);
+		myvec->push_back(&Fireball(direction));
 	}
 	CalculateFriction();
 	ApplyForce(m_friction);

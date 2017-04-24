@@ -4,7 +4,9 @@
 
 GameManager::GameManager()
 {
-	
+	//go = &player;
+	myvector.push_back(player);
+	//myvector.push_back(m_enemy);
 }
 
 
@@ -20,16 +22,24 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 		if (event.type == sf::Event::Closed)
 			window->close();
 	}
-
-	m_mage.Update(window,dt);
-	m_enemy.Update(window,dt);
+	for (std::vector<GameObject*>::iterator it = myvector.begin(); it != myvector.end(); ++it)
+	{
+		printf("In the for loop.\n");
+		(*it)->Update(window, dt);
+	}
+	//m_mage.Update(window,dt);
+	//m_enemy.Update(window,dt);
 }
 
 void GameManager::Draw(sf::RenderWindow * window)
 {
 	window->clear();
-	m_mage.Draw(window);
-	m_enemy.Draw(window);
+	for (std::vector<GameObject*>::iterator it = myvector.begin(); it != myvector.end(); ++it)
+	{
+		//printf("In the for loop.\n");
+		(*it)->Draw(window);
+	}
+	//m_enemy->Draw(window);
 	window->display();
 }
 

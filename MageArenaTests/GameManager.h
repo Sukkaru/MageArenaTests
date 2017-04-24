@@ -11,8 +11,13 @@ public:
 	void Update(sf::RenderWindow* window, sf::Time* dt);
 	void Draw(sf::RenderWindow* window);
 private:
-	Player m_mage;
-	Enemy m_enemy;
+	std::vector<GameObject*> myvector;
+	Player p = Player(&myvector);
+	Player* player = &p;
+	//Player* go = &player;
+	//Player* m_mage = Player(&myvector);
+	//Enemy* m_enemy = &Enemy(&myvector);
 	CollisionManager m_collisionManager;
+	
 };
 
