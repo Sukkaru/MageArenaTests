@@ -6,7 +6,7 @@ GameManager::GameManager()
 {
 	//go = &player;
 	player.reset(new Player(&addvector));
-	//addvector.push_back(player);
+	addvector.push_back(player);
 	//myvector.push_back(m_enemy);
 }
 
@@ -49,11 +49,11 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 			//printf("Dude: %x", *it);
 		}
 		addvector.clear();
-		printf("Size of addvector: %d\n", addvector.size());
+		//printf("Size of addvector: %d\n", addvector.size());
 	}
 	for (std::vector<std::shared_ptr<GameObject>>::iterator it = myvector.begin(); it != myvector.end(); ++it)
 	{
-		printf("In the for loop: %d.\n",myvector.size());
+		//printf("In the for loop: %d.\n",myvector.size());
 		//std::shared_ptr<GameObject> go = *it;
 		//printf("Pointed to by it: %x\n", go);
 		//go->Update(window, dt);

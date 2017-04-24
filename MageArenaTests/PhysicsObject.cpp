@@ -30,7 +30,7 @@ float PhysicsObject::Magnitude(sf::Vector2f vector)
 {
 	//Raising to the power of .5f is the same as taking the square root
 	float temp = powf((vector.x * vector.x) + (vector.y * vector.y),0.5f);
-	printf("Magnitude: %f\n", temp);
+	//printf("Magnitude: %f\n", temp);
 	return temp;
 }
 
@@ -54,5 +54,5 @@ void PhysicsObject::CalculateFriction()
 	m_friction = Normalize(m_velocity);
 	m_friction *= -1.f;
 	m_friction *= frictionMag; 
-	printf("Friction.x:%f\nFriction.y:%f\n", m_friction.x, m_friction.y);
+	//printf("Friction.x:%f\nFriction.y:%f\n", m_friction.x, m_friction.y);
 }
