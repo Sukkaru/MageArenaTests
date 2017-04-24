@@ -67,7 +67,9 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 		direction = Normalize(direction);
 		//Create the Fireball 
 		//Fireball fireball(direction);
-		myvec->push_back(&Fireball(direction));
+		Fireball f = Fireball(direction);
+		GameObject* fball = &f;
+		myvec->push_back(fball);
 	}
 	CalculateFriction();
 	ApplyForce(m_friction);

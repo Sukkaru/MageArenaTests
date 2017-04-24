@@ -12,7 +12,9 @@ public:
 	void Draw(sf::RenderWindow* window);
 private:
 	std::vector<GameObject*> myvector;
-	Player p = Player(&myvector);
+	std::vector<GameObject*> addvector;
+	std::vector<GameObject*> delvector;
+	Player p = Player(&addvector);		//This will eventually need a delvector reference, but worrying about add only for now
 	Player* player = &p;
 	//Player* go = &player;
 	//Player* m_mage = Player(&myvector);
