@@ -33,7 +33,7 @@ Player::~Player()
 void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 {
 	//sf::Time dt = clock->restart();
-	printf("DT in Player: %f\n", dt->asSeconds());
+	//printf("DT in Player: %f\n", dt->asSeconds());
 	//Reset acceleration so it doesn't add on itself
 	m_accel = sf::Vector2f(0, 0);
 
@@ -68,7 +68,9 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 		//Create the Fireball 
 		//Fireball fireball(direction);
 		Fireball f = Fireball(direction);
-		GameObject* fball = &f;
+		Fireball* fball = &f;
+		printf("Fireball address: %x\n", fball);
+		//printf("myvec size in player: %d", myvec->size());
 		myvec->push_back(fball);
 	}
 	CalculateFriction();

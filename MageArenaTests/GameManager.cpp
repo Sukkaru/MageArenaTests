@@ -34,16 +34,19 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 	{
 		for (std::vector<GameObject*>::iterator it = addvector.begin(); it != addvector.end(); ++it)
 		{
-			printf("Dude: %x", *it);
+			//printf("Dude: %x", *it);
 			myvector.push_back(*it);
-			printf("Dude: %x", *it);
+			//printf("Dude: %x", *it);
 		}
 		addvector.clear();
 	}
 	for (std::vector<GameObject*>::iterator it = myvector.begin(); it != myvector.end(); ++it)
 	{
 		printf("In the for loop: %d.\n",myvector.size());
-		(*it)->Update(window, dt);
+		GameObject* go = *it;
+		printf("Pointed to by it: %x\n", go);
+		go->Update(window, dt);
+		//(*it)->Update(window, dt);
 	}
 	//m_mage.Update(window,dt);
 	//m_enemy.Update(window,dt);
@@ -55,7 +58,10 @@ void GameManager::Draw(sf::RenderWindow * window)
 	for (std::vector<GameObject*>::iterator it = myvector.begin(); it != myvector.end(); ++it)
 	{
 		//printf("In the for loop.\n");
-		(*it)->Draw(window);
+		//(*it)->Draw(window);
+		GameObject* go = *it;
+		printf("Pointed to by it: \n", go);
+		go->Draw(window);
 	}
 	//m_enemy->Draw(window);
 	window->display();
