@@ -2,7 +2,7 @@
 #include "Player.h"
 
 
-Player::Player(std::vector<GameObject*>* p_vec)
+Player::Player(std::vector<std::unique_ptr<GameObject>>* p_vec)
 {
 	myvec = p_vec;
 	m_playerBody.setSize(sf::Vector2f(50, 50));
@@ -54,25 +54,6 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	{
 		ApplyForce(m_rightForce);
 	}
-	//Fireball spell test
-	//Don't think this will work, probably need to use mouse events
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-	{
-		//Calculate mousePos vector in relation to playerPos
-		//Cast mousePos from a Vector2I to a Vector2f
-		printf("Left Mouse Pressed\n");
-		sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window));
-		sf::Vector2f direction = mousePos - m_playerBody.getPosition();
-		//Normalize the direction vector 
-		direction = Normalize(direction);
-		//Create the Fireball 
-		//Fireball fireball(direction);
-		Fireball f = Fireball(direction);
-		Fireball* fball = &f;
-		printf("Fireball address: %x\n", fball);
-		//printf("myvec size in player: %d", myvec->size());
-		myvec->push_back(fball);
-	}
 	CalculateFriction();
 	ApplyForce(m_friction);
 	m_velocity += m_accel * dt->asSeconds();
@@ -85,6 +66,23 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 void Player::Draw(sf::RenderWindow* window)
 {
 	window->draw(m_playerBody);
+}
+
+void Player::castSpell(sf::RenderWindow* window)
+{
+	//Calculate mousePos vector in relation to playerPos
+	//Cast mousePos from a Vector2I to a Vector2f
+	printf("Left Mouse Pressed\n");
+	sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window));
+	sf::Vector2f direction = mousePos - m_playerBody.getPosition();
+	//Normalize the direction vector 
+	direction = Normalize(direction);
+	//Create the Fireball 
+	//Fireball fireball(direction);
+	std::unique_ptr<GameObject> fball(new Fireball(direction));
+	printf("Fireball address: %x\n", fball);
+	//printf("myvec size in player: %d", myvec->size());
+	myvec->push_back(fball);
 }
 
 

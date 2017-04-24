@@ -5,15 +5,16 @@
 class Player : public PhysicsObject
 {
 public:
-	Player(std::vector<GameObject*>* p_vec);
+	Player(std::vector<std::unique_ptr<GameObject>>* p_vec);
 	~Player();
 	void virtual Update(sf::RenderWindow* window, sf::Time* dt);
 	void virtual Draw(sf::RenderWindow* window);
+	void castSpell(sf::RenderWindow* window);
 
 private:
 	sf::RectangleShape m_playerBody;
 	sf::RectangleShape m_aimer;		//For player aiming, points toward mouse position
-	std::vector<GameObject*>* myvec;
+	std::vector<std::unique_ptr<GameObject>>* myvec;
 
 };
 
