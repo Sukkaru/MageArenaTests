@@ -7,16 +7,16 @@ class Player : public PhysicsObject
 public:
 	Player(std::vector<std::shared_ptr<GameObject>>* p_vec);
 	~Player();
-	void virtual Update(sf::RenderWindow* window, sf::Time* dt);
-	void virtual Draw(sf::RenderWindow* window);
-	void castSpell(sf::RenderWindow* window);
+	void virtual			Update(sf::RenderWindow* window, sf::Time* dt);
+	void virtual			Draw(sf::RenderWindow* window);
+	void					castSpell(sf::RenderWindow* window);
 	//quick and dirty fix for brandons mouse position problems
-	sf::Vector2i GetMousePosition(sf::RenderWindow& window);
+	sf::Vector2i			GetMousePosition(sf::RenderWindow& window);
 
 private:
-	sf::RectangleShape m_playerBody;
-	sf::RectangleShape m_aimer;		//For player aiming, points toward mouse position
-	std::vector<std::shared_ptr<GameObject>>* myvec;
+	sf::RectangleShape							m_playerBody;
+	sf::RectangleShape							m_aimer;		//For player aiming, points toward mouse position
+	std::vector<std::shared_ptr<GameObject>>*	myvec;
 
 };
 
