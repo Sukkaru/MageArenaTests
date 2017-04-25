@@ -10,6 +10,8 @@ public:
 	void virtual Update(sf::RenderWindow* window, sf::Time* dt);
 	void virtual Draw(sf::RenderWindow* window);
 	void castSpell(sf::RenderWindow* window);
+	//quick and dirty fix for brandons mouse position problems
+	sf::Vector2i GetMousePosition(sf::RenderWindow& window);
 
 private:
 	sf::RectangleShape m_playerBody;

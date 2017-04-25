@@ -73,8 +73,8 @@ void Player::castSpell(sf::RenderWindow* window)
 	//Calculate mousePos vector in relation to playerPos
 	//Cast mousePos from a Vector2I to a Vector2f
 	//printf("Left Mouse Pressed\n");
-	//sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window));
-	sf::Vector2f direction = static_cast<sf::Vector2f>(sf::Mouse::getPosition()) - m_playerBody.getPosition();
+	sf::Vector2f mousePos = static_cast<sf::Vector2f>(GetMousePosition(*window));
+	sf::Vector2f direction = mousePos - m_playerBody.getPosition();
 	//Normalize the direction vector 
 	direction = Normalize(direction);
 	printf("Direction.x: %d \n", direction.x);
@@ -87,5 +87,12 @@ void Player::castSpell(sf::RenderWindow* window)
 	myvec->push_back(fball);
 }
 
-
+sf::Vector2i Player::GetMousePosition(sf::RenderWindow& window)
+{
+	sf::Vector2i _windowBorderOffset = sf::Vector2i(8, 32);
+	sf::Vector2i _globalMousePos = sf::Mouse::getPosition();
+	_globalMousePos -= window.getPosition();
+	_globalMousePos -= _windowBorderOffset;
+	return _globalMousePos;
+}
 

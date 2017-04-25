@@ -14,6 +14,7 @@ private:
 	std::vector<std::shared_ptr<GameObject>> myvector;
 	std::vector<std::shared_ptr<GameObject>> addvector;
 	std::vector<std::shared_ptr<GameObject>> delvector;
+
 	//Player p = Player(&addvector);		//This will eventually need a delvector reference, but worrying about add only for now
 	//Player* player = &p;
 	std::shared_ptr<Player> player;

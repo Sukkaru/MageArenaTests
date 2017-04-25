@@ -10,7 +10,7 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(1280, 720), "Isaac Is The Man!");
 	sf::Clock clock;
 	GameManager gameManager;
 	while (window.isOpen())
@@ -18,7 +18,6 @@ int main()
 		sf::Time dt = clock.restart();
 		gameManager.Update(&window,&dt);
 		gameManager.Draw(&window);
-
 	}
 
 	return 0;

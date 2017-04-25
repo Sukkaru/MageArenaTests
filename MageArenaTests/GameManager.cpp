@@ -32,18 +32,6 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 		}
 	}
 
-	//if (addvector.size() > 0)
-	//{
-	//	for (std::vector<std::shared_ptr<GameObject>>::iterator it = addvector.begin(); it != addvector.end(); ++it)
-	//	{
-	//		//printf("Dude: %x", *it);
-	//		myvector.push_back(*it);
-	//		(*it)->Update(window, dt);
-	//		//printf("Dude: %x", *it);
-	//	}
-	//	addvector.clear();
-	//	//printf("Size of addvector: %d\n", addvector.size());
-	//}
 	if (addvector.size() > 0)
 	{
 		for (auto & value : addvector)
@@ -53,6 +41,7 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 		}
 		addvector.clear();
 	}
+
 	for (auto & value : myvector)
 	{
 		value->Update(window,dt);
@@ -69,4 +58,3 @@ void GameManager::Draw(sf::RenderWindow * window)
 	//m_enemy->Draw(window);
 	window->display();
 }
-
