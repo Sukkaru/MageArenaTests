@@ -31,32 +31,32 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 			}
 		}
 	}
-	//for (std::vector<GameObject*>::iterator it = myvector.begin(); it != myvector.end(); ++it)
+
+	//if (addvector.size() > 0)
 	//{
-	//	printf("In the for loop.\n");
-	//	(*it)->Update(window, dt);
+	//	for (std::vector<std::shared_ptr<GameObject>>::iterator it = addvector.begin(); it != addvector.end(); ++it)
+	//	{
+	//		//printf("Dude: %x", *it);
+	//		myvector.push_back(*it);
+	//		(*it)->Update(window, dt);
+	//		//printf("Dude: %x", *it);
+	//	}
+	//	addvector.clear();
+	//	//printf("Size of addvector: %d\n", addvector.size());
 	//}
-	//Check to see if there is anything in the addvector
-	//Add it to the normal vector
-	//Then iterate over the vector
 	if (addvector.size() > 0)
 	{
-		for (std::vector<std::shared_ptr<GameObject>>::iterator it = addvector.begin(); it != addvector.end(); ++it)
+		for (auto & value : addvector)
 		{
-			//printf("Dude: %x", *it);
-			myvector.push_back(*it);
-			(*it)->Update(window, dt);
-			//printf("Dude: %x", *it);
+			myvector.push_back(value);
+			value->Update(window, dt);
 		}
 		addvector.clear();
-		//printf("Size of addvector: %d\n", addvector.size());
 	}
 	for (auto & value : myvector)
 	{
 		value->Update(window,dt);
 	}
-	//m_mage.Update(window,dt);
-	//m_enemy.Update(window,dt);
 }
 
 void GameManager::Draw(sf::RenderWindow * window)
