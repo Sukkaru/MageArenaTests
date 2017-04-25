@@ -51,13 +51,9 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 		addvector.clear();
 		//printf("Size of addvector: %d\n", addvector.size());
 	}
-	for (std::vector<std::shared_ptr<GameObject>>::iterator it = myvector.begin(); it != myvector.end(); ++it)
+	for (auto & value : myvector)
 	{
-		//printf("In the for loop: %d.\n",myvector.size());
-		//std::shared_ptr<GameObject> go = *it;
-		//printf("Pointed to by it: %x\n", go);
-		//go->Update(window, dt);
-		(*it)->Update(window, dt);
+		value->Update(window,dt);
 	}
 	//m_mage.Update(window,dt);
 	//m_enemy.Update(window,dt);
@@ -66,13 +62,9 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 void GameManager::Draw(sf::RenderWindow * window)
 {
 	window->clear();
-	for (std::vector<std::shared_ptr<GameObject>>::iterator it = myvector.begin(); it != myvector.end(); ++it)
+	for (auto & value : myvector)
 	{
-		//printf("In the for loop.\n");
-		//(*it)->Draw(window);
-		//std::shared_ptr<GameObject> go = *it;
-		//printf("Pointed to by it: \n", go);
-		(*it)->Draw(window);
+		value->Draw(window);
 	}
 	//m_enemy->Draw(window);
 	window->display();

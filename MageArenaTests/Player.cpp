@@ -14,7 +14,7 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec)
 	m_mass = 2.0f;  
 	m_velocity = sf::Vector2f(0, 0);
 	//Friction variables
-	normalForce = 1.0f;
+	normalForce = 100.0f;
 	frictionCoeff = 5.0f;
 	m_friction = sf::Vector2f(0, 0);
 	//Forces used for movement
@@ -73,8 +73,8 @@ void Player::castSpell(sf::RenderWindow* window)
 	//Calculate mousePos vector in relation to playerPos
 	//Cast mousePos from a Vector2I to a Vector2f
 	//printf("Left Mouse Pressed\n");
-	sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window));
-	sf::Vector2f direction = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window)) - m_playerBody.getPosition();
+	//sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window));
+	sf::Vector2f direction = static_cast<sf::Vector2f>(sf::Mouse::getPosition()) - m_playerBody.getPosition();
 	//Normalize the direction vector 
 	direction = Normalize(direction);
 	printf("Direction.x: %d \n", direction.x);
