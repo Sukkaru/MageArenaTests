@@ -54,6 +54,10 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	{
 		ApplyForce(m_rightForce);
 	}
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		castSpell(window);
+	}
 	CalculateFriction();
 	ApplyForce(m_friction);
 	m_velocity += m_accel * dt->asSeconds();
@@ -72,8 +76,8 @@ void Player::castSpell(sf::RenderWindow* window)
 {
 	//Calculate mousePos vector in relation to playerPos
 	//Cast mousePos from a Vector2I to a Vector2f
-
-	sf::Vector2f mousePos = static_cast<sf::Vector2f>(GetMousePosition(*window));   //Using a function to calculate mouse position
+	sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window));
+	//sf::Vector2f mousePos = static_cast<sf::Vector2f>(GetMousePosition(*window));   //Using a function to calculate mouse position
 	sf::Vector2f direction = mousePos - m_playerBody.getPosition();
 	//Normalize the direction vector 
 	direction = Normalize(direction);

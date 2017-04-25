@@ -22,14 +22,14 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 	{
 		if (event.type == sf::Event::Closed)
 			window->close();
-		if (event.type == sf::Event::MouseButtonPressed)
-		{
-			if (event.mouseButton.button == sf::Mouse::Left)
-			{
+		//if (event.type == sf::Event::MouseButtonPressed)
+		//{
+			//if (event.mouseButton.button == sf::Mouse::Left)
+			//{
 
-				m_player->castSpell(window);
-			}
-		}
+				//m_player->castSpell(window);
+			//}
+		//}
 	}
 
 	if (addvector.size() > 0)
