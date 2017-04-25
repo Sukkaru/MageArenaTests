@@ -81,7 +81,7 @@ void Player::castSpell(sf::RenderWindow* window)
 	printf("Direction.y: %d \n", direction.y);
 	//Create the Fireball 
 	//Fireball fireball(direction);
-	std::shared_ptr<GameObject> fball(new Fireball(direction));
+	std::shared_ptr<GameObject> fball(new Fireball(direction,m_playerBody.getPosition()));
 	//printf("Fireball address: %x\n", fball);
 	//printf("myvec size in player: %d", myvec->size());
 	myvec->push_back(fball);

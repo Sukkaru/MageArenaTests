@@ -2,8 +2,9 @@
 #include "Fireball.h"
 
 
-Fireball::Fireball(sf::Vector2f direction)
+Fireball::Fireball(sf::Vector2f direction, sf::Vector2f initialpos)
 {
+	m_spellBody.setPosition(initialpos);
 	m_spellBody.setFillColor(sf::Color::Red);
 	m_spellBody.setRadius(20.0f);
 	m_moveSpeed = 1000;
