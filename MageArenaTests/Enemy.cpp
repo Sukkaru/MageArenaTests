@@ -8,14 +8,14 @@ Enemy::Enemy(std::vector<GameObject*>* p_vec)
 	m_enemyBody.setFillColor(sf::Color::Blue);
 	m_enemyBody.setPosition(sf::Vector2f(500, 350));
 	//Initialize physics attributes
-	m_moveSpeed = 1000;				//Pixels per second
-	m_maxMoveSpeed = 1000;			//Pixels per second
-	m_mass = 2.0f;
-	m_velocity = sf::Vector2f(0, 0);
+	m_moveSpeed =		1000;				//Pixels per second
+	m_maxMoveSpeed =	1000;				//Pixels per second
+	m_mass =			2.0f;
+	m_velocity =		sf::Vector2f(0, 0);
 	//Friction variables
-	normalForce = 1.0f;
-	frictionCoeff = 5.0f;
-	m_friction = sf::Vector2f(0, 0);
+	normalForce =		1.0f;
+	frictionCoeff =		5.0f;
+	m_friction =		sf::Vector2f(0, 0);
 }
 
 
