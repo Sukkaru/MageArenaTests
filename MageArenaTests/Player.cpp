@@ -11,19 +11,19 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec)
 	//m_playerBody.setFillColor(sf::Color::Red);
 	m_aimer.setFillColor(sf::Color::Blue);
 	//Initialize physics attributes
-	m_moveSpeed = 1000;				//Pixels per second
-	m_maxMoveSpeed = 1000;			//Pixels per second
-	m_mass = 2.0f;  
-	m_velocity = sf::Vector2f(0, 0);
+	m_moveSpeed =		1000;				//Pixels per second
+	m_maxMoveSpeed =	1000;			//Pixels per second
+	m_mass =			2.0f;  
+	m_velocity =		sf::Vector2f(0, 0);
 	//Friction variables
-	normalForce = 100.0f;
-	frictionCoeff = 5.0f;
-	m_friction = sf::Vector2f(0, 0);
+	normalForce =		100.0f;
+	frictionCoeff =		5.0f;
+	m_friction =		sf::Vector2f(0, 0);
 	//Forces used for movement
-	m_upForce = sf::Vector2f(0, -m_moveSpeed);
-	m_downForce = sf::Vector2f(0, m_moveSpeed);
-	m_rightForce = sf::Vector2f(m_moveSpeed, 0);
-	m_leftForce = sf::Vector2f(-m_moveSpeed, 0);
+	m_upForce =			sf::Vector2f(0, -m_moveSpeed);
+	m_downForce =		sf::Vector2f(0, m_moveSpeed);
+	m_rightForce =		sf::Vector2f(m_moveSpeed, 0);
+	m_leftForce =		sf::Vector2f(-m_moveSpeed, 0);
 
 }
 
@@ -93,12 +93,4 @@ void Player::castSpell(sf::RenderWindow* window)
 	myvec->push_back(fball);
 }
 
-sf::Vector2i Player::GetMousePosition(sf::RenderWindow& window)
-{
-	sf::Vector2i _windowBorderOffset = sf::Vector2i(8, 32);
-	sf::Vector2i _globalMousePos = sf::Mouse::getPosition();
-	_globalMousePos -= window.getPosition();
-	_globalMousePos -= _windowBorderOffset;
-	return _globalMousePos;
-}
 
