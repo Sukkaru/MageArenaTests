@@ -2,8 +2,9 @@
 #include "GameManager.h"
 
 
-GameManager::GameManager()
+GameManager::GameManager(sf::RenderWindow* window)
 {
+	CollisionManager m_collisionmanager(window);
 	m_player.reset(new Player(&addvector));
 	m_testdummy.reset(new Enemy(&addvector)); //For testing
 	addvector.push_back(m_player);

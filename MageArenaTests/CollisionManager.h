@@ -1,11 +1,25 @@
 #pragma once
 #include <SFML\Graphics.hpp>
+#include "PhysicsObject.h"
 class CollisionManager
 {
 public:
-	CollisionManager();
+	CollisionManager(sf::RenderWindow* window);
 	~CollisionManager();
-	//Using rectangles for now, change to something else later
-	void AddCollider(sf::RectangleShape* collider);
+	void checkCollisions();
+	void addToGrid(std::shared_ptr<PhysicsObject> obj);
+	void delFromGrid(sf::Vector2f pos);
+	
+
+private:
+	//Grid boxes for spatial partitioning of game world
+	//Setting these to 60 for now, can/will adjust later
+	//I chose 60 because it is slightly larger than the player
+	const int BOX_HEIGHT = 60;
+	const int BOX_WIDTH = 60;
+	std::vector<std::vector<std::vector<std::shared_ptr<PhysicsObject>>>> grid; //3 dimensions oh my
+	std::vector<int> activeboxes;
+	int numboxeswide;
+	int numboxeshigh;
 };
 

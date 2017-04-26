@@ -5,8 +5,10 @@
 Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec)
 {
 	myvec = p_vec;
-	m_playerBody.setSize(sf::Vector2f(50, 50));
-	m_playerBody.setFillColor(sf::Color::Red);
+	m_bbox.setSize(sf::Vector2f(50, 50));
+	m_bbox.setFillColor(sf::Color::Red);
+	//m_playerBody.setSize(sf::Vector2f(50, 50));
+	//m_playerBody.setFillColor(sf::Color::Red);
 	m_aimer.setFillColor(sf::Color::Blue);
 	//Initialize physics attributes
 	m_moveSpeed = 1000;				//Pixels per second
@@ -63,13 +65,14 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	m_velocity += m_accel * dt->asSeconds();
 	//printf("Accel.x:%f\nAccel.y:%f\n", m_accel.x, m_accel.y);
 	//printf("Velocity.x:%f\nVelocity.y:%f\n", m_velocity.x, m_velocity.y);
-	m_playerBody.setPosition(m_playerBody.getPosition() + m_velocity * dt->asSeconds());
+	m_bbox.setPosition(m_bbox.getPosition() + m_velocity * dt->asSeconds());
+	//m_playerBody.setPosition(m_playerBody.getPosition() + m_velocity * dt->asSeconds());
 	//printf("Position.x:%f\nPosition.y:%f\n", m_playerBody.getPosition().x, m_playerBody.getPosition().y);
 }
 
 void Player::Draw(sf::RenderWindow* window)
 {
-	window->draw(m_playerBody);
+	window->draw(m_bbox);
 }
 
 void Player::castSpell(sf::RenderWindow* window)
@@ -78,14 +81,14 @@ void Player::castSpell(sf::RenderWindow* window)
 	//Cast mousePos from a Vector2I to a Vector2f
 	sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window));
 	//sf::Vector2f mousePos = static_cast<sf::Vector2f>(GetMousePosition(*window));   //Using a function to calculate mouse position
-	sf::Vector2f direction = mousePos - m_playerBody.getPosition();
+	sf::Vector2f direction = mousePos - m_bbox.getPosition();
 	//Normalize the direction vector 
 	direction = Normalize(direction);
 	printf("Direction.x: %f \n", direction.x);
 	printf("Direction.y: %f \n", direction.y);
 	//Create the Fireball 
 
-	std::shared_ptr<GameObject> fball(new Fireball(direction,m_playerBody.getPosition()));
+	std::shared_ptr<GameObject> fball(new Fireball(direction,m_bbox.getPosition()));
 
 	myvec->push_back(fball);
 }

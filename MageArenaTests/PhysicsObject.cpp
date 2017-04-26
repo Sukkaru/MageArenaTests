@@ -56,3 +56,8 @@ void PhysicsObject::CalculateFriction()
 	m_friction *= frictionMag; 
 	//printf("Friction.x:%f\nFriction.y:%f\n", m_friction.x, m_friction.y);
 }
+
+sf::RectangleShape PhysicsObject::getBBox()
+{
+	return m_bbox;
+}

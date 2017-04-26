@@ -6,7 +6,7 @@
 class GameManager
 {
 public:
-	GameManager();
+	GameManager(sf::RenderWindow* window);
 	~GameManager();
 	void Update(sf::RenderWindow* window, sf::Time* dt);
 	void Draw(sf::RenderWindow* window);
@@ -17,7 +17,7 @@ private:
 
 	std::shared_ptr<Player> m_player;
 	std::shared_ptr<Enemy> m_testdummy;
-	CollisionManager m_collisionManager;
+	//CollisionManager m_collisionManager;
 	
 };
 
