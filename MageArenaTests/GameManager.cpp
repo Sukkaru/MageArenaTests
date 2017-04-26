@@ -4,10 +4,10 @@
 
 GameManager::GameManager()
 {
-	//go = &player;
-	player.reset(new Player(&addvector));
-	addvector.push_back(player);
-	//myvector.push_back(m_enemy);
+	m_player.reset(new Player(&addvector));
+	m_testdummy.reset(new Enemy(&addvector)); //For testing
+	addvector.push_back(m_player);
+	addvector.push_back(m_testdummy);
 }
 
 
@@ -22,14 +22,14 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 	{
 		if (event.type == sf::Event::Closed)
 			window->close();
-		if (event.type == sf::Event::MouseButtonPressed)
-		{
-			if (event.mouseButton.button == sf::Mouse::Left)
-			{
+		//if (event.type == sf::Event::MouseButtonPressed)
+		//{
+			//if (event.mouseButton.button == sf::Mouse::Left)
+			//{
 
-				player->castSpell(window);
-			}
-		}
+				//m_player->castSpell(window);
+			//}
+		//}
 	}
 
 	if (addvector.size() > 0)
@@ -37,7 +37,6 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 		for (auto & value : addvector)
 		{
 			myvector.push_back(value);
-			value->Update(window, dt);
 		}
 		addvector.clear();
 	}
@@ -55,6 +54,5 @@ void GameManager::Draw(sf::RenderWindow * window)
 	{
 		value->Draw(window);
 	}
-	//m_enemy->Draw(window);
 	window->display();
 }

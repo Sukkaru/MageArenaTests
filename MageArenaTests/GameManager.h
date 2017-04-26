@@ -13,14 +13,10 @@ public:
 private:
 	std::vector<std::shared_ptr<GameObject>> myvector;
 	std::vector<std::shared_ptr<GameObject>> addvector;
-	std::vector<std::shared_ptr<GameObject>> delvector;
+	std::vector<std::shared_ptr<GameObject>> delvector;	//Might not use this but keeping it for reminder
 
-	//Player p = Player(&addvector);		//This will eventually need a delvector reference, but worrying about add only for now
-	//Player* player = &p;
-	std::shared_ptr<Player> player;
-	//Player* go = &player;
-	//Player* m_mage = Player(&myvector);
-	//Enemy* m_enemy = &Enemy(&myvector);
+	std::shared_ptr<Player> m_player;
+	std::shared_ptr<Enemy> m_testdummy;
 	CollisionManager m_collisionManager;
 	
 };
