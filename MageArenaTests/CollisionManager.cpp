@@ -10,13 +10,11 @@ CollisionManager::CollisionManager(sf::RenderWindow* window)
 	numboxeshigh = (window->getSize().y / BOX_HEIGHT) + 1;
 	printf("High:%d \n Wide:%d \n", numboxeshigh, numboxeswide);
 	//Make sure the grid has allocated enough space for all boxes
-	grid.reserve(numboxeswide);
-	printf("Grid capacity:%d \n", grid.capacity());
-
+	grid = std::vector<std::vector<std::vector<std::shared_ptr<PhysicsObject>>>>(numboxeswide, std::vector<std::vector<std::shared_ptr<PhysicsObject>>>(numboxeshigh, std::vector<std::shared_ptr<PhysicsObject>>()));
+	printf("Capacity of row: %d \n", grid.capacity());
 	for (int i = 0; i < numboxeswide; i++)
 	{
-		
-		//printf("Value capacity:%d \n", grid.at(i).capacity());
+		printf("Capacity of columns: %d\n", grid[i].capacity());
 	}
 	/*for (auto& value : grid)
 	{
