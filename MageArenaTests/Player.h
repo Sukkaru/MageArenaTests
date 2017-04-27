@@ -2,6 +2,7 @@
 #include "PhysicsObject.h"
 #include "Fireball.h"
 #include <SFML/Graphics.hpp>
+
 class Player : public PhysicsObject
 {
 public:
@@ -15,6 +16,7 @@ private:
 	sf::RectangleShape							m_playerBody;
 	sf::RectangleShape							m_aimer;		//For player aiming, points toward mouse position
 	std::vector<std::shared_ptr<GameObject>>*	myvec;
-
+	float										m_castcooldown;
+	std::shared_ptr<BaseSpell>					m_currentspell;
 };
 

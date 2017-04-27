@@ -12,7 +12,7 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec)
 	m_aimer.setFillColor(sf::Color::Blue);
 	//Initialize physics attributes
 	m_moveSpeed =		1000;				//Pixels per second
-	m_maxMoveSpeed =	1000;			//Pixels per second
+	m_maxMoveSpeed =	1000;				//Pixels per second
 	m_mass =			2.0f;  
 	m_velocity =		sf::Vector2f(0, 0);
 	//Friction variables
@@ -24,6 +24,7 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec)
 	m_downForce =		sf::Vector2f(0, m_moveSpeed);
 	m_rightForce =		sf::Vector2f(m_moveSpeed, 0);
 	m_leftForce =		sf::Vector2f(-m_moveSpeed, 0);
+	m_castcooldown =	1.f;
 
 }
 
@@ -58,8 +59,18 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	}
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
-		castSpell(window);
+
+		// the float on the right is the cool down of the players current spell until 
+		// I move spells around and get the cast spell function into a better place
+		// Like rehab. rehabs a better place
+		if (m_castcooldown > 0.2f)
+		{
+			castSpell(window);
+			m_castcooldown = 0.f;
+		}
 	}
+	m_castcooldown += dt->asSeconds();
+
 	CalculateFriction();
 	ApplyForce(m_friction);
 	m_velocity += m_accel * dt->asSeconds();

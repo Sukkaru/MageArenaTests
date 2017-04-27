@@ -26,3 +26,5 @@ void Fireball::Draw(sf::RenderWindow * window)
 {
 	window->draw(m_spellBody);
 }
+
+
