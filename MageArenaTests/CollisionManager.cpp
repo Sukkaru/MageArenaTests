@@ -16,12 +16,6 @@ CollisionManager::CollisionManager(sf::RenderWindow* window)
 	{
 		printf("Capacity of columns: %d\n", grid[i].capacity());
 	}
-	/*for (auto& value : grid)
-	{
-		value.reserve(numboxeshigh);
-		printf("Value capacity:%d \n", value.capacity());
-	}*/
-	printf("cap:%d\n", grid.empty());
 }
 
 
@@ -41,9 +35,15 @@ void CollisionManager::addToGrid(std::shared_ptr<PhysicsObject> obj)
 	
 	//Compute what box to put the object in
 	//obj.pos.x/BOX_WIDTH = horizontal box number
-	int horizbox = obj->getBBox().getPosition().x / BOX_WIDTH;
-	
+	int rowbox = obj->getBBox().getPosition().x / BOX_WIDTH;
+	int colbox = obj->getBBox().getPosition().y / BOX_HEIGHT;
+	grid[rowbox][colbox].push_back(obj);
 
+	if (grid[rowbox][colbox].size())
+	{
+		printf("What box am I in? %d,%d\n", rowbox,colbox);
+	}
+	
 }
 
 void CollisionManager::delFromGrid(sf::Vector2f pos)

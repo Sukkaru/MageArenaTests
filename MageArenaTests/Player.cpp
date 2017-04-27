@@ -2,7 +2,7 @@
 #include "Player.h"
 
 
-Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec)
+Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec, std::shared_ptr<CollisionManager> p_collisionptr)
 {
 	myvec = p_vec;
 	m_bbox.setSize(sf::Vector2f(50, 50));
@@ -26,6 +26,9 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec)
 	m_leftForce =		sf::Vector2f(-m_moveSpeed, 0);
 	m_castcooldown =	1.f;
 
+	//This add the player to the collision grid (sort of)
+	//Also prints out where the player is
+	p_collisionptr->addToGrid(std::shared_ptr<Player>(this));
 }
 
 
