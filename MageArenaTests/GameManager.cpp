@@ -9,6 +9,10 @@ GameManager::GameManager(sf::RenderWindow* window)
 	p_colptr.reset(new CollisionManager(window));
 	m_player.reset(new Player(&addvector,p_colptr));
 	m_testdummy.reset(new Enemy(&addvector)); //For testing
+	//Add player and testdummy to the collision manager
+	p_colptr->addToGrid(m_player);
+	p_colptr->addToGrid(m_testdummy);
+	//Add player and testdummy to the GameObject vector
 	addvector.push_back(m_player);
 	addvector.push_back(m_testdummy);
 }

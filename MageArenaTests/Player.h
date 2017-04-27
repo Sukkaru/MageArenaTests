@@ -14,7 +14,6 @@ public:
 	void										castSpell(sf::RenderWindow* window);
 	
 private:
-	sf::RectangleShape							m_playerBody;
 	sf::RectangleShape							m_aimer;		//For player aiming, points toward mouse position
 	std::vector<std::shared_ptr<GameObject>>*	myvec;
 	float										m_castcooldown;
