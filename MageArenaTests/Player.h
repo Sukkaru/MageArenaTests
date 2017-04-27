@@ -1,4 +1,4 @@
-#pragma once
+ #pragma once
 #include "PhysicsObject.h"
 #include "Fireball.h"
 #include "CollisionManager.h"
@@ -9,9 +9,9 @@ class Player : public PhysicsObject
 public:
 	Player(std::vector<std::shared_ptr<GameObject>>* p_vec,std::shared_ptr<CollisionManager> p_collisionptr);
 	~Player();
-	void virtual			Update(sf::RenderWindow* window, sf::Time* dt);
-	void virtual			Draw(sf::RenderWindow* window);
-	void					castSpell(sf::RenderWindow* window);
+	void virtual								Update(sf::RenderWindow* window, sf::Time* dt);
+	void virtual								Draw(sf::RenderWindow* window);
+	void										castSpell(sf::RenderWindow* window);
 	
 private:
 	sf::RectangleShape							m_playerBody;
