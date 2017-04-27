@@ -89,14 +89,14 @@ void Player::Draw(sf::RenderWindow* window)
 void Player::castSpell(sf::RenderWindow* window)
 {
 	//Calculate mousePos vector in relation to playerPos
-	//Cast mousePos from a Vector2I to a Vector2f
+	//Cast mousePos from a Vector2I to a</div> Vector2f
 	sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window));
 	//sf::Vector2f mousePos = static_cast<sf::Vector2f>(GetMousePosition(*window));   //Using a function to calculate mouse position
 	sf::Vector2f direction = mousePos - m_bbox.getPosition();
 	//Normalize the direction vector 
 	direction = Normalize(direction);
-	printf("Direction.x: %f \n", direction.x);
-	printf("Direction.y: %f \n", direction.y);
+	//printf("Direction.x: %f \n", direction.x);
+	//printf("Direction.y: %f \n", direction.y);
 	//Create the Fireball 
 
 	std::shared_ptr<GameObject> fball(new Fireball(direction,m_bbox.getPosition()));
