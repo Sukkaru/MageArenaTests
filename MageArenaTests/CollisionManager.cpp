@@ -39,10 +39,7 @@ void CollisionManager::addToGrid(std::shared_ptr<PhysicsObject> obj)
 	int colbox = obj->getBBox().getPosition().y / BOX_HEIGHT;
 	grid[rowbox][colbox].push_back(obj);
 
-	if (grid[rowbox][colbox].size())
-	{
-		printf("What box am I in? %d,%d\n", rowbox,colbox);
-	}
+	
 	
 }
 

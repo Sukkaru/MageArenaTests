@@ -28,7 +28,7 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec, std::shared_ptr<
 
 	//This add the player to the collision grid (sort of)
 	//Also prints out where the player is
-	p_collisionptr->addToGrid(std::shared_ptr<Player>(this));
+	//p_collisionptr->addToGrid(std::shared_ptr<Player>(this));
 }
 
 

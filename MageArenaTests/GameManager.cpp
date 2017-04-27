@@ -4,8 +4,10 @@
 
 GameManager::GameManager(sf::RenderWindow* window)
 {
-	CollisionManager m_collisionmanager(window);
-	m_player.reset(new Player(&addvector,std::shared_ptr<CollisionManager>(&m_collisionmanager)));
+	//CollisionManager m_collisionmanager(window);
+	std::shared_ptr<CollisionManager> p_colptr;
+	p_colptr.reset(new CollisionManager(window));
+	m_player.reset(new Player(&addvector,p_colptr));
 	m_testdummy.reset(new Enemy(&addvector)); //For testing
 	addvector.push_back(m_player);
 	addvector.push_back(m_testdummy);
