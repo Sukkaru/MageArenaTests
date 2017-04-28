@@ -40,7 +40,7 @@ void CollisionManager::addToGrid(std::shared_ptr<PhysicsObject> obj)
 	grid[rowbox][colbox].push_back(obj);
 	if(grid[rowbox][colbox].size() > 0)
 		printf("I'm in grid: [%d][%d]\n", rowbox, colbox);
-	
+	displayGrid();
 }
 
 void CollisionManager::delFromGrid(std::shared_ptr<PhysicsObject> obj)
@@ -56,5 +56,18 @@ void CollisionManager::delFromGrid(std::shared_ptr<PhysicsObject> obj)
 		}
 		else
 			++it;
+	}
+	displayGrid();
+}
+
+void CollisionManager::displayGrid()
+{
+	for (int i = 0; i < grid.size(); i++)
+	{
+		for (int j = 0; j < grid[i].size(); j++)
+		{
+			printf("[%d]", grid[i][j].size());
+		}
+		printf("\n");
 	}
 }

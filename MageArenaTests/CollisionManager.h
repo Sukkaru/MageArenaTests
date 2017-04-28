@@ -21,5 +21,6 @@ private:
 	std::vector<int> activeboxes;
 	int numboxeswide;
 	int numboxeshigh;
+	void displayGrid();
 };
 
