@@ -8,7 +8,7 @@ public:
 	~CollisionManager();
 	void checkCollisions();
 	void addToGrid(std::shared_ptr<PhysicsObject> obj);
-	void delFromGrid(sf::Vector2f pos);
+	void delFromGrid(std::shared_ptr<PhysicsObject> obj);
 	
 
 private:

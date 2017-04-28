@@ -11,6 +11,7 @@ GameManager::GameManager(sf::RenderWindow* window)
 	m_testdummy.reset(new Enemy(&addvector)); //For testing
 	//Add player and testdummy to the collision manager
 	p_colptr->addToGrid(m_player);
+	p_colptr->delFromGrid(m_player);
 	p_colptr->addToGrid(m_testdummy);
 	//Add player and testdummy to the GameObject vector
 	addvector.push_back(m_player);

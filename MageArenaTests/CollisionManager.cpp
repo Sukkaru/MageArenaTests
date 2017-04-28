@@ -35,16 +35,26 @@ void CollisionManager::addToGrid(std::shared_ptr<PhysicsObject> obj)
 	
 	//Compute what box to put the object in
 	//obj.pos.x/BOX_WIDTH = horizontal box number
-	printf("%d\n", obj->getBBox().getPosition().x);
 	int rowbox = obj->getBBox().getPosition().x / BOX_WIDTH;
 	int colbox = obj->getBBox().getPosition().y / BOX_HEIGHT;
-	
 	grid[rowbox][colbox].push_back(obj);
 	if(grid[rowbox][colbox].size() > 0)
 		printf("I'm in grid: [%d][%d]\n", rowbox, colbox);
 	
 }
 
-void CollisionManager::delFromGrid(sf::Vector2f pos)
+void CollisionManager::delFromGrid(std::shared_ptr<PhysicsObject> obj)
 {
+	int rowbox = obj->getBBox().getPosition().x / BOX_WIDTH;
+	int colbox = obj->getBBox().getPosition().y / BOX_HEIGHT;
+	for (auto it = grid[rowbox][colbox].begin(); it != grid[rowbox][colbox].end();)
+	{
+		if (*it == obj)
+		{
+			it = grid[rowbox][colbox].erase(it);
+			printf("I am no longer in the grid: %d\n", grid[rowbox][colbox].size());
+		}
+		else
+			++it;
+	}
 }
