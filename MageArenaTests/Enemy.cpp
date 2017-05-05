@@ -5,6 +5,7 @@
 Enemy::Enemy(std::vector<std::shared_ptr<GameObject>>* p_vec)
 {
 	m_bbox.setSize(sf::Vector2f(50, 50));
+	m_bbox.setOrigin(m_bbox.getSize().x / 2, m_bbox.getSize().y / 2);
 	m_bbox.setFillColor(sf::Color::Blue);
 	m_bbox.setPosition(sf::Vector2f(500, 350));
 	//Initialize physics attributes
