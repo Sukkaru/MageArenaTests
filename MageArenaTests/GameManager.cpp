@@ -56,9 +56,32 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 		addvector.clear();
 	}
 
-	for (auto & value : myvector)
+	//for (auto & value : myvector)
+	//{
+	//	value->Update(window,dt);
+
+	//	// Checks to see if the current value is a base spell, if it is it checks to see if it is flagged destroy
+	//	// if it is destroyed, remove from the vector of game objects and back up a step
+
+	//	if (std::dynamic_pointer_cast<BaseSpell>(value))
+	//	{
+	//		if (value->getDestroyed())
+	//		{
+	//			
+	//		}
+	//	}
+	//}
+
+	for (auto i = 0; i < myvector.size(); i++)
 	{
-		value->Update(window,dt);
+		myvector[i]->Update(window, dt);
+
+		//removes
+		if (myvector[i]->getDestroyed())
+		{
+			myvector.erase(myvector.begin() + i);
+			i--;
+		}
 	}
 }
 
