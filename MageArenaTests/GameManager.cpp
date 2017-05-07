@@ -4,16 +4,23 @@
 
 GameManager::GameManager(sf::RenderWindow* window)
 {
+	/*
+	
+	** Commented out until finished or working
+	** also commented out collider arguements in player header and cpp
+
 	//CollisionManager m_collisionmanager(window);
 	std::shared_ptr<CollisionManager> p_colptr;
 	p_colptr.reset(new CollisionManager(window));
-	m_player.reset(new Player(&addvector,p_colptr));
-	m_testdummy.reset(new Enemy(&addvector)); //For testing
 	//Add player and testdummy to the collision manager
 	p_colptr->addToGrid(m_player);
 	p_colptr->delFromGrid(m_player);
 	p_colptr->addToGrid(m_testdummy);
+	*/
+
 	//Add player and testdummy to the GameObject vector
+	m_testdummy.reset(new Enemy(&addvector)); //For testing
+	m_player.reset(new Player(&addvector/*,p_colptr*/));
 	addvector.push_back(m_player);
 	addvector.push_back(m_testdummy);
 }

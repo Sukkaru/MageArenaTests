@@ -2,7 +2,7 @@
 #include "Player.h"
 
 
-Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec, std::shared_ptr<CollisionManager> p_collisionptr)
+Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec/*, std::shared_ptr<CollisionManager> p_collisionptr*/)
 {
 	myvec = p_vec;
 	m_bbox.setSize(sf::Vector2f(50, 50));
