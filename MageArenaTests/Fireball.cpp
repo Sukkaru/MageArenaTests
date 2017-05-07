@@ -10,6 +10,8 @@ Fireball::Fireball(sf::Vector2f direction, sf::Vector2f initialpos)
 	m_spellBody.setPosition(initialpos);
 	m_moveSpeed =	1000;
 	m_velocity =	direction * m_moveSpeed;
+	m_totalSpellLife =	2.f;
+	m_currentSpellLife = 0;
 
 }
 
@@ -21,6 +23,9 @@ Fireball::~Fireball()
 void Fireball::Update(sf::RenderWindow * window, sf::Time* dt)
 {
 	m_spellBody.setPosition(m_spellBody.getPosition() + m_velocity * dt->asSeconds());
+	m_currentSpellLife += dt->asSeconds();
+
+
 }
 
 void Fireball::Draw(sf::RenderWindow * window)

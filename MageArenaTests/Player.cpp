@@ -66,8 +66,8 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 
 		// the float on the right is the cool down of the players current spell until 
 		// I move spells around and get the cast spell function into a better place
-		// Like rehab. rehabs a better place
-		if (m_castcooldown > 0.2f)
+
+		if (m_castcooldown > 0.000002f)
 		{
 			castSpell(window);
 			m_castcooldown = 0.f;
