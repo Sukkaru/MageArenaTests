@@ -9,7 +9,7 @@ Fireball::Fireball(sf::Vector2f initialpos, sf::Vector2f direction)
 	m_totalSpellLife =		1.5f;
 	m_currentSpellLife =	0;
 	m_spellcooldown =		0.5f;
-	m_castCooldown =		10.f;
+	m_castCooldown =		0.f;
 
 	m_spellBody.setPosition(initialpos);
 	m_spellBody.setFillColor(sf::Color::Red);

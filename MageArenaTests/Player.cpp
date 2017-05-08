@@ -70,13 +70,12 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
 	{
 		m_currentspell.reset(new Fireball(sf::Vector2f(-100, -100), sf::Vector2f(-100, -100)));
-		m_currentspell->resetCastCooldown();
-
-
+		//m_currentspell->resetCastCooldown();
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
 	{
 		m_currentspell.reset(new Waterhose(sf::Vector2f(-100, -100), sf::Vector2f(-100, -100)));
+		//m_currentspell->resetCastCooldown();
 
 	}
 
