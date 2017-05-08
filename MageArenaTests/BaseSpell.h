@@ -7,6 +7,7 @@ public:
 	~BaseSpell();
 	void virtual		Update(sf::RenderWindow* window, sf::Time* dt);
 	void virtual		Draw(sf::RenderWindow* window);
+	virtual std::shared_ptr<BaseSpell> getSpell(sf::Vector2f initialpos, sf::Vector2f direction) {};
 
 	float				getSpellCooldown();
 

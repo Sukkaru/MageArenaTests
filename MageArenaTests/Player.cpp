@@ -8,6 +8,7 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec/*, std::shared_pt
 	m_bbox.setSize(sf::Vector2f(50, 50));
 	m_bbox.setOrigin(m_bbox.getSize().x / 2, m_bbox.getSize().y / 2);
 	m_bbox.setFillColor(sf::Color::Red);
+	m_bbox.setPosition(sf::Vector2f(100, 100));
 	//m_playerBody.setSize(sf::Vector2f(50, 50));
 	//m_playerBody.setFillColor(sf::Color::Red);
 	m_aimer.setFillColor(sf::Color::Blue);
@@ -25,7 +26,10 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec/*, std::shared_pt
 	m_downForce =		sf::Vector2f(0, m_moveSpeed);
 	m_rightForce =		sf::Vector2f(m_moveSpeed, 0);
 	m_leftForce =		sf::Vector2f(-m_moveSpeed, 0);
+
+	//Spell stuff
 	m_castcooldown =	1.f;
+	m_currentspell.reset(new Fireball(sf::Vector2f(100,100), sf::Vector2f(100,100)));
 
 	//This add the player to the collision grid (sort of)
 	//Also prints out where the player is
@@ -67,7 +71,7 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 		// the float on the right is the cool down of the players current spell until 
 		// I move spells around and get the cast spell function into a better place
 
-		if (m_castcooldown > 0.000002f)
+		if (m_castcooldown > 0.2f)
 		{
 			castSpell(window);
 			m_castcooldown = 0.f;
@@ -103,9 +107,13 @@ void Player::castSpell(sf::RenderWindow* window)
 	//printf("Direction.y: %f \n", direction.y);
 	//Create the Fireball 
 
-	std::shared_ptr<GameObject> fball(new Fireball(direction,m_bbox.getPosition()));
+	//old fireball making stuff
+	//std::shared_ptr<GameObject> fball(new Fireball(direction,m_bbox.getPosition()));
+	//myvec->push_back(fball);
 
-	myvec->push_back(fball);
+	std::shared_ptr<BaseSpell> _spell = m_currentspell->getSpell(m_bbox.getPosition(), direction);
+	//_spell = m_currentspell->getSpell(m_bbox.getPosition(), direction);
+	myvec->push_back(_spell);
 }
 
 
