@@ -29,7 +29,8 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec/*, std::shared_pt
 
 	//Spell stuff
 	m_castcooldown =	1.f;
-	m_currentspell.reset(new Fireball(sf::Vector2f(100,100), sf::Vector2f(100,100)));
+	// initiall setting of a fireball, setting it off screen so that you can't see it. Yes... I know
+	m_currentspell.reset(new Fireball(sf::Vector2f(-100,-100), sf::Vector2f(-100,-100)));
 
 	//This add the player to the collision grid (sort of)
 	//Also prints out where the player is
@@ -67,17 +68,14 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	}
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
-
-		// the float on the right is the cool down of the players current spell until 
-		// I move spells around and get the cast spell function into a better place
-
-		if (m_castcooldown > 0.2f)
+		
+		if (m_currentspell->getCurrentCastCooldown() > m_currentspell->getSpellCooldown())
 		{
 			castSpell(window);
-			m_castcooldown = 0.f;
+			m_currentspell->resetCastCooldown();
 		}
 	}
-	m_castcooldown += dt->asSeconds();
+	m_currentspell->increaseCastCooldown(dt->asSeconds());
 
 	CalculateFriction();
 	ApplyForce(m_friction);
@@ -97,22 +95,13 @@ void Player::Draw(sf::RenderWindow* window)
 void Player::castSpell(sf::RenderWindow* window)
 {
 	//Calculate mousePos vector in relation to playerPos
-	//Cast mousePos from a Vector2I to a</div> Vector2f
+	//Cast mousePos from a Vector2I to a Vector2f
 	sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window));
-	//sf::Vector2f mousePos = static_cast<sf::Vector2f>(GetMousePosition(*window));   //Using a function to calculate mouse position
 	sf::Vector2f direction = mousePos - m_bbox.getPosition();
 	//Normalize the direction vector 
 	direction = Normalize(direction);
-	//printf("Direction.x: %f \n", direction.x);
-	//printf("Direction.y: %f \n", direction.y);
-	//Create the Fireball 
 
-	//old fireball making stuff
-	//std::shared_ptr<GameObject> fball(new Fireball(direction,m_bbox.getPosition()));
-	//myvec->push_back(fball);
-
-	std::shared_ptr<BaseSpell> _spell = m_currentspell->getSpell(m_bbox.getPosition(), direction);
-	//_spell = m_currentspell->getSpell(m_bbox.getPosition(), direction);
+	std::shared_ptr<BaseSpell> _spell = m_currentspell->makeSpell(m_bbox.getPosition(), direction);
 	myvec->push_back(_spell);
 }
 
