@@ -13,6 +13,11 @@ BaseSpell::~BaseSpell()
 
 void BaseSpell::Update(sf::RenderWindow * window, sf::Time* dt)
 {
+	m_currentSpellLife += dt->asSeconds();
+	if (m_currentSpellLife >= m_totalSpellLife)
+	{
+		setDestroyed(true);
+	}
 }
 
 void BaseSpell::Draw(sf::RenderWindow * window)

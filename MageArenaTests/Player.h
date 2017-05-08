@@ -1,6 +1,7 @@
  #pragma once
 #include "PhysicsObject.h"
 #include "Fireball.h"
+#include "Waterhose.h"
 #include "CollisionManager.h"
 #include <SFML/Graphics.hpp>
 

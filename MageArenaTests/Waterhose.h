@@ -1,16 +1,16 @@
 #pragma once
 #include "BaseSpell.h"
-class Fireball : public BaseSpell
+class Waterhose : public BaseSpell
 {
 public:
-	Fireball(sf::Vector2f initialpos, sf::Vector2f direction);
-	~Fireball();
+	Waterhose(sf::Vector2f initialpos, sf::Vector2f direction);
+	~Waterhose();
 	void virtual				Update(sf::RenderWindow* window, sf::Time* dt);
 	void virtual				Draw(sf::RenderWindow* window);
 	std::shared_ptr<BaseSpell>	makeSpell(sf::Vector2f initialpos, sf::Vector2f direction);
 
 private:
 	sf::CircleShape				m_spellBody;
-	
+	float						m_waveScaler = 200.f;
 };
 

@@ -66,6 +66,19 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	{
 		ApplyForce(m_rightForce);
 	}
+	//Switching Spells
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
+	{
+		m_currentspell.reset(new Fireball(sf::Vector2f(-100, -100), sf::Vector2f(-100, -100)));
+
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
+	{
+		m_currentspell.reset(new Waterhose(sf::Vector2f(-100, -100), sf::Vector2f(-100, -100)));
+
+	}
+
+
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		
