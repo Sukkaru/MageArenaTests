@@ -8,7 +8,7 @@ Fireball::Fireball(sf::Vector2f initialpos, sf::Vector2f direction)
 	m_velocity =			direction * m_moveSpeed;
 	m_totalSpellLife =		1.5f;
 	m_currentSpellLife =	0;
-	m_spellcooldown =		0.5f;
+	m_spellcooldown =		0.3f;
 	m_castCooldown =		0.f;
 
 	m_spellBody.setPosition(initialpos);

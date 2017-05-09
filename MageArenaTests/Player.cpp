@@ -70,12 +70,10 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
 	{
 		m_currentspell.reset(new Fireball(sf::Vector2f(-100, -100), sf::Vector2f(-100, -100)));
-		//m_currentspell->resetCastCooldown();
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
 	{
 		m_currentspell.reset(new Waterhose(sf::Vector2f(-100, -100), sf::Vector2f(-100, -100)));
-		//m_currentspell->resetCastCooldown();
 
 	}
 
@@ -114,8 +112,9 @@ void Player::castSpell(sf::RenderWindow* window)
 	sf::Vector2f direction = mousePos - m_bbox.getPosition();
 	//Normalize the direction vector 
 	direction = Normalize(direction);
-
-	std::shared_ptr<BaseSpell> _spell = m_currentspell->makeSpell(m_bbox.getPosition(), direction);
+	
+	// creates spell. The magic number is how many pixels away from player origin the spell starts
+	std::shared_ptr<BaseSpell> _spell = m_currentspell->makeSpell(m_bbox.getPosition() + (direction * 40.f), direction);
 	myvec->push_back(_spell);
 }
 
