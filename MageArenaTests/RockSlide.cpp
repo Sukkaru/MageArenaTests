@@ -2,18 +2,19 @@
 #include "RockSlide.h"
 
 
-RockSlide::RockSlide(sf::Vector2f initialpos, sf::Vector2f direction)
+RockSlide::RockSlide(sf::Vector2f initialpos, sf::Vector2f direction, std::vector<std::shared_ptr<GameObject>> &gameVec, int castCout)
 {
-	m_moveSpeed =			0;
+	m_moveSpeed =			1;
 	m_velocity =			direction * m_moveSpeed;
 	m_totalSpellLife =		1.5f;
 	m_currentSpellLife =	0;
-	m_spellcooldown =		0.3f;
+	m_spellcooldown =		1.f;
 	m_castCooldown =		0.f;
 
 	m_spellBody.setPosition(initialpos);
-	m_spellBody.setFillColor(sf::Color::Red);
-	m_spellBody.setRadius(12.0f);
+	// the rbg color code is a brownish
+	m_spellBody.setFillColor(sf::Color(130,70,0));
+	m_spellBody.setRadius(20.0f);
 	m_spellBody.setOrigin(m_spellBody.getRadius(), m_spellBody.getRadius());
 }
 

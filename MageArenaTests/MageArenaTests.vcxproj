@@ -163,6 +163,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="PhysicsObject.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RockSlide.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Waterhose.h" />
@@ -176,6 +177,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="PhysicsObject.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RockSlide.cpp" />
     <ClCompile Include="SFMLTemplate.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
