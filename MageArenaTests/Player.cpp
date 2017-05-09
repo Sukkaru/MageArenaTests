@@ -4,6 +4,7 @@
 
 Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec/*, std::shared_ptr<CollisionManager> p_collisionptr*/)
 {
+	m_destroyed = false;
 	myvec = p_vec;
 	m_bbox.setSize(sf::Vector2f(50, 50));
 	m_bbox.setOrigin(m_bbox.getSize().x / 2, m_bbox.getSize().y / 2);

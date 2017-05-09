@@ -4,6 +4,8 @@
 
 Fireball::Fireball(sf::Vector2f initialpos, sf::Vector2f direction)
 {
+	m_destroyed = false;
+
 	m_moveSpeed =			1000;
 	m_velocity =			direction * m_moveSpeed;
 	m_totalSpellLife =		1.5f;

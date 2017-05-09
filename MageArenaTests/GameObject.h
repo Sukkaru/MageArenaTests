@@ -13,6 +13,6 @@ public:
 	void			setDestroyed(bool input) { m_destroyed = input; }
 
 protected:
-	bool			m_destroyed = true;
+	bool			m_destroyed = false;
 };
 
