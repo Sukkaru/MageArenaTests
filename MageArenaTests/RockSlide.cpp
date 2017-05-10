@@ -2,7 +2,7 @@
 #include "RockSlide.h"
 
 
-RockSlide::RockSlide(sf::Vector2f initialpos, sf::Vector2f direction, std::vector<std::shared_ptr<GameObject>> &gameVec, int castCout)
+RockSlide::RockSlide(sf::Vector2f initialpos, sf::Vector2f direction, std::vector<std::shared_ptr<GameObject>> &gameVec, int castCout = 0)
 {
 	m_moveSpeed =			1;
 	m_velocity =			direction * m_moveSpeed;
@@ -31,7 +31,9 @@ void RockSlide::Draw(sf::RenderWindow * window)
 {
 }
 
-std::shared_ptr<BaseSpell> RockSlide::makeSpell(sf::Vector2f initialpos, sf::Vector2f direction)
+std::shared_ptr<BaseSpell> RockSlide::makeSpell(sf::Vector2f initialpos, sf::Vector2f direction, std::vector<std::shared_ptr<GameObject>> &gameVec)
 {
-	return std::shared_ptr<BaseSpell>();
+
+	std::shared_ptr<RockSlide> instance(new RockSlide(initialpos, direction, gameVec));
+	return instance;
 }

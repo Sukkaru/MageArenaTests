@@ -7,7 +7,9 @@ public:
 	~BaseSpell();
 	void virtual						Update(sf::RenderWindow* window, sf::Time* dt);
 	void virtual						Draw(sf::RenderWindow* window);
-	virtual std::shared_ptr<BaseSpell>	makeSpell(sf::Vector2f initialpos, sf::Vector2f direction) = 0;
+	std::shared_ptr<BaseSpell>	makeSpell(sf::Vector2f initialpos, sf::Vector2f direction) { return nullptr; }
+	//std::shared_ptr<BaseSpell>	makeSpell(sf::Vector2f initialpos, sf::Vector2f direction, std::vector<std::shared_ptr<GameObject>> &gameVec, int castCount = 0) { return nullptr; }
+
 
 	float								getSpellCooldown();
 	float								getCurrentCastCooldown();
