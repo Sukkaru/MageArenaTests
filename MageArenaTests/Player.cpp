@@ -78,7 +78,7 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3))
 	{
-		m_currentspell.reset(new RockSlide(sf::Vector2f(-100, -100), sf::Vector2f(-100, -100)));
+		m_currentspell.reset(new RockSlide(sf::Vector2f(-1000, -1000), sf::Vector2f(-1000, -1000)));
 	}
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))

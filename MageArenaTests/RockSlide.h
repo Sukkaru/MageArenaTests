@@ -12,9 +12,17 @@ public:
 
 
 private:
+	float						m_spellsRadius;
+
 	sf::CircleShape				m_spellBody;
+	sf::CircleShape				m_shadowOne;
+	sf::CircleShape				m_shadowTwo;
+	sf::Vector2f				m_previousPosition;
 
-	                                      
-
+	float						m_moveSpellBody;
+	float						m_moveSpellBodyTimer;
+	float						m_moveSpellDistance;
+	int							m_moveCount;
+	int							m_maxMoveCount;
 };
 
