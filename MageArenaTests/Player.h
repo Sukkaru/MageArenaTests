@@ -8,7 +8,7 @@
 class Player : public PhysicsObject
 {
 public:
-	Player(std::vector<std::shared_ptr<GameObject>>* p_vec/*,std::shared_ptr<CollisionManager> p_collisionptr*/);
+	Player(std::vector<std::shared_ptr<GameObject>>* p_vec,std::shared_ptr<CollisionManager> p_collisionptr);
 	~Player();
 	void virtual								Update(sf::RenderWindow* window, sf::Time* dt);
 	void virtual								Draw(sf::RenderWindow* window);

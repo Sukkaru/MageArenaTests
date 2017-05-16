@@ -2,11 +2,11 @@
 #include "Player.h"
 
 
-Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec/*, std::shared_ptr<CollisionManager> p_collisionptr*/)
+Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec, std::shared_ptr<CollisionManager> p_collisionptr)
 {
 	m_destroyed = false;
 	myvec = p_vec;
-	m_bbox.setSize(sf::Vector2f(50, 50));
+	m_bbox.setSize(sf::Vector2f(50, 100));
 	m_bbox.setOrigin(m_bbox.getSize().x / 2, m_bbox.getSize().y / 2);
 	m_bbox.setFillColor(sf::Color::Red);
 	m_bbox.setPosition(sf::Vector2f(100, 100));

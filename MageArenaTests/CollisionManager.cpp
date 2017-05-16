@@ -34,12 +34,26 @@ void CollisionManager::addToGrid(std::shared_ptr<PhysicsObject> obj)
 	//For now this will only work for normal sized objects, I'll add code for bigger things later
 	
 	//Compute what box to put the object in
-	//obj.pos.x/BOX_WIDTH = horizontal box number
-	int rowbox = obj->getBBox().getPosition().x / BOX_WIDTH;
-	int colbox = obj->getBBox().getPosition().y / BOX_HEIGHT;
-	grid[rowbox][colbox].push_back(obj);
-	if(grid[rowbox][colbox].size() > 0)
-		printf("I'm in grid: [%d][%d]\n", rowbox, colbox);
+	//Get the dimensions of the object and its position
+	//Get the four corners of the global bounding rectangle of the object
+	
+	float objleft = obj->getBBox().getGlobalBounds().left;
+	float objtop = obj->getBBox().getGlobalBounds().top;
+	float objright = objleft + obj->getBBox().getGlobalBounds().width;
+	float objbot = objtop + obj->getBBox().getGlobalBounds().height;
+	printf("Object left,top,right,bot: %f,%f,%f,%f\n", objleft, objtop, objright, objbot);
+	int startcol = objleft / BOX_WIDTH;
+	int endcol = objright / BOX_WIDTH;
+	int startrow = objtop / BOX_HEIGHT;
+	int endrow = objbot / BOX_HEIGHT;
+	for (int row = startrow; row <= endrow; row++)
+	{
+		for (int col = startcol; col <= endcol; col++)
+		{
+			grid[row][col].push_back(obj);
+		}
+	}
+	
 	displayGrid();
 }
 
@@ -52,7 +66,6 @@ void CollisionManager::delFromGrid(std::shared_ptr<PhysicsObject> obj)
 		if (*it == obj)
 		{
 			it = grid[rowbox][colbox].erase(it);
-			printf("I am no longer in the grid: %d\n", grid[rowbox][colbox].size());
 		}
 		else
 			++it;
