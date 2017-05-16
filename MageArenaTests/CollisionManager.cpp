@@ -11,11 +11,6 @@ CollisionManager::CollisionManager(sf::RenderWindow* window)
 	printf("High:%d \n Wide:%d \n", numboxeshigh, numboxeswide);
 	//Make sure the grid has allocated enough space for all boxes
 	grid = std::vector<std::vector<std::vector<std::shared_ptr<PhysicsObject>>>>(numboxeswide, std::vector<std::vector<std::shared_ptr<PhysicsObject>>>(numboxeshigh, std::vector<std::shared_ptr<PhysicsObject>>()));
-	printf("Capacity of row: %d \n", grid.capacity());
-	for (int i = 0; i < numboxeswide; i++)
-	{
-		printf("Capacity of columns: %d\n", grid[i].capacity());
-	}
 }
 
 
@@ -31,26 +26,24 @@ void CollisionManager::addToGrid(std::shared_ptr<PhysicsObject> obj)
 {
 	//This function takes an object, gets the position of the object
 	//and adds the object to the vector of the grid squares that it is in
-	//For now this will only work for normal sized objects, I'll add code for bigger things later
 	
-	//Compute what box to put the object in
-	//Get the dimensions of the object and its position
 	//Get the four corners of the global bounding rectangle of the object
-	
 	float objleft = obj->getBBox().getGlobalBounds().left;
 	float objtop = obj->getBBox().getGlobalBounds().top;
 	float objright = objleft + obj->getBBox().getGlobalBounds().width;
 	float objbot = objtop + obj->getBBox().getGlobalBounds().height;
 	printf("Object left,top,right,bot: %f,%f,%f,%f\n", objleft, objtop, objright, objbot);
+	//Compute the rows and columns that correspond to the corners of the rectangle
 	int startcol = objleft / BOX_WIDTH;
 	int endcol = objright / BOX_WIDTH;
 	int startrow = objtop / BOX_HEIGHT;
 	int endrow = objbot / BOX_HEIGHT;
+	//Go through every box in between the starting and ending column and row
 	for (int row = startrow; row <= endrow; row++)
 	{
 		for (int col = startcol; col <= endcol; col++)
 		{
-			grid[row][col].push_back(obj);
+			grid[row][col].push_back(obj);	//Add the object pointer to the box
 		}
 	}
 	
@@ -59,22 +52,43 @@ void CollisionManager::addToGrid(std::shared_ptr<PhysicsObject> obj)
 
 void CollisionManager::delFromGrid(std::shared_ptr<PhysicsObject> obj)
 {
-	int rowbox = obj->getBBox().getPosition().x / BOX_WIDTH;
-	int colbox = obj->getBBox().getPosition().y / BOX_HEIGHT;
-	for (auto it = grid[rowbox][colbox].begin(); it != grid[rowbox][colbox].end();)
+	//This function deletes all pointers to an object from all grid boxes it is in
+
+	//Get the four corners of the global bounding rectangle of the object
+	float objleft = obj->getBBox().getGlobalBounds().left;
+	float objtop = obj->getBBox().getGlobalBounds().top;
+	float objright = objleft + obj->getBBox().getGlobalBounds().width;
+	float objbot = objtop + obj->getBBox().getGlobalBounds().height;
+	printf("Object left,top,right,bot: %f,%f,%f,%f\n", objleft, objtop, objright, objbot);
+	//Compute the rows and columns that correspond to the corners of the rectangle
+	int startcol = objleft / BOX_WIDTH;
+	int endcol = objright / BOX_WIDTH;
+	int startrow = objtop / BOX_HEIGHT;
+	int endrow = objbot / BOX_HEIGHT;
+	//Go through every box in between the starting and ending column and row
+	for (int row = startrow; row <= endrow; row++)
 	{
-		if (*it == obj)
+		for (int col = startcol; col <= endcol; col++)
 		{
-			it = grid[rowbox][colbox].erase(it);
+			//Search the vector of object pointers at the specific box
+			for (auto it = grid[row][col].begin(); it != grid[row][col].end();)
+			{
+				if (*it == obj)		//If the object pointer is in the vector
+				{
+					it = grid[row][col].erase(it);	//Erase the object pointer from the vector
+				}
+				else
+					++it;
+			}
 		}
-		else
-			++it;
 	}
+	
 	displayGrid();
 }
 
 void CollisionManager::displayGrid()
 {
+	//Iterates through the entire grid printing out the amount of objects in each box
 	for (int i = 0; i < grid.size(); i++)
 	{
 		for (int j = 0; j < grid[i].size(); j++)
