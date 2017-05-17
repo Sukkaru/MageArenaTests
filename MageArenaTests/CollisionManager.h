@@ -9,7 +9,7 @@ public:
 	void checkCollisions();
 	void addToGrid(std::shared_ptr<PhysicsObject> obj);
 	void delFromGrid(std::shared_ptr<PhysicsObject> obj);
-	
+	void updateGrid(std::shared_ptr<PhysicsObject> obj);
 
 private:
 	//Grid boxes for spatial partitioning of game world

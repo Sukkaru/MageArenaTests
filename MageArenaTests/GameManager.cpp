@@ -11,7 +11,7 @@ GameManager::GameManager(sf::RenderWindow* window)
 	** also commented out collider arguements in player header and cpp
 	*/
 	//CollisionManager m_collisionmanager(window);
-	std::shared_ptr<CollisionManager> p_colptr;
+	
 	p_colptr.reset(new CollisionManager(window));
 	//Keep these above anything that uses them
 	m_testdummy.reset(new Enemy(&addvector)); //For testing
@@ -85,6 +85,14 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 
 	for (auto i = 0; i < myvector.size(); i++)
 	{
+		if (std::shared_ptr<PhysicsObject> p = std::dynamic_pointer_cast<PhysicsObject>(myvector[i]))
+		{
+			if (p->getVelocity().x > 0 || p->getVelocity().y > 0)
+			{
+				p_colptr->updateGrid(p);
+			}
+			
+		}
 		myvector[i]->Update(window, dt);
 
 		//removes

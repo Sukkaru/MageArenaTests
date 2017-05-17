@@ -12,9 +12,11 @@ public:
 	sf::Vector2f			Normalize(sf::Vector2f vector);
 	void					CalculateFriction();
 	sf::RectangleShape		getBBox();
-
+	sf::RectangleShape		getPrevBBox();
+	sf::Vector2f			getVelocity();
 protected:
 	sf::RectangleShape		m_bbox;			//Bounding box for collision detection
+	sf::RectangleShape		m_prevbbox;		//Previous box for collision detection
 	sf::Vector2f			m_upForce;		//For moving up
 	sf::Vector2f			m_downForce;	//For moving down
 	sf::Vector2f			m_rightForce;	//For moving right
@@ -28,5 +30,6 @@ protected:
 	float					m_moveSpeed;
 	float					m_maxMoveSpeed;
 	float					m_mass;
+	
 };
 

@@ -2,14 +2,16 @@
 #include "Player.h"
 
 
-Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec, std::shared_ptr<CollisionManager> p_collisionptr)
+Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec, std::shared_ptr<CollisionManager> p_collisionmanager)
 {
 	m_destroyed = false;
-	myvec = p_vec;
+	p_gameobjvec = p_vec;
+	p_collisionmngr = p_collisionmanager;
 	m_bbox.setSize(sf::Vector2f(50, 100));
 	m_bbox.setOrigin(m_bbox.getSize().x / 2, m_bbox.getSize().y / 2);
 	m_bbox.setFillColor(sf::Color::Red);
 	m_bbox.setPosition(sf::Vector2f(100, 100));
+	m_prevbbox = m_bbox;
 	//m_playerBody.setSize(sf::Vector2f(50, 50));
 	//m_playerBody.setFillColor(sf::Color::Red);
 	m_aimer.setFillColor(sf::Color::Blue);
@@ -49,7 +51,6 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	//printf("DT in Player: %f\n", dt->asSeconds());
 	//Reset acceleration so it doesn't add on itself
 	m_accel = sf::Vector2f(0, 0);
-
 	//Movement
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))	//Down
 	{
@@ -94,7 +95,8 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	ApplyForce(m_friction);
 	m_velocity += m_accel * dt->asSeconds();
 	//printf("Accel.x:%f\nAccel.y:%f\n", m_accel.x, m_accel.y);
-	//printf("Velocity.x:%f\nVelocity.y:%f\n", m_velocity.x, m_velocity.y);
+	printf("Velocity.x:%f\nVelocity.y:%f\n", m_velocity.x, m_velocity.y);
+	m_prevbbox = m_bbox;
 	m_bbox.setPosition(m_bbox.getPosition() + m_velocity * dt->asSeconds());
 	//m_playerBody.setPosition(m_playerBody.getPosition() + m_velocity * dt->asSeconds());
 	//printf("Position.x:%f\nPosition.y:%f\n", m_playerBody.getPosition().x, m_playerBody.getPosition().y);
@@ -116,7 +118,7 @@ void Player::castSpell(sf::RenderWindow* window)
 	
 	// creates spell. The magic number is how many pixels away from player origin the spell starts
 	std::shared_ptr<BaseSpell> _spell = m_currentspell->makeSpell(m_bbox.getPosition() + (direction * 40.f), direction);
-	myvec->push_back(_spell);
+	p_gameobjvec->push_back(_spell);
 }
 
 

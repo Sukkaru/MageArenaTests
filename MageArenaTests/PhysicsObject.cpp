@@ -62,3 +62,13 @@ sf::RectangleShape PhysicsObject::getBBox()
 {
 	return m_bbox;
 }
+
+sf::RectangleShape PhysicsObject::getPrevBBox()
+{
+	return m_prevbbox;
+}
+
+sf::Vector2f PhysicsObject::getVelocity()
+{
+	return m_velocity;
+}

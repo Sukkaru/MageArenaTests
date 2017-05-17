@@ -10,7 +10,7 @@ CollisionManager::CollisionManager(sf::RenderWindow* window)
 	numboxeshigh = (window->getSize().y / BOX_HEIGHT) + 1;
 	printf("High:%d \n Wide:%d \n", numboxeshigh, numboxeswide);
 	//Make sure the grid has allocated enough space for all boxes
-	grid = std::vector<std::vector<std::vector<std::shared_ptr<PhysicsObject>>>>(numboxeswide, std::vector<std::vector<std::shared_ptr<PhysicsObject>>>(numboxeshigh, std::vector<std::shared_ptr<PhysicsObject>>()));
+	grid = std::vector<std::vector<std::vector<std::shared_ptr<PhysicsObject>>>>(numboxeshigh, std::vector<std::vector<std::shared_ptr<PhysicsObject>>>(numboxeswide, std::vector<std::shared_ptr<PhysicsObject>>()));
 }
 
 
@@ -32,7 +32,7 @@ void CollisionManager::addToGrid(std::shared_ptr<PhysicsObject> obj)
 	float objtop = obj->getBBox().getGlobalBounds().top;
 	float objright = objleft + obj->getBBox().getGlobalBounds().width;
 	float objbot = objtop + obj->getBBox().getGlobalBounds().height;
-	printf("Object left,top,right,bot: %f,%f,%f,%f\n", objleft, objtop, objright, objbot);
+	//printf("Object left,top,right,bot: %f,%f,%f,%f\n", objleft, objtop, objright, objbot);
 	//Compute the rows and columns that correspond to the corners of the rectangle
 	int startcol = objleft / BOX_WIDTH;
 	int endcol = objright / BOX_WIDTH;
@@ -55,11 +55,11 @@ void CollisionManager::delFromGrid(std::shared_ptr<PhysicsObject> obj)
 	//This function deletes all pointers to an object from all grid boxes it is in
 
 	//Get the four corners of the global bounding rectangle of the object
-	float objleft = obj->getBBox().getGlobalBounds().left;
-	float objtop = obj->getBBox().getGlobalBounds().top;
-	float objright = objleft + obj->getBBox().getGlobalBounds().width;
-	float objbot = objtop + obj->getBBox().getGlobalBounds().height;
-	printf("Object left,top,right,bot: %f,%f,%f,%f\n", objleft, objtop, objright, objbot);
+	float objleft = obj->getPrevBBox().getGlobalBounds().left;
+	float objtop = obj->getPrevBBox().getGlobalBounds().top;
+	float objright = objleft + obj->getPrevBBox().getGlobalBounds().width;
+	float objbot = objtop + obj->getPrevBBox().getGlobalBounds().height;
+	//printf("Object left,top,right,bot: %f,%f,%f,%f\n", objleft, objtop, objright, objbot);
 	//Compute the rows and columns that correspond to the corners of the rectangle
 	int startcol = objleft / BOX_WIDTH;
 	int endcol = objright / BOX_WIDTH;
@@ -84,6 +84,17 @@ void CollisionManager::delFromGrid(std::shared_ptr<PhysicsObject> obj)
 	}
 	
 	displayGrid();
+}
+
+void CollisionManager::updateGrid(std::shared_ptr<PhysicsObject> obj)
+{
+	//First delete the object from the grid
+	delFromGrid(obj);
+	//Then add it back in to the grid
+	addToGrid(obj);
+	//Then add the boxes that contain the object
+	//To the list of boxes that need to be checked for collisions
+
 }
 
 void CollisionManager::displayGrid()

@@ -8,7 +8,7 @@
 class Player : public PhysicsObject
 {
 public:
-	Player(std::vector<std::shared_ptr<GameObject>>* p_vec,std::shared_ptr<CollisionManager> p_collisionptr);
+	Player(std::vector<std::shared_ptr<GameObject>>* p_vec,std::shared_ptr<CollisionManager> p_collisionmanager);
 	~Player();
 	void virtual								Update(sf::RenderWindow* window, sf::Time* dt);
 	void virtual								Draw(sf::RenderWindow* window);
@@ -16,7 +16,8 @@ public:
 	
 private:
 	sf::RectangleShape							m_aimer;		//For player aiming, points toward mouse position
-	std::vector<std::shared_ptr<GameObject>>*	myvec;
+	std::vector<std::shared_ptr<GameObject>>*	p_gameobjvec;
+	std::shared_ptr<CollisionManager>			p_collisionmngr;
 	float										m_castcooldown;
 	std::shared_ptr<BaseSpell>					m_currentspell;
 };
