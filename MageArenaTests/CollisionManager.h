@@ -7,9 +7,9 @@ public:
 	CollisionManager(sf::RenderWindow* window);
 	~CollisionManager();
 	void checkCollisions();
-	void addToGrid(std::shared_ptr<PhysicsObject> obj);
-	void delFromGrid(std::shared_ptr<PhysicsObject> obj);
-	void updateGrid(std::shared_ptr<PhysicsObject> obj);
+	void addToGrid(std::shared_ptr<PhysicsObject> obj,sf::FloatRect boundingrect);
+	void delFromGrid(std::shared_ptr<PhysicsObject> obj, sf::FloatRect boundingrect);
+	void updateGrid(std::shared_ptr<PhysicsObject> obj, sf::FloatRect boundingrect, sf::FloatRect prevboundingrect);
 
 private:
 	//Grid boxes for spatial partitioning of game world
