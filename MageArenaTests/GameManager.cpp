@@ -3,24 +3,17 @@
 
 
 GameManager::GameManager(sf::RenderWindow* window)
-{
-	/*
-	
-	** Commented out until finished or working
-	** also commented out collider arguements in player header and cpp
-
-	//CollisionManager m_collisionmanager(window);
-	std::shared_ptr<CollisionManager> p_colptr;
+{	
 	p_colptr.reset(new CollisionManager(window));
-	//Add player and testdummy to the collision manager
-	p_colptr->addToGrid(m_player);
-	p_colptr->delFromGrid(m_player);
-	p_colptr->addToGrid(m_testdummy);
-	*/
-
-	//Add player and testdummy to the GameObject vector
+	//Keep these above anything that uses them
 	m_testdummy.reset(new Enemy(&addvector)); //For testing
-	m_player.reset(new Player(&addvector/*,p_colptr*/));
+	m_player.reset(new Player(&addvector, p_colptr));
+	//Add player and testdummy to the collision manager
+	p_colptr->addToGrid(m_player,m_player->getBBox().getGlobalBounds());
+	p_colptr->addToGrid(m_testdummy,m_testdummy->getBBox().getGlobalBounds());
+	
+
+	//Add player and testdummy to the GameObject vector	
 	addvector.push_back(m_player);
 	addvector.push_back(m_testdummy);
 }
@@ -37,18 +30,8 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 	{
 		if (event.type == sf::Event::Closed)
 			window->close();
-
-		//if (event.type == sf::Event::MouseButtonPressed)
-		//{
-			//if (event.mouseButton.button == sf::Mouse::Left)
-			//{
-
-				//m_player->castSpell(window);
-			//}
-		//}
-		
 	}
-
+	//Press ESC to close the game window
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
 		window->close();
@@ -63,24 +46,19 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 		addvector.clear();
 	}
 
-	//for (auto & value : myvector)
-	//{
-	//	value->Update(window,dt);
-
-	//	// Checks to see if the current value is a base spell, if it is it checks to see if it is flagged destroy
-	//	// if it is destroyed, remove from the vector of game objects and back up a step
-
-	//	if (std::dynamic_pointer_cast<BaseSpell>(value))
-	//	{
-	//		if (value->getDestroyed())
-	//		{
-	//			
-	//		}
-	//	}
-	//}
 
 	for (auto i = 0; i < myvector.size(); i++)
 	{
+		//Check if the current object is a PhysicsObject
+		if (std::shared_ptr<PhysicsObject> p = std::dynamic_pointer_cast<PhysicsObject>(myvector[i]))
+		{
+			//If the object is moving, update its position in the collision grid
+			if (p->getVelocity().x != 0 || p->getVelocity().y != 0)
+			{
+				p_colptr->updateGrid(p,p->getBBox().getGlobalBounds(),p->getPrevBBox().getGlobalBounds());
+			}
+			
+		}
 		myvector[i]->Update(window, dt);
 
 		//removes

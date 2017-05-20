@@ -14,7 +14,7 @@ private:
 	std::vector<std::shared_ptr<GameObject>> myvector;
 	std::vector<std::shared_ptr<GameObject>> addvector;
 	std::vector<std::shared_ptr<GameObject>> delvector;	//Might not use this but keeping it for reminder
-
+	std::shared_ptr<CollisionManager> p_colptr;
 	std::shared_ptr<Player> m_player;
 	std::shared_ptr<Enemy> m_testdummy;
 	//CollisionManager m_collisionManager;
