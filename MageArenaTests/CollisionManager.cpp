@@ -120,4 +120,5 @@ void CollisionManager::displayGrid()
 		}
 		printf("\n");
 	}
+	printf("\n");
 }
