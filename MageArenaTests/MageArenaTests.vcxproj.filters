@@ -57,12 +57,9 @@
     <ClInclude Include="Waterhose.h">
       <Filter>Header Files\Spells</Filter>
     </ClInclude>
-<<<<<<< HEAD
-=======
     <ClInclude Include="MultiSpell.h">
       <Filter>Header Files</Filter>
     </ClInclude>
->>>>>>> b4rock
     <ClInclude Include="RockSlide.h">
       <Filter>Header Files\Spells</Filter>
     </ClInclude>
@@ -101,12 +98,9 @@
     <ClCompile Include="Waterhose.cpp">
       <Filter>Source Files\Spells</Filter>
     </ClCompile>
-<<<<<<< HEAD
-=======
     <ClCompile Include="MultiSpell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
->>>>>>> b4rock
     <ClCompile Include="RockSlide.cpp">
       <Filter>Source Files\Spells</Filter>
     </ClCompile>
