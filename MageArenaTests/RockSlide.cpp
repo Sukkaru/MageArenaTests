@@ -82,7 +82,7 @@ void RockSlide::Draw(sf::RenderWindow * window)
 
 }
 
-std::shared_ptr<BaseSpell> RockSlide::makeSpell(sf::Vector2f initialpos, sf::Vector2f direction, std::vector<std::shared_ptr<GameObject>> &gameVec)
+std::shared_ptr<BaseSpell> RockSlide::makeSpell(sf::Vector2f initialpos, sf::Vector2f direction)
 {
 
 

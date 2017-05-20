@@ -53,7 +53,7 @@ void CollisionManager::addToGrid(std::shared_ptr<PhysicsObject> obj, sf::FloatRe
 		}
 	}
 	
-	displayGrid();
+	//displayGrid();
 }
 
 void CollisionManager::delFromGrid(std::shared_ptr<PhysicsObject> obj, sf::FloatRect boundingrect)
