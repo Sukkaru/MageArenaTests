@@ -59,13 +59,17 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 			}
 			
 		}
-		myvector[i]->Update(window, dt);
+		if (myvector[i] != nullptr)
+			myvector[i]->Update(window, dt);
 
 		//removes
-		if (myvector[i]->getDestroyed())
+		if (myvector[i] != nullptr)
 		{
-			myvector.erase(myvector.begin() + i);
-			i--;
+			if (myvector[i]->getDestroyed())
+			{
+				myvector.erase(myvector.begin() + i);
+				i--;
+			}
 		}
 	}
 }
