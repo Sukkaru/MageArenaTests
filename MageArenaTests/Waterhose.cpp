@@ -29,7 +29,6 @@ void Waterhose::Update(sf::RenderWindow * window, sf::Time * dt)
 	m_spellBody.setPosition(m_spellBody.getPosition() + m_velocity * dt->asSeconds());
 	//m_spellBody.setRadius(m_spellBody.getRadius() + (dt->asSeconds() * m_waveScaler));
 	m_spellBody.scale(m_waveScaler, m_waveScaler);
-
 }
 
 void Waterhose::Draw(sf::RenderWindow * window)

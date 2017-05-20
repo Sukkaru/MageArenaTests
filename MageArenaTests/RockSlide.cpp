@@ -20,6 +20,8 @@ RockSlide::RockSlide(sf::Vector2f initialpos, sf::Vector2f direction)
 
 	m_spellsRadius = 40.f;
 
+	m_previousPosition = initialpos;		//Added this so shadowOne on the first update doesn't appear at position (0,0)
+
 	m_spellBody.setPosition(initialpos);
 	m_spellBody.setFillColor(sf::Color(150,50,0));
 	m_spellBody.setRadius(m_spellsRadius);

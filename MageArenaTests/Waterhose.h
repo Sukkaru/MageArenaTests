@@ -11,6 +11,6 @@ public:
 
 private:
 	sf::CircleShape				m_spellBody;
-	float						m_waveScaler = 1.0015f;
+	float						m_waveScaler = 1.0015f;	
 };
 
