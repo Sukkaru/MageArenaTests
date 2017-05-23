@@ -67,6 +67,7 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 			myvector.erase(myvector.begin() + i);
 			i--;
 		}
+		
 	}
 }
 

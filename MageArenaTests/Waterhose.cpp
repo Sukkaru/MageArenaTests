@@ -11,6 +11,7 @@ Waterhose::Waterhose(sf::Vector2f initialpos, sf::Vector2f direction)
 	m_currentSpellLife = 0;
 	m_spellcooldown = 0.05f;
 	m_castCooldown = 0.f;
+	m_waveScaler = 1.004f;
 
 	m_spellBody.setPosition(initialpos);
 	m_spellBody.setFillColor(sf::Color::Blue);
