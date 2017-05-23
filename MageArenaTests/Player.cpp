@@ -8,8 +8,8 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec, std::shared_ptr<
 	p_gameobjvec = p_vec;
 	//Collision stuff
 	p_collisionmngr = p_collisionmanager;
-	collisiongroup = 1;						//Player group is 1
-	collidablegroups = 6;					//Groups Player can collide with, 2 and 4, terrain and enemy
+	m_collisiongroup = 1;							//Player group is 1
+	m_collidablegroups = 12;						//Groups Player can collide with, 2^2 = 4 and 2^3 = 8, terrain and enemy
 	//Body stuff
 	m_playerbody.setSize(sf::Vector2f(50, 50));
 	m_playerbody.setOrigin(m_playerbody.getSize().x / 2, m_playerbody.getSize().y / 2);

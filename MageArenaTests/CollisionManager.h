@@ -21,6 +21,9 @@ private:
 	std::vector<int> activeboxes;
 	int numboxeswide;
 	int numboxeshigh;
+
 	void displayGrid();
+	bool checkCollisionGroup(unsigned char collidablegroups, int collisiongroup);
+	bool checkBBoxCollision(sf::FloatRect obj1bbox, sf::FloatRect obj2bbox);
 };
 

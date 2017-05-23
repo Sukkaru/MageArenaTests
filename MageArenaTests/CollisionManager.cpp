@@ -32,9 +32,14 @@ void CollisionManager::checkCollisions()
 				{
 					//Compare stuff here
 					//If obj can collide with obj2's group
-					if ((grid[row][col][obj]->getCollidableGroups() & grid[row][col][obj2]->getCollisionGroup()) > 0)
+					if (checkCollisionGroup(grid[row][col][obj]->getCollidableGroups(), grid[row][col][obj2]->getCollisionGroup()) == true)
 					{
-
+						//Check if the bounding box for each object collide
+						if (checkBBoxCollision(grid[row][col][obj]->getBBox(), grid[row][col][obj2]->getBBox()) == true)
+						{
+							//Call overloaded function here, which accepts any combination of CircleShapes and RectangleShapes
+							printf("Collision!\n");
+						}
 					}
 				}
 			}
@@ -124,9 +129,6 @@ void CollisionManager::updateGrid(std::shared_ptr<PhysicsObject> obj, sf::FloatR
 	delFromGrid(obj,prevboundingrect);
 	//Then add it back in to the grid
 	addToGrid(obj,boundingrect);
-	//Then add the boxes that contain the object
-	//To the list of boxes that need to be checked for collisions
-
 }
 
 void CollisionManager::displayGrid()
@@ -141,4 +143,30 @@ void CollisionManager::displayGrid()
 		printf("\n");
 	}
 	printf("\n");
+}
+
+bool CollisionManager::checkCollisionGroup(unsigned char collidablegroups, int collisiongroup)
+{
+	unsigned char mask = 1;							//Initialize the bitmask
+	mask = mask << collisiongroup;					//Shift the active bit over to the slot that corresponds to the collision group
+	return (collidablegroups & mask) > 0;			//If there is a 1 in the slot that corresponds to that group, the objects can collide
+}
+
+bool CollisionManager::checkBBoxCollision(sf::FloatRect obj1bbox, sf::FloatRect obj2bbox)
+{
+	float obj1left = obj1bbox.left;
+	float obj1top = obj1bbox.top;
+	float obj1right = obj1bbox.left + obj1bbox.width;
+	float obj1bot = obj1bbox.top + obj1bbox.height;
+
+	float obj2left = obj2bbox.left;
+	float obj2top = obj2bbox.top;
+	float obj2right = obj2bbox.left + obj2bbox.width;
+	float obj2bot = obj2bbox.top + obj2bbox.height;
+	//Check simple bounding box rectangle collision
+	if (obj1left > obj2right || obj1right < obj2left || obj1top > obj2bot || obj1bot < obj2top)
+	{
+		return false;
+	}
+	return true;
 }

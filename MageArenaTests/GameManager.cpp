@@ -59,6 +59,7 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 			}
 			
 		}
+		p_colptr->checkCollisions();
 		myvector[i]->Update(window, dt);
 		//printf("CollisionGroup: %d \n", myvector[i]->getCollisionGroup());
 		//removes

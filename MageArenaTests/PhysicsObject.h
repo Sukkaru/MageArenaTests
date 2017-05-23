@@ -14,6 +14,8 @@ public:
 	sf::FloatRect			getBBox();
 	sf::FloatRect			getPrevBBox();
 	sf::Vector2f			getVelocity();
+	int						getCollisionGroup() { return m_collisiongroup; }
+	unsigned char			getCollidableGroups() { return m_collidablegroups; }
 protected:
 	sf::FloatRect			m_bbox;			//Bounding box for collision detection
 	sf::FloatRect			m_prevbbox;		//Previous bounding box for collision detection
@@ -30,6 +32,9 @@ protected:
 	float					m_moveSpeed;
 	float					m_maxMoveSpeed;
 	float					m_mass;
+
+	int						m_collisiongroup = 0;			//Default: Not part of any collision group
+	unsigned char			m_collidablegroups = 0;			//Default: Can't collide with anything
 	
 };
 
