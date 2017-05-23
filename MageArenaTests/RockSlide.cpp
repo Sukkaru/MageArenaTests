@@ -27,6 +27,9 @@ RockSlide::RockSlide(sf::Vector2f initialpos, sf::Vector2f direction)
 	m_spellBody.setRadius(m_spellsRadius);
 	m_spellBody.setOrigin(m_spellBody.getRadius(), m_spellBody.getRadius());
 
+	m_bbox = m_spellBody.getGlobalBounds();
+	m_prevbbox = m_bbox;
+
 	//Stuff for the lasting circle effect
 	m_shadowOne.setPosition(initialpos);
 	m_shadowOne.setFillColor(sf::Color(150, 50, 0));
@@ -66,7 +69,9 @@ void RockSlide::Update(sf::RenderWindow * window, sf::Time * dt)
 		m_previousPosition = m_spellBody.getPosition();
 		if (m_moveCount < m_maxMoveCount)
 		{
+			m_prevbbox = m_bbox;
 			m_spellBody.move(m_velocity * m_moveSpellDistance);
+			m_bbox = m_spellBody.getGlobalBounds();
 		}
 		m_moveSpellBodyTimer = 0.f;
 		m_moveCount++;

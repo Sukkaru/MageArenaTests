@@ -17,6 +17,9 @@ Waterhose::Waterhose(sf::Vector2f initialpos, sf::Vector2f direction)
 	m_spellBody.setFillColor(sf::Color::Blue);
 	m_spellBody.setRadius(12.0f);
 	m_spellBody.setOrigin(m_spellBody.getRadius(), m_spellBody.getRadius());
+
+	m_bbox = m_spellBody.getGlobalBounds();
+	m_prevbbox = m_bbox;
 }
 
 
@@ -27,7 +30,9 @@ Waterhose::~Waterhose()
 void Waterhose::Update(sf::RenderWindow * window, sf::Time * dt)
 {
 	BaseSpell::Update(window, dt);
+	m_prevbbox = m_bbox;
 	m_spellBody.setPosition(m_spellBody.getPosition() + m_velocity * dt->asSeconds());
+	m_bbox = m_spellBody.getGlobalBounds();
 	//m_spellBody.setRadius(m_spellBody.getRadius() + (dt->asSeconds() * m_waveScaler));
 	m_spellBody.scale(m_waveScaler, m_waveScaler);
 }

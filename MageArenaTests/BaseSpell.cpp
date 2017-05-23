@@ -4,6 +4,8 @@
 
 BaseSpell::BaseSpell()
 {
+	m_collisiongroup = 4;
+	m_collidablegroups = 12;
 }
 
 
