@@ -9,8 +9,8 @@ GameManager::GameManager(sf::RenderWindow* window)
 	m_testdummy.reset(new Enemy(&addvector)); //For testing
 	m_player.reset(new Player(&addvector, p_colptr));
 	//Add player and testdummy to the collision manager
-	p_colptr->addToGrid(m_player,m_player->getBBox().getGlobalBounds());
-	p_colptr->addToGrid(m_testdummy,m_testdummy->getBBox().getGlobalBounds());
+	p_colptr->addToGrid(m_player,m_player->getBBox());
+	p_colptr->addToGrid(m_testdummy,m_testdummy->getBBox());
 	
 
 	//Add player and testdummy to the GameObject vector	
@@ -55,7 +55,7 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 			//If the object is moving, update its position in the collision grid
 			if (p->getVelocity().x != 0 || p->getVelocity().y != 0)
 			{
-				p_colptr->updateGrid(p,p->getBBox().getGlobalBounds(),p->getPrevBBox().getGlobalBounds());
+				p_colptr->updateGrid(p,p->getBBox(),p->getPrevBBox());
 			}
 			
 		}

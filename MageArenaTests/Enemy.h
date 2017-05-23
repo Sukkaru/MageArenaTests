@@ -8,5 +8,6 @@ public:
 	void virtual Update(sf::RenderWindow* window, sf::Time* dt);
 	void virtual Draw(sf::RenderWindow* window);
 private:
+	sf::RectangleShape			m_enemybody;
 };
 

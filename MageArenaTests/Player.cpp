@@ -11,10 +11,11 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec, std::shared_ptr<
 	collisiongroup = 1;						//Player group is 1
 	collidablegroups = 6;					//Groups Player can collide with, 2 and 4, terrain and enemy
 	//Body stuff
-	m_bbox.setSize(sf::Vector2f(50, 100));
-	m_bbox.setOrigin(m_bbox.getSize().x / 2, m_bbox.getSize().y / 2);
-	m_bbox.setFillColor(sf::Color::Red);
-	m_bbox.setPosition(sf::Vector2f(100, 100));
+	m_playerbody.setSize(sf::Vector2f(50, 50));
+	m_playerbody.setOrigin(m_playerbody.getSize().x / 2, m_playerbody.getSize().y / 2);
+	m_playerbody.setFillColor(sf::Color::Red);
+	m_playerbody.setPosition(sf::Vector2f(100, 100));
+	m_bbox = m_playerbody.getGlobalBounds();
 	m_prevbbox = m_bbox;
 	//Initialize physics attributes
 	m_moveSpeed =		1000;				//Pixels per second
@@ -94,13 +95,14 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	//printf("Accel.x:%f\nAccel.y:%f\n", m_accel.x, m_accel.y);
 	//printf("Velocity.x:%f\nVelocity.y:%f\n", m_velocity.x, m_velocity.y);
 	m_prevbbox = m_bbox;															//Update the previous bounding box with the current one
-	m_bbox.setPosition(m_bbox.getPosition() + m_velocity * dt->asSeconds());
+	m_playerbody.setPosition(m_playerbody.getPosition() + m_velocity * dt->asSeconds());
+	m_bbox = m_playerbody.getGlobalBounds();										//Update the current bounding box
 	//printf("Position.x:%f\nPosition.y:%f\n", m_playerBody.getPosition().x, m_playerBody.getPosition().y);
 }
 
 void Player::Draw(sf::RenderWindow* window)
 {
-	window->draw(m_bbox);
+	window->draw(m_playerbody);
 }
 
 void Player::castSpell(sf::RenderWindow* window)
@@ -108,12 +110,12 @@ void Player::castSpell(sf::RenderWindow* window)
 	//Calculate mousePos vector in relation to playerPos
 	//Cast mousePos from a Vector2I to a Vector2f
 	sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window));
-	sf::Vector2f direction = mousePos - m_bbox.getPosition();
+	sf::Vector2f direction = mousePos - m_playerbody.getPosition();
 	//Normalize the direction vector 
 	direction = Normalize(direction);
 	
 	// creates spell. The magic number is how many pixels away from player origin the spell starts
-	std::shared_ptr<BaseSpell> _spell = m_currentspell->makeSpell(m_bbox.getPosition() + (direction * 40.f), direction);
+	std::shared_ptr<BaseSpell> _spell = m_currentspell->makeSpell(m_playerbody.getPosition() + (direction * 40.f), direction);
 	p_gameobjvec->push_back(_spell);
 }
 

@@ -58,12 +58,12 @@ void PhysicsObject::CalculateFriction()
 	//printf("Friction.x:%f\nFriction.y:%f\n", m_friction.x, m_friction.y);
 }
 
-sf::RectangleShape PhysicsObject::getBBox()
+sf::FloatRect PhysicsObject::getBBox()
 {
 	return m_bbox;
 }
 
-sf::RectangleShape PhysicsObject::getPrevBBox()
+sf::FloatRect PhysicsObject::getPrevBBox()
 {
 	return m_prevbbox;
 }
