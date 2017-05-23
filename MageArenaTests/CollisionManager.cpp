@@ -20,6 +20,26 @@ CollisionManager::~CollisionManager()
 
 void CollisionManager::checkCollisions()
 {
+	//Just iterating through the entire grid for now
+	//If this is too slow it can be optimized
+	for (int row = 0; row < grid.size(); row++)
+	{
+		for (int col = 0; col < grid[row].size(); col++)
+		{
+			for (int obj = 0; obj < grid[row][col].size; obj++)
+			{
+				for (int obj2 = obj + 1; obj2 < grid[row][col].size; obj2++)
+				{
+					//Compare stuff here
+					//If obj can collide with obj2's group
+					if ((grid[row][col][obj]->getCollidableGroups() & grid[row][col][obj2]->getCollisionGroup()) > 0)
+					{
+
+					}
+				}
+			}
+		}
+	}
 }
 
 void CollisionManager::addToGrid(std::shared_ptr<PhysicsObject> obj, sf::FloatRect boundingrect)

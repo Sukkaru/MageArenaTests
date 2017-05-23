@@ -6,7 +6,11 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec, std::shared_ptr<
 {
 	m_destroyed = false;
 	p_gameobjvec = p_vec;
+	//Collision stuff
 	p_collisionmngr = p_collisionmanager;
+	collisiongroup = 1;						//Player group is 1
+	collidablegroups = 6;					//Groups Player can collide with, 2 and 4, terrain and enemy
+	//Body stuff
 	m_bbox.setSize(sf::Vector2f(50, 100));
 	m_bbox.setOrigin(m_bbox.getSize().x / 2, m_bbox.getSize().y / 2);
 	m_bbox.setFillColor(sf::Color::Red);

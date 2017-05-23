@@ -17,6 +17,8 @@ Fireball::Fireball(sf::Vector2f initialpos, sf::Vector2f direction)
 	m_spellBody.setFillColor(sf::Color::Red);
 	m_spellBody.setRadius(12.0f);
 	m_spellBody.setOrigin(m_spellBody.getRadius(), m_spellBody.getRadius());
+
+	//m_bbox = m_spellBody.getGlobalBounds();
 }
 
 
