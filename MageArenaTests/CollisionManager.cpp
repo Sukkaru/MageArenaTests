@@ -26,9 +26,9 @@ void CollisionManager::checkCollisions()
 	{
 		for (int col = 0; col < grid[row].size(); col++)
 		{
-			for (int obj = 0; obj < grid[row][col].size; obj++)
+			for (int obj = 0; obj < grid[row][col].size(); obj++)
 			{
-				for (int obj2 = obj + 1; obj2 < grid[row][col].size; obj2++)
+				for (int obj2 = obj + 1; obj2 < grid[row][col].size(); obj2++)
 				{
 					//Compare stuff here
 					//If obj can collide with obj2's group

@@ -60,7 +60,7 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 			
 		}
 		myvector[i]->Update(window, dt);
-		printf("CollisionGroup: %d \n", myvector[i]->getCollisionGroup());
+		//printf("CollisionGroup: %d \n", myvector[i]->getCollisionGroup());
 		//removes
 		if (myvector[i]->getDestroyed())
 		{
