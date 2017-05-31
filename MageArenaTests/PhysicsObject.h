@@ -16,9 +16,12 @@ public:
 	sf::Vector2f			getVelocity();
 	int						getCollisionGroup() { return m_collisiongroup; }
 	unsigned char			getCollidableGroups() { return m_collidablegroups; }
+	int						getCollisionID() { return m_collisionID; }
+	void					setCollisionID(int id);
 protected:
 	sf::FloatRect			m_bbox;			//Bounding box for collision detection
 	sf::FloatRect			m_prevbbox;		//Previous bounding box for collision detection
+
 	sf::Vector2f			m_upForce;		//For moving up
 	sf::Vector2f			m_downForce;	//For moving down
 	sf::Vector2f			m_rightForce;	//For moving right
@@ -35,6 +38,8 @@ protected:
 
 	int						m_collisiongroup = 0;			//Default: Not part of any collision group
 	unsigned char			m_collidablegroups = 0;			//Default: Can't collide with anything
-	
+	int						m_collisionID = 0;				//Used to uniquely identify objects during collision detection
+private:
+	static int				s_objuniqueID;					//Used to set the collision ID 
 };
 

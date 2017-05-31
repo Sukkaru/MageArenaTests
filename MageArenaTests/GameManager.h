@@ -17,7 +17,6 @@ private:
 	std::shared_ptr<CollisionManager> p_colptr;
 	std::shared_ptr<Player> m_player;
 	std::shared_ptr<Enemy> m_testdummy;
-	//CollisionManager m_collisionManager;
 	
 };
 

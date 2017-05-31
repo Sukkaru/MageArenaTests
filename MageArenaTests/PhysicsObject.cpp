@@ -1,10 +1,12 @@
 #include "stdafx.h"
 #include "PhysicsObject.h"
 
+int PhysicsObject::s_objuniqueID = 0;
 
 PhysicsObject::PhysicsObject()
 {
-	
+	++s_objuniqueID;
+	m_collisionID = s_objuniqueID;
 }
 
 
@@ -71,4 +73,9 @@ sf::FloatRect PhysicsObject::getPrevBBox()
 sf::Vector2f PhysicsObject::getVelocity()
 {
 	return m_velocity;
+}
+
+void PhysicsObject::setCollisionID(int id)
+{
+	m_collisionID = id;
 }

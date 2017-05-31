@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "PhysicsObject.h"
+#include <unordered_set>
 class CollisionManager
 {
 public:
@@ -18,7 +19,7 @@ private:
 	const int BOX_HEIGHT = 60;
 	const int BOX_WIDTH = 60;
 	std::vector<std::vector<std::vector<std::shared_ptr<PhysicsObject>>>> grid; //3 dimensions oh my
-	std::vector<int> activeboxes;
+	std::unordered_set<std::string> collisionpairs;								//Holds pairs of object IDs so objects don't collide more than once if they share multiple grid boxes
 	int numboxeswide;
 	int numboxeshigh;
 

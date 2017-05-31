@@ -27,6 +27,7 @@ RockSlide::RockSlide(sf::Vector2f initialpos, sf::Vector2f direction)
 	m_spellBody.setRadius(m_spellsRadius);
 	m_spellBody.setOrigin(m_spellBody.getRadius(), m_spellBody.getRadius());
 
+	//Collision stuff
 	m_bbox = m_spellBody.getGlobalBounds();
 	m_prevbbox = m_bbox;
 

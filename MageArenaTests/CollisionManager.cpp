@@ -20,6 +20,8 @@ CollisionManager::~CollisionManager()
 
 void CollisionManager::checkCollisions()
 {
+	//Empty the set of collision pairs
+	collisionpairs.clear();
 	//Just iterating through the entire grid for now
 	//If this is too slow it can be optimized
 	for (int row = 0; row < grid.size(); row++)
@@ -34,11 +36,17 @@ void CollisionManager::checkCollisions()
 					//If obj can collide with obj2's group
 					if (checkCollisionGroup(grid[row][col][obj]->getCollidableGroups(), grid[row][col][obj2]->getCollisionGroup()) == true)
 					{
-						//Check if the bounding box for each object collide
-						if (checkBBoxCollision(grid[row][col][obj]->getBBox(), grid[row][col][obj2]->getBBox()) == true)
+						//If this object pair has not been checked for collisions yet
+						if (collisionpairs.count(grid[row][col][obj]->getCollisionID() + ":" + grid[row][col][obj2]->getCollisionID()) == 0)
 						{
-							//Call overloaded function here, which accepts any combination of CircleShapes and RectangleShapes
-							printf("Collision!\n");
+							//Check if the bounding box for each object collide
+							if (checkBBoxCollision(grid[row][col][obj]->getBBox(), grid[row][col][obj2]->getBBox()) == true)
+							{
+								//Call overloaded function here, which accepts any combination of CircleShapes and RectangleShapes
+								printf("Collision!\n");
+								//Add the pair of objects to the collision pair set
+								collisionpairs.insert(grid[row][col][obj]->getCollisionID() + ":" + grid[row][col][obj2]->getCollisionID());
+							}
 						}
 					}
 				}

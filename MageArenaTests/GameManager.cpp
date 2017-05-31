@@ -59,9 +59,8 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 			}
 			
 		}
-		p_colptr->checkCollisions();
+		p_colptr->checkCollisions();				//Check the collision grid for collisions
 		myvector[i]->Update(window, dt);
-		//printf("CollisionGroup: %d \n", myvector[i]->getCollisionGroup());
 		//removes
 		if (myvector[i]->getDestroyed())
 		{
