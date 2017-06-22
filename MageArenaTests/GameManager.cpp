@@ -12,6 +12,7 @@ GameManager::GameManager(sf::RenderWindow* window)
 	p_colptr->addToGrid(m_player,m_player->getBBox());
 	p_colptr->addToGrid(m_testdummy,m_testdummy->getBBox());
 	
+	p_arena.reset(new Arena());
 
 	//Add player and testdummy to the GameObject vector	
 	addvector.push_back(m_player);
@@ -74,6 +75,8 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 void GameManager::Draw(sf::RenderWindow * window)
 {
 	window->clear();
+	//Draw arena
+	p_arena->Draw(window);
 	for (auto & value : myvector)
 	{
 		value->Draw(window);
