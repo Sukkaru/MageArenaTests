@@ -42,16 +42,16 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 	{
 		for (auto & value : addvector)
 		{
-			myvector.push_back(value);
+			gameobjvector.push_back(value);
 		}
 		addvector.clear();
 	}
 
 
-	for (auto i = 0; i < myvector.size(); i++)
+	for (auto i = 0; i < gameobjvector.size(); i++)
 	{
 		//Check if the current object is a PhysicsObject
-		if (std::shared_ptr<PhysicsObject> p = std::dynamic_pointer_cast<PhysicsObject>(myvector[i]))
+		if (std::shared_ptr<PhysicsObject> p = std::dynamic_pointer_cast<PhysicsObject>(gameobjvector[i]))
 		{
 			//If the object is moving, update its position in the collision grid
 			if (p->getVelocity().x != 0 || p->getVelocity().y != 0)
@@ -61,17 +61,17 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 			
 		}
 		p_colptr->checkCollisions();				//Check the collision grid for collisions
-		myvector[i]->Update(window, dt);
+		gameobjvector[i]->Update(window, dt);
 		//removes
-		if (myvector[i]->getDestroyed())
+		if (gameobjvector[i]->getDestroyed())
 		{
 			//Remove the object from the collision grid
-			if (std::shared_ptr<PhysicsObject> p = std::dynamic_pointer_cast<PhysicsObject>(myvector[i]))
+			if (std::shared_ptr<PhysicsObject> p = std::dynamic_pointer_cast<PhysicsObject>(gameobjvector[i]))
 			{
 				p_colptr->delFromGrid(p,p->getBBox());
 				p_colptr->delFromGrid(p, p->getPrevBBox());
 			}
-			myvector.erase(myvector.begin() + i);
+			gameobjvector.erase(gameobjvector.begin() + i);
 			i--;
 		}
 		
@@ -83,7 +83,7 @@ void GameManager::Draw(sf::RenderWindow * window)
 	window->clear();
 	//Draw arena
 	p_arena->Draw(window);
-	for (auto & value : myvector)
+	for (auto & value : gameobjvector)
 	{
 		value->Draw(window);
 	}

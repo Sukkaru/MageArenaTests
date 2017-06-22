@@ -9,9 +9,9 @@ Waterhose::Waterhose(sf::Vector2f initialpos, sf::Vector2f direction)
 	m_velocity = direction * m_moveSpeed;
 	m_totalSpellLife = 0.26f;
 	m_currentSpellLife = 0;
-	m_spellcooldown = 0.04f;	//0.05
+	m_spellcooldown = 0.05f;	//0.05
 	m_castCooldown = 0.f;
-	m_waveScaler = 1.15f;
+	m_waveScaler = 1.1f;
 
 	m_spellBody.setPosition(initialpos);
 	m_spellBody.setFillColor(sf::Color::Blue);

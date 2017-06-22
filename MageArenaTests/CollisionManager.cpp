@@ -24,7 +24,7 @@ void CollisionManager::checkCollisions()
 	collisionpairs.clear();
 	//Just iterating through the entire grid for now
 	//If this is too slow it can be optimized
-	displayGrid();
+	//displayGrid();
 	for (int row = 0; row < grid.size(); row++)
 	{
 		for (int col = 0; col < grid[row].size(); col++)

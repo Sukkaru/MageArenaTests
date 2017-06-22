@@ -4,7 +4,7 @@
 
 Arena::Arena()
 {
-	
+	srand(time(NULL));	//Seed the RNG
 	tilewidth = 64;
 	tileheight = 64;
 	if (!tilemap.loadFromFile("Graphics/stone_tiles.png"))
@@ -25,10 +25,16 @@ Arena::Arena()
 	tiles = std::vector<std::vector<sf::Sprite>>(numtileshigh, std::vector<sf::Sprite>(numtileswide));
 	for (int row = 0; row < numtileshigh; row++)
 	{
-		for (int col = 0; col < numtileswide; col++)
+		arenamap[row][0] = sf::Vector2i(1,1);
+		arenamap[row][numtileswide - 1] = sf::Vector2i(1, 1);
+		for (int col = 1; col < numtileswide - 1; col++)		//Only iterate over the inner rectangle so the walls aren't replaced
 		{
+
 			arenamap[row][col].x = rand() % 2;		//Temp value for testing
-			arenamap[row][col].y = rand() % 2;
+			arenamap[row][col].y = 0;
+			arenamap[0][col] = sf::Vector2i(1, 1);
+			arenamap[1][col] = sf::Vector2i(0, 2);
+			arenamap[numtileshigh - 1][col] = sf::Vector2i(1, 1);
 		}
 	}
 
