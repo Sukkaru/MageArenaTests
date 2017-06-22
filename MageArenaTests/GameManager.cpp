@@ -65,6 +65,12 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 		//removes
 		if (myvector[i]->getDestroyed())
 		{
+			//Remove the object from the collision grid
+			if (std::shared_ptr<PhysicsObject> p = std::dynamic_pointer_cast<PhysicsObject>(myvector[i]))
+			{
+				p_colptr->delFromGrid(p,p->getBBox());
+				p_colptr->delFromGrid(p, p->getPrevBBox());
+			}
 			myvector.erase(myvector.begin() + i);
 			i--;
 		}

@@ -24,6 +24,7 @@ void CollisionManager::checkCollisions()
 	collisionpairs.clear();
 	//Just iterating through the entire grid for now
 	//If this is too slow it can be optimized
+	displayGrid();
 	for (int row = 0; row < grid.size(); row++)
 	{
 		for (int col = 0; col < grid[row].size(); col++)
@@ -44,7 +45,8 @@ void CollisionManager::checkCollisions()
 							{
 								//Call overloaded function here, which accepts any combination of CircleShapes and RectangleShapes
 								//This will do the more precise collision detection
-								printf("Collision!\n");
+								//printf("Collision!\n");
+								
 								//Add the pair of objects to the collision pair set
 								//This prevents the objects from being checked for collision more than once
 								collisionpairs.insert(grid[row][col][obj]->getCollisionID() + ":" + grid[row][col][obj2]->getCollisionID());
