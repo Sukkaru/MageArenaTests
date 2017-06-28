@@ -27,6 +27,11 @@ void BaseSpell::Draw(sf::RenderWindow * window)
 {
 }
 
+void BaseSpell::resolveCollision(std::shared_ptr<PhysicsObject> otherobject)
+{
+
+}
+
 float BaseSpell::getSpellCooldown()
 {
 	return m_spellcooldown;

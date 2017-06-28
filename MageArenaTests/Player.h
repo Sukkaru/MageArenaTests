@@ -14,7 +14,7 @@ public:
 	void virtual								Update(sf::RenderWindow* window, sf::Time* dt);
 	void virtual								Draw(sf::RenderWindow* window);
 	void										castSpell(sf::RenderWindow* window);
-	
+	void virtual								resolveCollision(std::shared_ptr<PhysicsObject> otherobject);
 private:
 	sf::RectangleShape							m_playerbody;
 	std::vector<std::shared_ptr<GameObject>>*	p_gameobjvec;

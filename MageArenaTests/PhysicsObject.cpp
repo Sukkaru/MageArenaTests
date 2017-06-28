@@ -75,7 +75,17 @@ sf::Vector2f PhysicsObject::getVelocity()
 	return m_velocity;
 }
 
+void PhysicsObject::setVelocity(sf::Vector2f velocity)
+{
+	m_velocity = velocity;
+}
+
 void PhysicsObject::setCollisionID(int id)
 {
 	m_collisionID = id;
+}
+
+void PhysicsObject::resolveCollision(std::shared_ptr<PhysicsObject> otherobject)
+{
+
 }

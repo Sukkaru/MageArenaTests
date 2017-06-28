@@ -98,3 +98,13 @@ std::shared_ptr<BaseSpell> RockSlide::makeSpell(sf::Vector2f initialpos, sf::Vec
 
 	return instance;
 }
+
+void RockSlide::resolveCollision(std::shared_ptr<PhysicsObject> otherobject)
+{
+	switch (otherobject->getCollisionGroup())
+	{
+	case 2:					//Terrain
+		m_destroyed = true;	//Destroy the spell when it hits terrain
+		break;
+	}
+}

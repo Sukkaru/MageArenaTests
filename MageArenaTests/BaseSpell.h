@@ -9,7 +9,7 @@ public:
 	void virtual						Draw(sf::RenderWindow* window);
 	std::shared_ptr<BaseSpell> virtual	makeSpell(sf::Vector2f initialpos, sf::Vector2f direction) { return nullptr; }
 	//std::shared_ptr<BaseSpell>	makeSpell(sf::Vector2f initialpos, sf::Vector2f direction, std::vector<std::shared_ptr<GameObject>> &gameVec, int castCount = 0) { return nullptr; }
-
+	void virtual						resolveCollision(std::shared_ptr<PhysicsObject> otherobject);
 
 	float								getSpellCooldown();
 	float								getCurrentCastCooldown();

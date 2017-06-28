@@ -48,3 +48,13 @@ std::shared_ptr<BaseSpell> Waterhose::makeSpell(sf::Vector2f initialpos, sf::Vec
 	std::shared_ptr<Waterhose> instance(new Waterhose(initialpos, direction));
 	return instance;
 }
+
+void Waterhose::resolveCollision(std::shared_ptr<PhysicsObject> otherobject)
+{
+	switch (otherobject->getCollisionGroup())
+	{
+	case 2:					//Terrain
+		m_destroyed = true;	//Destroy the spell when it hits terrain
+		break;
+	}
+}

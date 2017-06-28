@@ -10,6 +10,7 @@ public:
 	void virtual				Draw(sf::RenderWindow* window);
 	//std::shared_ptr<BaseSpell>	makeSpell(sf::Vector2f initialpos, sf::Vector2f direction, std::vector<std::shared_ptr<GameObject>> &gameVec);
 	std::shared_ptr<BaseSpell> 	makeSpell(sf::Vector2f initialpos, sf::Vector2f direction);
+	void virtual				resolveCollision(std::shared_ptr<PhysicsObject> otherobject);
 
 private:
 	float						m_spellsRadius;

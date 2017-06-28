@@ -119,4 +119,9 @@ void Player::castSpell(sf::RenderWindow* window)
 	p_gameobjvec->push_back(_spell);
 }
 
+void Player::resolveCollision(std::shared_ptr<PhysicsObject> otherobject)
+{
+	//Player isn't going to do anything on collision for now
+}
+
 
