@@ -38,7 +38,7 @@ protected:
 
 	int						m_collisiongroup = 0;			//Default: Not part of any collision group
 	unsigned char			m_collidablegroups = 0;			//Default: Can't collide with anything
-	int						m_collisionID = 0;				//Used to uniquely identify objects during collision detection
+	int						m_collisionID = 0;				//Used to uniquely identify objects during collision detection, gets set by this object, don't overwrite in derived objects
 private:
 	static int				s_objuniqueID;					//Used to set the collision ID 
 };

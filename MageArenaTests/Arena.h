@@ -1,10 +1,11 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "Wall.h"
+#include "CollisionManager.h"
 class Arena
 {
 public:
-	Arena();
+	Arena(std::shared_ptr<CollisionManager> p_colmngr);
 	~Arena();
 	void Draw(sf::RenderWindow* window);
 private:
@@ -17,6 +18,8 @@ private:
 	int arenaheight;
 	int numtileswide;
 	int numtileshigh;
+
+	std::shared_ptr<CollisionManager> p_colmngr;
 
 	std::shared_ptr<Wall> p_topouterwall;
 	std::shared_ptr<Wall> p_topinnerwall;

@@ -45,7 +45,7 @@ void CollisionManager::checkCollisions()
 							{
 								//Call overloaded function here, which accepts any combination of CircleShapes and RectangleShapes
 								//This will do the more precise collision detection
-								//printf("Collision!\n");
+								printf("Collision!\n");
 								
 								//Add the pair of objects to the collision pair set
 								//This prevents the objects from being checked for collision more than once

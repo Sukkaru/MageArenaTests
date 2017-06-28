@@ -14,7 +14,7 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec, std::shared_ptr<
 	m_playerbody.setSize(sf::Vector2f(50, 50));
 	m_playerbody.setOrigin(m_playerbody.getSize().x / 2, m_playerbody.getSize().y / 2);
 	m_playerbody.setFillColor(sf::Color::Red);
-	m_playerbody.setPosition(sf::Vector2f(100, 100));
+	m_playerbody.setPosition(sf::Vector2f(200, 200));
 	m_bbox = m_playerbody.getGlobalBounds();
 	m_prevbbox = m_bbox;
 	//Initialize physics attributes

@@ -12,7 +12,6 @@ public:
 private:
 	int numtileswide;
 	int numtileshigh;
-	//std::vector<sf::Sprite> walltiles;
 	std::vector<std::vector<sf::Sprite> > walltiles;
 };
 

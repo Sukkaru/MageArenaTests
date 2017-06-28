@@ -12,7 +12,7 @@ GameManager::GameManager(sf::RenderWindow* window)
 	p_colptr->addToGrid(m_player,m_player->getBBox());
 	p_colptr->addToGrid(m_testdummy,m_testdummy->getBBox());
 	
-	p_arena.reset(new Arena());
+	p_arena.reset(new Arena(p_colptr));
 
 	//Add player and testdummy to the GameObject vector	
 	addvector.push_back(m_player);

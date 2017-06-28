@@ -2,8 +2,9 @@
 #include "Arena.h"
 
 
-Arena::Arena()
+Arena::Arena(std::shared_ptr<CollisionManager> collisionmanager)
 {
+	p_colmngr = collisionmanager;
 	srand(time(NULL));	//Seed the RNG
 	tilewidth = 64;
 	tileheight = 64;
@@ -24,12 +25,19 @@ Arena::Arena()
 	p_rightwall.reset(new Wall(sf::IntRect(arenawidth - tilewidth, tileheight, tilewidth, arenaheight - tileheight), &tilemap, sf::IntRect(64, 64, 64, 64)));
 	p_leftwall.reset(new Wall(sf::IntRect(0, tileheight, tilewidth, arenaheight - tileheight), &tilemap, sf::IntRect(64, 64, 64, 64)));
 	p_bottomwall.reset(new Wall(sf::IntRect(0, arenaheight - tileheight, arenawidth, tileheight), &tilemap, sf::IntRect(64, 64, 64, 64)));
-	p_pillar.reset(new Wall(sf::IntRect(arenawidth/2, arenaheight / 2, tilewidth, tileheight), &tilemap, sf::IntRect(64, 64, 64, 64)));
+
+	//Add the walls to the collision grid
+	p_colmngr->addToGrid(p_topouterwall, p_topouterwall->getBBox());
+	p_colmngr->addToGrid(p_topinnerwall, p_topinnerwall->getBBox());
+	p_colmngr->addToGrid(p_rightwall, p_rightwall->getBBox());
+	p_colmngr->addToGrid(p_leftwall, p_leftwall->getBBox());
+	p_colmngr->addToGrid(p_bottomwall, p_bottomwall->getBBox());
 }
 
 
 Arena::~Arena()
 {
+	
 }
 
 void Arena::Draw(sf::RenderWindow * window)
@@ -39,5 +47,4 @@ void Arena::Draw(sf::RenderWindow * window)
 	p_rightwall->Draw(window);
 	p_leftwall->Draw(window);
 	p_bottomwall->Draw(window);
-	p_pillar->Draw(window);
 }
