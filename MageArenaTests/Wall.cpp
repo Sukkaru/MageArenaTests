@@ -53,44 +53,23 @@ void Wall::resolveCollision(std::shared_ptr<PhysicsObject> otherobject)
 	float wallright = m_bbox.left + m_bbox.width;
 	float walltop = m_bbox.top;
 	float wallbot = m_bbox.top + m_bbox.height;
-	////Collide right
-	//if (otherobject->getPrevBBox().left > wallright && otherobject->getBBox().left <= wallright)
-	//{
-	//	otherobject->setVelocity(sf::Vector2f(0, otherobject->getVelocity().y));
-	//}
-	////Collide left
-	//if (otherobject->getPrevBBox().left + otherobject->getPrevBBox().width < wallleft && otherobject->getBBox().left + otherobject->getBBox().width >= wallleft)
-	//{
-	//	otherobject->setVelocity(sf::Vector2f(0, otherobject->getVelocity().y));
-	//}
-	////Collide top
-	//if (otherobject->getPrevBBox().top + otherobject->getPrevBBox().height < walltop && otherobject->getBBox().top + otherobject->getBBox().height >= walltop)
-	//{
-	//	otherobject->setVelocity(sf::Vector2f(otherobject->getVelocity().x, 0));
-	//}
-	////Collide bottom
-	//if (otherobject->getPrevBBox().top > wallbot && otherobject->getBBox().top <= wallbot)
-	//{
-	//	otherobject->setVelocity(sf::Vector2f(otherobject->getVelocity().x, 0));
-	//}
-
 	//Collide right
-	if (otherobject->getBBox().left <= wallright)
+	if (otherobject->getPrevBBox().left > wallright && otherobject->getBBox().left <= wallright)
 	{
 		otherobject->setVelocity(sf::Vector2f(0, otherobject->getVelocity().y));
 	}
 	//Collide left
-	if (otherobject->getBBox().left + otherobject->getBBox().width >= wallleft)
+	if (otherobject->getPrevBBox().left + otherobject->getPrevBBox().width < wallleft && otherobject->getBBox().left + otherobject->getBBox().width >= wallleft)
 	{
 		otherobject->setVelocity(sf::Vector2f(0, otherobject->getVelocity().y));
 	}
 	//Collide top
-	if (otherobject->getBBox().top + otherobject->getBBox().height >= walltop)
+	if (otherobject->getPrevBBox().top + otherobject->getPrevBBox().height < walltop && otherobject->getBBox().top + otherobject->getBBox().height >= walltop)
 	{
 		otherobject->setVelocity(sf::Vector2f(otherobject->getVelocity().x, 0));
 	}
 	//Collide bottom
-	if (otherobject->getBBox().top <= wallbot)
+	if (otherobject->getPrevBBox().top > wallbot && otherobject->getBBox().top <= wallbot)
 	{
 		otherobject->setVelocity(sf::Vector2f(otherobject->getVelocity().x, 0));
 	}
