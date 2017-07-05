@@ -21,5 +21,9 @@ private:
 	std::shared_ptr<CollisionManager>			p_collisionmngr;
 	float										m_castcooldown;
 	std::shared_ptr<BaseSpell>					m_currentspell;
+
+	sf::Texture									m_spritesheet;
+	sf::Sprite									m_playersprite;
+
 };
 

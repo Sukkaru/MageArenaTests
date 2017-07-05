@@ -4,7 +4,9 @@ class Wall :
 	public PhysicsObject
 {
 public:
+	Wall(sf::IntRect wallrect, sf::FloatRect boundingbox, sf::Texture* walltexture, sf::IntRect texturerect);
 	Wall(sf::IntRect wallrect, sf::Texture* walltexture, sf::IntRect texturerect);
+	
 	~Wall();
 	void virtual			Update(sf::RenderWindow * window, sf::Time* dt);
 	void virtual			Draw(sf::RenderWindow * window);

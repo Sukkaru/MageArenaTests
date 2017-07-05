@@ -21,7 +21,7 @@ Arena::Arena(std::shared_ptr<CollisionManager> collisionmanager)
 	
 	//Create arena walls
 	p_topouterwall.reset(new Wall(sf::IntRect(0, 0, arenawidth, tileheight), &tilemap, sf::IntRect(64, 64, 64, 64)));
-	p_topinnerwall.reset(new Wall(sf::IntRect(0, tileheight, arenawidth, tileheight), &tilemap, sf::IntRect(0, 128, 64, 64)));
+	p_topinnerwall.reset(new Wall(sf::IntRect(0, tileheight, arenawidth, tileheight),sf::FloatRect(0,tileheight,arenawidth,15), &tilemap, sf::IntRect(0, 128, 64, 64)));
 	p_rightwall.reset(new Wall(sf::IntRect(arenawidth - tilewidth, tileheight, tilewidth, arenaheight - tileheight), &tilemap, sf::IntRect(64, 64, 64, 64)));
 	p_leftwall.reset(new Wall(sf::IntRect(0, tileheight, tilewidth, arenaheight - tileheight), &tilemap, sf::IntRect(64, 64, 64, 64)));
 	p_bottomwall.reset(new Wall(sf::IntRect(0, arenaheight - tileheight, arenawidth, tileheight), &tilemap, sf::IntRect(64, 64, 64, 64)));
@@ -42,6 +42,7 @@ Arena::~Arena()
 
 void Arena::Draw(sf::RenderWindow * window)
 {
+	//Add these to the GO vector eventually
 	p_topouterwall->Draw(window);
 	p_topinnerwall->Draw(window);
 	p_rightwall->Draw(window);

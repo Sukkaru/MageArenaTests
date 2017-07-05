@@ -10,7 +10,7 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1280, 768), "Isaac Is The Man!");
+	sf::RenderWindow window(sf::VideoMode(1280, 768), "Isaac Is The Man!");	//1280 768
 	window.setFramerateLimit(60);
 	sf::Clock clock;
 	GameManager gameManager(&window);

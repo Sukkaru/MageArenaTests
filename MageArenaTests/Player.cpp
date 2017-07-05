@@ -11,11 +11,11 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec, std::shared_ptr<
 	m_collisiongroup = 1;							//Player group is 1
 	m_collidablegroups = 12;						//Groups Player can collide with, 2^2 = 4 and 2^3 = 8, terrain and enemy
 	//Body stuff
-	m_playerbody.setSize(sf::Vector2f(50, 50));
-	m_playerbody.setOrigin(m_playerbody.getSize().x / 2, m_playerbody.getSize().y / 2);
-	m_playerbody.setFillColor(sf::Color::Red);
-	m_playerbody.setPosition(sf::Vector2f(200, 200));
-	m_bbox = m_playerbody.getGlobalBounds();
+	//m_playerbody.setSize(sf::Vector2f(50, 50));
+	m_playersprite.setOrigin(32,32);
+	//m_playerbody.setFillColor(sf::Color::Red);
+	m_playersprite.setPosition(sf::Vector2f(200, 200));
+	m_bbox = sf::FloatRect(m_playersprite.getPosition() - m_playersprite.getOrigin(), sf::Vector2f(32, 49));
 	m_prevbbox = m_bbox;
 	//Initialize physics attributes
 	m_moveSpeed =		1000;				//Pixels per second
@@ -36,6 +36,14 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec, std::shared_ptr<
 	m_castcooldown =	1.f;
 	// initiall setting of a fireball, setting it off screen so that you can't see it. Yes... I know
 	m_currentspell.reset(new Fireball(sf::Vector2f(-100,-100), sf::Vector2f(-100,-100)));
+
+	//Sprite stuff
+	if (!m_spritesheet.loadFromFile("Graphics/player.png"))
+	{
+		printf("Error opening player spritesheet file!\n");
+	}
+	m_playersprite.setTexture(m_spritesheet);
+	m_playersprite.setTextureRect(sf::IntRect(256,0,64,64));
 }
 
 
@@ -92,17 +100,16 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	CalculateFriction();
 	ApplyForce(m_friction);
 	m_velocity += m_accel * dt->asSeconds();
-	//printf("Accel.x:%f\nAccel.y:%f\n", m_accel.x, m_accel.y);
-	//printf("Velocity.x:%f\nVelocity.y:%f\n", m_velocity.x, m_velocity.y);
 	m_prevbbox = m_bbox;															//Update the previous bounding box with the current one
-	m_playerbody.setPosition(m_playerbody.getPosition() + m_velocity * dt->asSeconds());
-	m_bbox = m_playerbody.getGlobalBounds();										//Update the current bounding box
+	//m_playerbody.setPosition(m_playerbody.getPosition() + m_velocity * dt->asSeconds());
+	m_playersprite.setPosition(m_playersprite.getPosition() + m_velocity * dt->asSeconds());
+	m_bbox = sf::FloatRect(m_playersprite.getPosition() - sf::Vector2f(15,20), sf::Vector2f(30, 50));										//Update the current bounding box
 	//printf("Position.x:%f\nPosition.y:%f\n", m_playerBody.getPosition().x, m_playerBody.getPosition().y);
 }
 
 void Player::Draw(sf::RenderWindow* window)
 {
-	window->draw(m_playerbody);
+	window->draw(m_playersprite);
 }
 
 void Player::castSpell(sf::RenderWindow* window)
@@ -110,12 +117,12 @@ void Player::castSpell(sf::RenderWindow* window)
 	//Calculate mousePos vector in relation to playerPos
 	//Cast mousePos from a Vector2I to a Vector2f
 	sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window));
-	sf::Vector2f direction = mousePos - m_playerbody.getPosition();
+	sf::Vector2f direction = mousePos - m_playersprite.getPosition();
 	//Normalize the direction vector 
 	direction = Normalize(direction);
 	
 	// creates spell. The magic number is how many pixels away from player origin the spell starts
-	std::shared_ptr<BaseSpell> _spell = m_currentspell->makeSpell(m_playerbody.getPosition() + (direction * 40.f), direction);
+	std::shared_ptr<BaseSpell> _spell = m_currentspell->makeSpell(m_playersprite.getPosition() + (direction * 40.f), direction);
 	p_gameobjvec->push_back(_spell);
 }
 

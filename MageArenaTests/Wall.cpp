@@ -2,7 +2,7 @@
 #include "Wall.h"
 
 
-Wall::Wall(sf::IntRect wallrect, sf::Texture* walltexture, sf::IntRect texturerect)
+Wall::Wall(sf::IntRect wallrect,sf::Texture* walltexture, sf::IntRect texturerect)
 {
 	numtileswide = wallrect.width / texturerect.width;
 	numtileshigh = wallrect.height / texturerect.height;
@@ -24,6 +24,12 @@ Wall::Wall(sf::IntRect wallrect, sf::Texture* walltexture, sf::IntRect texturere
 	m_collisiongroup = 2;		//Terrain collision group
 	m_collidablegroups = 26;	//Groups terrain can collide with, 2^1 = 2, 2^3 = 8, 2^4 = 16, Player, Enemy, Spell 
 
+}
+
+Wall::Wall(sf::IntRect wallrect, sf::FloatRect boundingbox, sf::Texture * walltexture, sf::IntRect texturerect) : Wall(wallrect, walltexture, texturerect)
+{
+	m_bbox = boundingbox;
+	m_prevbbox = m_bbox;
 }
 
 
