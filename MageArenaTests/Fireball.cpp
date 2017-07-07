@@ -49,7 +49,7 @@ std::shared_ptr<BaseSpell> Fireball::makeSpell(sf::Vector2f initialpos, sf::Vect
 	return instance;
 }
 
-void Fireball::resolveCollision(std::shared_ptr<PhysicsObject> otherobject)
+void Fireball::resolveCollision(std::shared_ptr<PhysicsObject> otherobject, sf::FloatRect collisionrect)
 {
 	//Do damage eventually
 

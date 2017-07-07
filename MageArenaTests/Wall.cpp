@@ -59,17 +59,35 @@ void Wall::resolveCollision(std::shared_ptr<PhysicsObject> otherobject, sf::Floa
 	//Vertical collision
 	if (collisionrect.width >= collisionrect.height)
 	{
-		if (collisionrect.height > 1)
+		//Collision with top side of wall
+		if (m_bbox.top - otherobject->getPosition().y > 0)
 		{
-			//otherobject->setVelocity(sf::Vector2f(otherobject->getVelocity().x, -otherobject->getVelocity().y));
-			otherobject->setPosition(sf::Vector2f(otherobject->getPosition().x, m_bbox.top + m_bbox.height + 25));
-			//printf("Vertical Collision! \n");
+			otherobject->setVelocity(sf::Vector2f(otherobject->getVelocity().x, -100));		//I just picked the number because it looked good in testing
+			otherobject->setPosition(sf::Vector2f(otherobject->getPosition().x, m_bbox.top - otherobject->getEntityHeight() / 2));
+			printf("bbox height: %f \n", otherobject->getBBox().top + otherobject->getBBox().height);
+			printf("b: %f \n", m_bbox.top);
+		}
+		//Collision with bottom side of wall
+		if ((m_bbox.top + m_bbox.height) - otherobject->getPosition().y < 0)
+		{
+			otherobject->setVelocity(sf::Vector2f(otherobject->getVelocity().x, 100));		//I just picked the number because it looked good in testing
+			otherobject->setPosition(sf::Vector2f(otherobject->getPosition().x, m_bbox.top + m_bbox.height + otherobject->getEntityHeight() / 2));
 		}
 	}
 	//Horizontal collision
 	if (collisionrect.height >= collisionrect.width)
 	{
-		otherobject->setVelocity(sf::Vector2f(-otherobject->getVelocity().x, otherobject->getVelocity().y));
-		printf("Horizontal Collision! \n");
+		//Collision with left side of wall
+		if (m_bbox.left - otherobject->getPosition().x > 0)
+		{
+			otherobject->setVelocity(sf::Vector2f(-100, otherobject->getVelocity().y));		//I just picked the number because it looked good in testing
+			otherobject->setPosition(sf::Vector2f(m_bbox.left - otherobject->getEntityWidth() / 2, otherobject->getPosition().y));
+		}
+		//Collision with right side of wall
+		if ((m_bbox.left + m_bbox.width) - otherobject->getPosition().x < 0)
+		{
+			otherobject->setVelocity(sf::Vector2f(100, otherobject->getVelocity().y));		//I just picked the number because it looked good in testing
+			otherobject->setPosition(sf::Vector2f(m_bbox.left + m_bbox.width + otherobject->getEntityWidth() / 2, otherobject->getPosition().y));
+		}
 	}
 }

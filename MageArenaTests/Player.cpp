@@ -11,13 +11,11 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec, std::shared_ptr<
 	m_collisiongroup = 1;							//Player group is 1
 	m_collidablegroups = 12;						//Groups Player can collide with, 2^2 = 4 and 2^3 = 8, terrain and enemy
 	//Body stuff
-	m_playerheight = 50;
-	m_playerwidth = 30;
-	//m_playerbody.setSize(sf::Vector2f(50, 50));
-	m_playersprite.setOrigin(32,32);
-	//m_playerbody.setFillColor(sf::Color::Red);
+	m_entityheight = 50;
+	m_entitywidth = 30;
+	m_playersprite.setOrigin(32,39);
 	m_playersprite.setPosition(sf::Vector2f(200, 200));
-	m_bbox = sf::FloatRect(m_playersprite.getPosition() - m_playersprite.getOrigin(), sf::Vector2f(32, 49));
+	m_bbox = sf::FloatRect(m_playersprite.getPosition() - sf::Vector2f(m_entitywidth / 2, m_entityheight / 2), sf::Vector2f(m_entitywidth, m_entityheight));
 	m_prevbbox = m_bbox;
 	//Initialize physics attributes
 	m_moveSpeed =		1000;				//Pixels per second
@@ -99,14 +97,12 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	}
 	m_currentspell->increaseCastCooldown(dt->asSeconds());
 
+	m_prevbbox = m_bbox;					//Update the previous bounding box with the current one
 	CalculateFriction();
 	ApplyForce(m_friction);
 	m_velocity += m_accel * dt->asSeconds();
-	m_prevbbox = m_bbox;															//Update the previous bounding box with the current one
-	//m_playerbody.setPosition(m_playerbody.getPosition() + m_velocity * dt->asSeconds());
 	m_playersprite.setPosition(m_playersprite.getPosition() + m_velocity * dt->asSeconds());
-	m_bbox = sf::FloatRect(m_playersprite.getPosition() - sf::Vector2f(15,20), sf::Vector2f(30, 50));										//Update the current bounding box
-	//printf("Position.x:%f\nPosition.y:%f\n", m_playerBody.getPosition().x, m_playerBody.getPosition().y);
+	m_bbox = sf::FloatRect(m_playersprite.getPosition() - sf::Vector2f(m_entitywidth / 2, m_entityheight / 2), sf::Vector2f(m_entitywidth, m_entityheight));
 }
 
 void Player::Draw(sf::RenderWindow* window)
@@ -143,14 +139,5 @@ void Player::setPosition(sf::Vector2f position)
 	m_playersprite.setPosition(position);
 }
 
-int Player::getPlayerHeight()
-{
-	return m_playerheight;
-}
-
-int Player::getPlayerWidth()
-{
-	return m_playerwidth;
-}
 
 

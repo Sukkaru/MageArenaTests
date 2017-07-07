@@ -13,6 +13,8 @@ public:
 	void					CalculateFriction();
 	sf::FloatRect			getBBox();
 	sf::FloatRect			getPrevBBox();
+	int						getEntityHeight();
+	int						getEntityWidth();
 	sf::Vector2f			getVelocity();
 	void					setVelocity(sf::Vector2f velocity);
 	sf::Vector2f virtual	getPosition();
@@ -27,6 +29,9 @@ public:
 protected:
 	sf::FloatRect			m_bbox;			//Bounding box for collision detection
 	sf::FloatRect			m_prevbbox;		//Previous bounding box for collision detection
+
+	int						m_entityheight;	//Height of the actual entity graphic, because the entity does not take up the entire sprite size
+	int						m_entitywidth;	//Width of the actual entity graphic, because the entity does not take up the entire sprite size
 
 	sf::Vector2f			m_upForce;		//For moving up
 	sf::Vector2f			m_downForce;	//For moving down

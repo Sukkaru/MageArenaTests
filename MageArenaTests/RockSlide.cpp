@@ -99,7 +99,7 @@ std::shared_ptr<BaseSpell> RockSlide::makeSpell(sf::Vector2f initialpos, sf::Vec
 	return instance;
 }
 
-void RockSlide::resolveCollision(std::shared_ptr<PhysicsObject> otherobject)
+void RockSlide::resolveCollision(std::shared_ptr<PhysicsObject> otherobject, sf::FloatRect collisionrect)
 {
 	switch (otherobject->getCollisionGroup())
 	{

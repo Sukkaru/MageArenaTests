@@ -49,7 +49,7 @@ std::shared_ptr<BaseSpell> Waterhose::makeSpell(sf::Vector2f initialpos, sf::Vec
 	return instance;
 }
 
-void Waterhose::resolveCollision(std::shared_ptr<PhysicsObject> otherobject)
+void Waterhose::resolveCollision(std::shared_ptr<PhysicsObject> otherobject, sf::FloatRect collisionrect)
 {
 	switch (otherobject->getCollisionGroup())
 	{

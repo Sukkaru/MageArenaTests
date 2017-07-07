@@ -70,6 +70,16 @@ sf::FloatRect PhysicsObject::getPrevBBox()
 	return m_prevbbox;
 }
 
+int PhysicsObject::getEntityHeight()
+{
+	return m_entityheight;
+}
+
+int PhysicsObject::getEntityWidth()
+{
+	return m_entitywidth;
+}
+
 sf::Vector2f PhysicsObject::getVelocity()
 {
 	return m_velocity;

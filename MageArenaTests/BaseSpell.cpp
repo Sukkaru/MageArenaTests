@@ -27,7 +27,7 @@ void BaseSpell::Draw(sf::RenderWindow * window)
 {
 }
 
-void BaseSpell::resolveCollision(std::shared_ptr<PhysicsObject> otherobject)
+void BaseSpell::resolveCollision(std::shared_ptr<PhysicsObject> otherobject, sf::FloatRect collisionrect)
 {
 
 }
