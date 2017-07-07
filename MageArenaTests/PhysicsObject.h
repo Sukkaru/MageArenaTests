@@ -15,13 +15,15 @@ public:
 	sf::FloatRect			getPrevBBox();
 	sf::Vector2f			getVelocity();
 	void					setVelocity(sf::Vector2f velocity);
+	sf::Vector2f virtual	getPosition();
+	void virtual			setPosition(sf::Vector2f position);
 	int						getCollisionGroup() { return m_collisiongroup; }
 	unsigned char			getCollidableGroups() { return m_collidablegroups; }
 	int						getCollisionID() { return m_collisionID; }
 	void					setCollisionID(int id);
 
 
-	void virtual			resolveCollision(std::shared_ptr<PhysicsObject> otherobject);
+	void virtual			resolveCollision(std::shared_ptr<PhysicsObject> otherobject,sf::FloatRect collisionrect);
 protected:
 	sf::FloatRect			m_bbox;			//Bounding box for collision detection
 	sf::FloatRect			m_prevbbox;		//Previous bounding box for collision detection

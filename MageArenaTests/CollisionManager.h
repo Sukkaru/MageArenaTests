@@ -25,6 +25,7 @@ private:
 
 	void displayGrid();
 	bool checkCollisionGroup(unsigned char collidablegroups, int collisiongroup);
-	bool checkBBoxCollision(sf::FloatRect obj1bbox, sf::FloatRect obj2bbox);
+	sf::FloatRect createCollisionRect(sf::FloatRect obj1bbox, sf::FloatRect obj2bbox);
+	bool checkRectForCollision(sf::FloatRect collisionrect);
 };
 

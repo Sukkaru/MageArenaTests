@@ -11,6 +11,8 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec, std::shared_ptr<
 	m_collisiongroup = 1;							//Player group is 1
 	m_collidablegroups = 12;						//Groups Player can collide with, 2^2 = 4 and 2^3 = 8, terrain and enemy
 	//Body stuff
+	m_playerheight = 50;
+	m_playerwidth = 30;
 	//m_playerbody.setSize(sf::Vector2f(50, 50));
 	m_playersprite.setOrigin(32,32);
 	//m_playerbody.setFillColor(sf::Color::Red);
@@ -126,9 +128,29 @@ void Player::castSpell(sf::RenderWindow* window)
 	p_gameobjvec->push_back(_spell);
 }
 
-void Player::resolveCollision(std::shared_ptr<PhysicsObject> otherobject)
+void Player::resolveCollision(std::shared_ptr<PhysicsObject> otherobject, sf::FloatRect collisionrect)
 {
 	//Player isn't going to do anything on collision for now
+}
+
+sf::Vector2f Player::getPosition()
+{
+	return m_playersprite.getPosition();
+}
+
+void Player::setPosition(sf::Vector2f position)
+{
+	m_playersprite.setPosition(position);
+}
+
+int Player::getPlayerHeight()
+{
+	return m_playerheight;
+}
+
+int Player::getPlayerWidth()
+{
+	return m_playerwidth;
 }
 
 

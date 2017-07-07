@@ -80,12 +80,21 @@ void PhysicsObject::setVelocity(sf::Vector2f velocity)
 	m_velocity = velocity;
 }
 
+sf::Vector2f PhysicsObject::getPosition()
+{
+	return sf::Vector2f();
+}
+
+void PhysicsObject::setPosition(sf::Vector2f position)
+{
+}
+
 void PhysicsObject::setCollisionID(int id)
 {
 	m_collisionID = id;
 }
 
-void PhysicsObject::resolveCollision(std::shared_ptr<PhysicsObject> otherobject)
+void PhysicsObject::resolveCollision(std::shared_ptr<PhysicsObject> otherobject, sf::FloatRect collisionrect)
 {
 
 }

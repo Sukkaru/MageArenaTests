@@ -40,14 +40,13 @@ void CollisionManager::checkCollisions()
 						//If this object pair has not been checked for collisions yet
 						if (collisionpairs.count(grid[row][col][obj]->getCollisionID() + ":" + grid[row][col][obj2]->getCollisionID()) == 0)
 						{
-							//Check if the bounding box for each object collide
-							if (checkBBoxCollision(grid[row][col][obj]->getBBox(), grid[row][col][obj2]->getBBox()) == true)
+							sf::FloatRect collisionrect = createCollisionRect(grid[row][col][obj]->getBBox(), grid[row][col][obj2]->getBBox());
+							//Check if there is an actual collision
+							if (checkRectForCollision(collisionrect) == true)
 							{
-								//Call overloaded function here, which accepts any combination of CircleShapes and RectangleShapes
-								//This will do the more precise collision detection
-								//printf("Collision!\n");
-								grid[row][col][obj]->resolveCollision(grid[row][col][obj2]);
-								grid[row][col][obj2]->resolveCollision(grid[row][col][obj]);
+								printf("Collision!\n");
+								grid[row][col][obj]->resolveCollision(grid[row][col][obj2], collisionrect);
+								grid[row][col][obj2]->resolveCollision(grid[row][col][obj], collisionrect);
 								//Add the pair of objects to the collision pair set
 								//This prevents the objects from being checked for collision more than once
 								collisionpairs.insert(grid[row][col][obj]->getCollisionID() + ":" + grid[row][col][obj2]->getCollisionID());
@@ -165,7 +164,7 @@ bool CollisionManager::checkCollisionGroup(unsigned char collidablegroups, int c
 	return (collidablegroups & mask) > 0;			//If there is a 1 in the slot that corresponds to that group, the objects can collide
 }
 
-bool CollisionManager::checkBBoxCollision(sf::FloatRect obj1bbox, sf::FloatRect obj2bbox)
+sf::FloatRect CollisionManager::createCollisionRect(sf::FloatRect obj1bbox, sf::FloatRect obj2bbox)
 {
 	float obj1left = obj1bbox.left;
 	float obj1top = obj1bbox.top;
@@ -176,10 +175,17 @@ bool CollisionManager::checkBBoxCollision(sf::FloatRect obj1bbox, sf::FloatRect 
 	float obj2top = obj2bbox.top;
 	float obj2right = obj2bbox.left + obj2bbox.width;
 	float obj2bot = obj2bbox.top + obj2bbox.height;
-	//Check simple bounding box rectangle collision
-	if (obj1left > obj2right || obj1right < obj2left || obj1top > obj2bot || obj1bot < obj2top)
-	{
-		return false;
-	}
-	return true;
+	//Create the collision rectangle
+	float rectleft = std::max(obj1left, obj2left);
+	float recttop = std::max(obj1top, obj2top);
+	float rectright = std::min(obj1right, obj2right);
+	float rectbot = std::min(obj1bot, obj2bot);
+
+	sf::FloatRect collisionrect = sf::FloatRect(rectleft, recttop, rectright - rectleft, rectbot - recttop);
+	return collisionrect;
+}
+
+bool CollisionManager::checkRectForCollision(sf::FloatRect collisionrect)
+{
+	return collisionrect.left < (collisionrect.left + collisionrect.width) && collisionrect.top < (collisionrect.top + collisionrect.height);
 }

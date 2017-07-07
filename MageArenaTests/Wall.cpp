@@ -52,31 +52,24 @@ void Wall::Draw(sf::RenderWindow * window)
 	}
 }
 
-void Wall::resolveCollision(std::shared_ptr<PhysicsObject> otherobject)
+void Wall::resolveCollision(std::shared_ptr<PhysicsObject> otherobject, sf::FloatRect collisionrect)
 {
-	//This code might change in the future
-	float wallleft = m_bbox.left;
-	float wallright = m_bbox.left + m_bbox.width;
-	float walltop = m_bbox.top;
-	float wallbot = m_bbox.top + m_bbox.height;
-	//Collide right
-	if (otherobject->getPrevBBox().left > wallright && otherobject->getBBox().left <= wallright)
+
+	printf("Width: %f\n Height: %f\n", collisionrect.width, collisionrect.height);
+	//Vertical collision
+	if (collisionrect.width >= collisionrect.height)
 	{
-		otherobject->setVelocity(sf::Vector2f(0, otherobject->getVelocity().y));
+		if (collisionrect.height > 1)
+		{
+			//otherobject->setVelocity(sf::Vector2f(otherobject->getVelocity().x, -otherobject->getVelocity().y));
+			otherobject->setPosition(sf::Vector2f(otherobject->getPosition().x, m_bbox.top + m_bbox.height + 25));
+			//printf("Vertical Collision! \n");
+		}
 	}
-	//Collide left
-	if (otherobject->getPrevBBox().left + otherobject->getPrevBBox().width < wallleft && otherobject->getBBox().left + otherobject->getBBox().width >= wallleft)
+	//Horizontal collision
+	if (collisionrect.height >= collisionrect.width)
 	{
-		otherobject->setVelocity(sf::Vector2f(0, otherobject->getVelocity().y));
-	}
-	//Collide top
-	if (otherobject->getPrevBBox().top + otherobject->getPrevBBox().height < walltop && otherobject->getBBox().top + otherobject->getBBox().height >= walltop)
-	{
-		otherobject->setVelocity(sf::Vector2f(otherobject->getVelocity().x, 0));
-	}
-	//Collide bottom
-	if (otherobject->getPrevBBox().top > wallbot && otherobject->getBBox().top <= wallbot)
-	{
-		otherobject->setVelocity(sf::Vector2f(otherobject->getVelocity().x, 0));
+		otherobject->setVelocity(sf::Vector2f(-otherobject->getVelocity().x, otherobject->getVelocity().y));
+		printf("Horizontal Collision! \n");
 	}
 }
