@@ -102,6 +102,7 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	ApplyForce(m_friction);
 	m_velocity += m_accel * dt->asSeconds();
 	m_playersprite.setPosition(m_playersprite.getPosition() + m_velocity * dt->asSeconds());
+	window->setView(sf::View(m_playersprite.getPosition(), sf::Vector2f(window->getSize())));
 	m_bbox = sf::FloatRect(m_playersprite.getPosition() - sf::Vector2f(m_entitywidth / 2, m_entityheight / 2), sf::Vector2f(m_entitywidth, m_entityheight));
 }
 
@@ -114,11 +115,10 @@ void Player::castSpell(sf::RenderWindow* window)
 {
 	//Calculate mousePos vector in relation to playerPos
 	//Cast mousePos from a Vector2I to a Vector2f
-	sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window));
+	sf::Vector2f mousePos = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
 	sf::Vector2f direction = mousePos - m_playersprite.getPosition();
 	//Normalize the direction vector 
 	direction = Normalize(direction);
-	
 	// creates spell. The magic number is how many pixels away from player origin the spell starts
 	std::shared_ptr<BaseSpell> _spell = m_currentspell->makeSpell(m_playersprite.getPosition() + (direction * 40.f), direction);
 	p_gameobjvec->push_back(_spell);

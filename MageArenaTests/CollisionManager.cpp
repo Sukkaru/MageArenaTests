@@ -6,8 +6,8 @@ CollisionManager::CollisionManager(sf::RenderWindow* window)
 {
 	//Determine how many boxes needed
 	//Add one to account for possible rounding down
-	numboxeswide = (window->getSize().x / BOX_WIDTH) + 1;
-	numboxeshigh = (window->getSize().y / BOX_HEIGHT) + 1;
+	numboxeswide = (2000 / BOX_WIDTH) + 1;
+	numboxeshigh = (2000 / BOX_HEIGHT) + 1;
 	printf("High:%d \n Wide:%d \n", numboxeshigh, numboxeswide);
 	//Make sure the grid has allocated enough space for all boxes
 	grid = std::vector<std::vector<std::vector<std::shared_ptr<PhysicsObject>>>>(numboxeshigh, std::vector<std::vector<std::shared_ptr<PhysicsObject>>>(numboxeswide, std::vector<std::shared_ptr<PhysicsObject>>()));
@@ -44,7 +44,7 @@ void CollisionManager::checkCollisions()
 							//Check if there is an actual collision
 							if (checkRectForCollision(collisionrect) == true)
 							{
-								printf("Collision!\n");
+								//printf("Collision!\n");
 								grid[row][col][obj]->resolveCollision(grid[row][col][obj2], collisionrect);
 								grid[row][col][obj2]->resolveCollision(grid[row][col][obj], collisionrect);
 								//Add the pair of objects to the collision pair set

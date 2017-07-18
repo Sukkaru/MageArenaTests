@@ -20,5 +20,7 @@ private:
 	std::shared_ptr<Enemy> m_testdummy;
 	std::shared_ptr<Arena> p_arena;
 	
+	int arenawidth;
+	int arenaheight;
 };
 

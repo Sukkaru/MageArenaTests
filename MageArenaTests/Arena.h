@@ -9,9 +9,12 @@ public:
 	~Arena();
 	void Draw(sf::RenderWindow* window);
 private:
+	void createFloor(sf::Texture* tilemap, sf::IntRect texturerect, int tileswide, int tileshigh, sf::Vector2f position);
+
+
 	sf::Texture tilemap;
-	std::vector<std::vector<sf::Vector2i> > arenamap;
-	std::vector<std::vector<sf::Sprite> > tiles;
+	std::vector<std::vector<sf::Vector2i> > floortiles;
+	std::vector<std::vector<sf::Sprite> > floorsprites;
 	int tilewidth;
 	int tileheight;
 	int arenawidth;
