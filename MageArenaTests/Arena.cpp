@@ -2,7 +2,7 @@
 #include "Arena.h"
 
 
-Arena::Arena(std::shared_ptr<CollisionManager> collisionmanager)
+Arena::Arena(std::shared_ptr<CollisionManager> collisionmanager, int arenawidth, int arenaheight)
 {
 	p_colmngr = collisionmanager;
 	srand(time(NULL));	//Seed the RNG
@@ -16,8 +16,8 @@ Arena::Arena(std::shared_ptr<CollisionManager> collisionmanager)
 
 	//Temp values for testing
 	//Pass in constructor later
-	arenawidth = 2048; //1280
-	arenaheight = 2048;	//768
+	this->arenawidth = arenawidth; 
+	this->arenaheight = arenaheight;
 	
 	numtileswide = arenawidth / tilewidth;
 	numtileshigh = arenaheight / tileheight;

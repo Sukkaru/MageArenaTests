@@ -5,7 +5,7 @@
 class Arena
 {
 public:
-	Arena(std::shared_ptr<CollisionManager> p_colmngr);
+	Arena(std::shared_ptr<CollisionManager> p_colmngr, int arenawidth, int arenaheight);
 	~Arena();
 	void Draw(sf::RenderWindow* window);
 private:

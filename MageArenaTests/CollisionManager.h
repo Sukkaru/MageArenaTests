@@ -5,7 +5,7 @@
 class CollisionManager
 {
 public:
-	CollisionManager(sf::RenderWindow* window);
+	CollisionManager(int arenawidth, int arenaheight);
 	~CollisionManager();
 	void checkCollisions();
 	void addToGrid(std::shared_ptr<PhysicsObject> obj,sf::FloatRect boundingrect);

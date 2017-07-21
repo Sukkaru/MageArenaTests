@@ -4,7 +4,10 @@
 
 GameManager::GameManager(sf::RenderWindow* window)
 {	
-	p_colptr.reset(new CollisionManager(window));
+
+	arenawidth = 1280;		//Must be multiple of 64
+	arenaheight = 768;		//Must be multiple of 64
+	p_colptr.reset(new CollisionManager(arenawidth,arenaheight));
 	//Keep these above anything that uses them
 	m_testdummy.reset(new Enemy(&addvector)); //For testing
 	m_player.reset(new Player(&addvector, p_colptr));
@@ -12,7 +15,7 @@ GameManager::GameManager(sf::RenderWindow* window)
 	p_colptr->addToGrid(m_player,m_player->getBBox());
 	p_colptr->addToGrid(m_testdummy,m_testdummy->getBBox());
 	
-	p_arena.reset(new Arena(p_colptr));
+	p_arena.reset(new Arena(p_colptr, arenawidth, arenaheight));
 
 	//Add player and testdummy to the GameObject vector	
 	addvector.push_back(m_player);

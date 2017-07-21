@@ -4,6 +4,7 @@
 #include "Waterhose.h"
 #include "RockSlide.h"
 #include "CollisionManager.h"
+#include "Animation.h"
 #include <SFML/Graphics.hpp>
 
 class Player : public PhysicsObject
@@ -25,6 +26,6 @@ private:
 
 	sf::Texture									m_spritesheet;
 	sf::Sprite									m_playersprite;
-
+	std::unique_ptr<Animation>					m_playerwalkanim;
 };
 

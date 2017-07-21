@@ -43,7 +43,8 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec, std::shared_ptr<
 		printf("Error opening player spritesheet file!\n");
 	}
 	m_playersprite.setTexture(m_spritesheet);
-	m_playersprite.setTextureRect(sf::IntRect(256,0,64,64));
+	//m_playersprite.setTextureRect(sf::IntRect(256,0,64,64));
+	m_playerwalkanim.reset(new Animation(&m_spritesheet, sf::Vector2u(64, 64), 0.1f));
 }
 
 
@@ -104,6 +105,9 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	m_playersprite.setPosition(m_playersprite.getPosition() + m_velocity * dt->asSeconds());
 	window->setView(sf::View(m_playersprite.getPosition(), sf::Vector2f(window->getSize())));
 	m_bbox = sf::FloatRect(m_playersprite.getPosition() - sf::Vector2f(m_entitywidth / 2, m_entityheight / 2), sf::Vector2f(m_entitywidth, m_entityheight));
+
+	m_playerwalkanim->Update(dt->asSeconds(),10,6);
+	m_playersprite.setTextureRect(m_playerwalkanim->getTextureRect());
 }
 
 void Player::Draw(sf::RenderWindow* window)
