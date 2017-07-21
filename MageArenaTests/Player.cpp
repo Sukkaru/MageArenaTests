@@ -18,7 +18,7 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec, std::shared_ptr<
 	m_bbox = sf::FloatRect(m_playersprite.getPosition() - sf::Vector2f(m_entitywidth / 2, m_entityheight / 2), sf::Vector2f(m_entitywidth, m_entityheight));
 	m_prevbbox = m_bbox;
 	//Initialize physics attributes
-	m_moveSpeed =		1000;				//Pixels per second
+	m_moveSpeed =		200;				//Pixels per second
 	m_maxMoveSpeed =	1000;				//Pixels per second
 	m_mass =			2.0f;  
 	m_velocity =		sf::Vector2f(0, 0);
@@ -44,7 +44,7 @@ Player::Player(std::vector<std::shared_ptr<GameObject>>* p_vec, std::shared_ptr<
 	}
 	m_playersprite.setTexture(m_spritesheet);
 	//m_playersprite.setTextureRect(sf::IntRect(256,0,64,64));
-	m_playerwalkanim.reset(new Animation(&m_spritesheet, sf::Vector2u(64, 64), 0.1f));
+	m_playerwalkanim.reset(new Animation(&m_spritesheet, sf::Vector2u(64, 64), 0.2f));
 }
 
 
@@ -56,22 +56,31 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 {
 	//Reset acceleration so it doesn't add on itself
 	m_accel = sf::Vector2f(0, 0);
+	m_velocity = sf::Vector2f(0, 0);
 	//Movement
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))	//Down
 	{
-		ApplyForce(m_downForce);
+		//ApplyForce(m_downForce);
+		m_velocity = sf::Vector2f(m_velocity.x,m_moveSpeed);
+		m_playerwalkanim->Update(dt->asSeconds(), 6, 9);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))	//Up
 	{
-		ApplyForce(m_upForce);
+		//ApplyForce(m_upForce);
+		m_velocity = sf::Vector2f(m_velocity.x, -m_moveSpeed);
+		m_playerwalkanim->Update(dt->asSeconds(), 4, 9);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))	//Left
 	{
-		ApplyForce(m_leftForce);
+		//ApplyForce(m_leftForce);
+		m_velocity = sf::Vector2f(-m_moveSpeed, m_velocity.y);
+		m_playerwalkanim->Update(dt->asSeconds(), 5, 9);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))	//Right
 	{
-		ApplyForce(m_rightForce);
+		//ApplyForce(m_rightForce);
+		m_velocity = sf::Vector2f(m_moveSpeed, m_velocity.y);
+		m_playerwalkanim->Update(dt->asSeconds(), 7, 9);
 	}
 	//Switching Spells
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
@@ -99,14 +108,14 @@ void Player::Update(sf::RenderWindow* window, sf::Time* dt)
 	m_currentspell->increaseCastCooldown(dt->asSeconds());
 
 	m_prevbbox = m_bbox;					//Update the previous bounding box with the current one
-	CalculateFriction();
-	ApplyForce(m_friction);
-	m_velocity += m_accel * dt->asSeconds();
+	//CalculateFriction();
+	//ApplyForce(m_friction);
+	//m_velocity += m_accel * dt->asSeconds();
 	m_playersprite.setPosition(m_playersprite.getPosition() + m_velocity * dt->asSeconds());
 	window->setView(sf::View(m_playersprite.getPosition(), sf::Vector2f(window->getSize())));
 	m_bbox = sf::FloatRect(m_playersprite.getPosition() - sf::Vector2f(m_entitywidth / 2, m_entityheight / 2), sf::Vector2f(m_entitywidth, m_entityheight));
 
-	m_playerwalkanim->Update(dt->asSeconds(),10,6);
+	
 	m_playersprite.setTextureRect(m_playerwalkanim->getTextureRect());
 }
 

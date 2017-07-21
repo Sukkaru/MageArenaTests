@@ -53,7 +53,6 @@ sf::Vector2f PhysicsObject::Normalize(sf::Vector2f vector)
 void PhysicsObject::CalculateFriction()
 {
 	float frictionMag = frictionCoeff * normalForce;
-	m_friction = m_velocity;
 	m_friction = Normalize(m_velocity);
 	m_friction *= -1.f;
 	m_friction *= frictionMag; 
