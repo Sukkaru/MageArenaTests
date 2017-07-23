@@ -5,31 +5,31 @@
 class Arena
 {
 public:
-	Arena(std::shared_ptr<CollisionManager> p_colmngr, int arenawidth, int arenaheight);
+	Arena(std::shared_ptr<CollisionManager> collisionManager, int arenaWidth, int arenaHeight);
 	~Arena();
-	void Draw(sf::RenderWindow* window);
+	void draw(sf::RenderWindow* window);
 private:
-	void createFloor(sf::Texture* tilemap, sf::IntRect texturerect, int tileswide, int tileshigh, sf::Vector2f position);
+	void createFloor(sf::Texture* tileMap, sf::IntRect textureRect, int nTilesWide, int nTilesHigh, sf::Vector2f position);
 
 
-	sf::Texture tilemap;
-	std::vector<std::vector<sf::Vector2i> > floortiles;
-	std::vector<std::vector<sf::Sprite> > floorsprites;
-	int tilewidth;
-	int tileheight;
-	int arenawidth;
-	int arenaheight;
-	int numtileswide;
-	int numtileshigh;
+	sf::Texture m_tilesTexture;
+	std::vector<std::vector<sf::Vector2i> > m_floorTiles;
+	std::vector<std::vector<sf::Sprite> > m_floorSprites;
+	int m_tileWidth;
+	int m_tileHeight;
+	int m_arenaWidth;
+	int m_arenaHeight;
+	int m_nTilesWide;
+	int m_nTilesHigh;
 
-	std::shared_ptr<CollisionManager> p_colmngr;
+	std::shared_ptr<CollisionManager> m_collisionManager;
 
-	std::shared_ptr<Wall> p_topouterwall;
-	std::shared_ptr<Wall> p_topinnerwall;
-	std::shared_ptr<Wall> p_rightwall;
-	std::shared_ptr<Wall> p_leftwall;
-	std::shared_ptr<Wall> p_bottomwall;
+	std::shared_ptr<Wall> m_topOuterWall;
+	std::shared_ptr<Wall> m_topInnerWall;
+	std::shared_ptr<Wall> m_rightWall;
+	std::shared_ptr<Wall> m_leftWall;
+	std::shared_ptr<Wall> m_bottomWall;
 
-	std::shared_ptr<Wall> p_pillar;
+	std::shared_ptr<Wall> m_pillar;
 };
 

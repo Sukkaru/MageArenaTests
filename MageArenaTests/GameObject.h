@@ -6,13 +6,13 @@ class GameObject
 public:
 	GameObject();
 	~GameObject();
-	void virtual	Update(sf::RenderWindow* window, sf::Time* dt);
-	void virtual	Draw(sf::RenderWindow* window);
+	void virtual	update(sf::RenderWindow* window, sf::Time* dt);
+	void virtual	draw(sf::RenderWindow* window);
 
-	bool			getDestroyed() { return m_destroyed; }
-	void			setDestroyed(bool input) { m_destroyed = input; }
+	bool			getDestroyed();
+	void			setDestroyed(bool isDestroyed);
 
 protected:
-	bool			m_destroyed = false;
+	bool			m_destroyed;
 };
 

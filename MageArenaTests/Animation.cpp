@@ -2,14 +2,14 @@
 #include "Animation.h"
 
 
-Animation::Animation(sf::Texture* texture, sf::Vector2u texturerectsize, float switchtime)
+Animation::Animation(sf::Texture* texture, sf::Vector2u textureRectSize, float switchTime)
 {
-	this->switchtime = switchtime;
-	totaltime = 0;
-	currentimage.x = 0;
+	m_switchTime = switchTime;
+	m_totalTime = 0;
+	m_currentImage.x = 0;
 
-	texturerect.width = texturerectsize.x;
-	texturerect.height = texturerectsize.y;
+	m_textureRect.width = textureRectSize.x;
+	m_textureRect.height = textureRectSize.y;
 }
 
 
@@ -17,27 +17,27 @@ Animation::~Animation()
 {
 }
 
-void Animation::Update(float dt, int row, int endcol, int startcol)
+void Animation::update(float dt, int row, int endColumn, int startColumn)
 {
-	currentimage.y = row;
-	totaltime += dt;
+	m_currentImage.y = row;
+	m_totalTime += dt;
 
-	if (totaltime >= switchtime)
+	if (m_totalTime >= m_switchTime)
 	{
-		totaltime -= switchtime;
-		currentimage.x++;
+		m_totalTime -= m_switchTime;
+		m_currentImage.x++;
 
-		if (currentimage.x >= endcol)
+		if (m_currentImage.x >= endColumn)
 		{
-			currentimage.x = startcol;
+			m_currentImage.x = startColumn;
 		}
 	}
 
-	texturerect.left = currentimage.x * texturerect.width;
-	texturerect.top = currentimage.y * texturerect.height;
+	m_textureRect.left = m_currentImage.x * m_textureRect.width;
+	m_textureRect.top = m_currentImage.y * m_textureRect.height;
 }
 
 sf::IntRect Animation::getTextureRect()
 {
-	return texturerect;
+	return m_textureRect;
 }

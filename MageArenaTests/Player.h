@@ -10,22 +10,22 @@
 class Player : public PhysicsObject
 {
 public:
-	Player(std::vector<std::shared_ptr<GameObject>>* p_vec,std::shared_ptr<CollisionManager> p_collisionmanager);
+	Player(std::vector<std::shared_ptr<GameObject>>* newGameObjects,std::shared_ptr<CollisionManager> collisionManager);
 	~Player();
-	void virtual								Update(sf::RenderWindow* window, sf::Time* dt);
-	void virtual								Draw(sf::RenderWindow* window);
+	void virtual								update(sf::RenderWindow* window, sf::Time* dt);
+	void virtual								draw(sf::RenderWindow* window);
 	void										castSpell(sf::RenderWindow* window);
-	void virtual								resolveCollision(std::shared_ptr<PhysicsObject> otherobject, sf::FloatRect collisionrect);
+	void virtual								resolveCollision(std::shared_ptr<PhysicsObject> otherObject, sf::FloatRect collisionRect);
 	sf::Vector2f								getPosition();
 	void										setPosition(sf::Vector2f position);
 private:
-	std::vector<std::shared_ptr<GameObject>>*	p_gameobjvec;
-	std::shared_ptr<CollisionManager>			p_collisionmngr;
-	float										m_castcooldown;
-	std::shared_ptr<BaseSpell>					m_currentspell;
+	std::vector<std::shared_ptr<GameObject>>*	m_newGameObjects;
+	std::shared_ptr<CollisionManager>			m_collisionManager;
+	float										m_castCooldown;
+	std::shared_ptr<BaseSpell>					m_currentSpell;
 
-	sf::Texture									m_spritesheet;
-	sf::Sprite									m_playersprite;
-	std::unique_ptr<Animation>					m_playerwalkanim;
+	sf::Texture									m_spriteSheet;
+	sf::Sprite									m_playerSprite;
+	std::unique_ptr<Animation>					m_playerWalkAnimation;
 };
 

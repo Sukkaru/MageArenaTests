@@ -2,42 +2,42 @@
 #include "Arena.h"
 
 
-Arena::Arena(std::shared_ptr<CollisionManager> collisionmanager, int arenawidth, int arenaheight)
+Arena::Arena(std::shared_ptr<CollisionManager> collisionManager, int arenaWidth, int arenaHeight)
 {
-	p_colmngr = collisionmanager;
+	m_collisionManager = collisionManager;
 	srand(time(NULL));	//Seed the RNG
-	tilewidth = 64;
-	tileheight = 64;
+	m_tileWidth = 64;
+	m_tileHeight = 64;
 
-	if (!tilemap.loadFromFile("Graphics/stone_tiles.png"))
+	if (!m_tilesTexture.loadFromFile("Graphics/stone_tiles.png"))
 	{
 		printf("Error opening tilemap file!\n");
 	}
 
 	//Temp values for testing
 	//Pass in constructor later
-	this->arenawidth = arenawidth; 
-	this->arenaheight = arenaheight;
+	m_arenaWidth = arenaWidth; 
+	m_arenaHeight = arenaHeight;
 	
-	numtileswide = arenawidth / tilewidth;
-	numtileshigh = arenaheight / tileheight;
+	m_nTilesWide = arenaWidth / m_tileWidth;
+	m_nTilesHigh = arenaHeight / m_tileHeight;
 
 	//Create arena walls
-	p_topouterwall.reset(new Wall(sf::IntRect(0, 0, arenawidth, tileheight), &tilemap, sf::IntRect(64, 64, 64, 64)));
-	p_topinnerwall.reset(new Wall(sf::IntRect(0, tileheight, arenawidth, tileheight),sf::FloatRect(0,tileheight,arenawidth,15), &tilemap, sf::IntRect(0, 128, 64, 64)));
-	p_rightwall.reset(new Wall(sf::IntRect(arenawidth - tilewidth, tileheight, tilewidth, arenaheight - tileheight), &tilemap, sf::IntRect(64, 64, 64, 64)));
-	p_leftwall.reset(new Wall(sf::IntRect(0, tileheight, tilewidth, arenaheight - tileheight), &tilemap, sf::IntRect(64, 64, 64, 64)));
-	p_bottomwall.reset(new Wall(sf::IntRect(0, arenaheight - tileheight, arenawidth, tileheight), &tilemap, sf::IntRect(64, 64, 64, 64)));
+	m_topOuterWall.reset(new Wall(sf::IntRect(0, 0, arenaWidth, m_tileHeight), &m_tilesTexture, sf::IntRect(64, 64, 64, 64)));
+	m_topInnerWall.reset(new Wall(sf::IntRect(0, m_tileHeight, arenaWidth, m_tileHeight),sf::FloatRect(0, m_tileHeight, arenaWidth,15), &m_tilesTexture, sf::IntRect(0, 128, 64, 64)));
+	m_rightWall.reset(new Wall(sf::IntRect(arenaWidth - m_tileWidth, m_tileHeight, m_tileWidth, arenaHeight - m_tileHeight), &m_tilesTexture, sf::IntRect(64, 64, 64, 64)));
+	m_leftWall.reset(new Wall(sf::IntRect(0, m_tileHeight, m_tileWidth, arenaHeight - m_tileHeight), &m_tilesTexture, sf::IntRect(64, 64, 64, 64)));
+	m_bottomWall.reset(new Wall(sf::IntRect(0, arenaHeight - m_tileHeight, arenaWidth, m_tileHeight), &m_tilesTexture, sf::IntRect(64, 64, 64, 64)));
 
 	//Add the walls to the collision grid
-	p_colmngr->addToGrid(p_topouterwall, p_topouterwall->getBBox());
-	p_colmngr->addToGrid(p_topinnerwall, p_topinnerwall->getBBox());
-	p_colmngr->addToGrid(p_rightwall, p_rightwall->getBBox());
-	p_colmngr->addToGrid(p_leftwall, p_leftwall->getBBox());
-	p_colmngr->addToGrid(p_bottomwall, p_bottomwall->getBBox());
+	m_collisionManager->addToGrid(m_topOuterWall, m_topOuterWall->getBoundingBox());
+	m_collisionManager->addToGrid(m_topInnerWall, m_topInnerWall->getBoundingBox());
+	m_collisionManager->addToGrid(m_rightWall, m_rightWall->getBoundingBox());
+	m_collisionManager->addToGrid(m_leftWall, m_leftWall->getBoundingBox());
+	m_collisionManager->addToGrid(m_bottomWall, m_bottomWall->getBoundingBox());
 
 	//Create the floor of the arena
-	createFloor(&tilemap, sf::IntRect(0, 0, 64, 64), numtileswide - 2, numtileshigh - 3,sf::Vector2f(tilewidth,tileheight*2));
+	createFloor(&m_tilesTexture, sf::IntRect(0, 0, 64, 64), m_nTilesWide - 2, m_nTilesHigh - 3,sf::Vector2f(m_tileWidth,m_tileHeight*2));
 }
 
 
@@ -46,16 +46,16 @@ Arena::~Arena()
 	
 }
 
-void Arena::Draw(sf::RenderWindow * window)
+void Arena::draw(sf::RenderWindow * window)
 {
 	//Add these to the GO vector eventually
-	p_topouterwall->Draw(window);
-	p_topinnerwall->Draw(window);
-	p_rightwall->Draw(window);
-	p_leftwall->Draw(window);
-	p_bottomwall->Draw(window);
+	m_topOuterWall->draw(window);
+	m_topInnerWall->draw(window);
+	m_rightWall->draw(window);
+	m_leftWall->draw(window);
+	m_bottomWall->draw(window);
 
-	for (auto row : floorsprites)
+	for (auto row : m_floorSprites)
 	{
 		for (auto col : row)
 		{
@@ -64,16 +64,16 @@ void Arena::Draw(sf::RenderWindow * window)
 	}
 }
 
-void Arena::createFloor(sf::Texture * tilemap, sf::IntRect texturerect, int tileswide, int tileshigh, sf::Vector2f position)
+void Arena::createFloor(sf::Texture * tilesTexture, sf::IntRect textureRect, int nTilesWide, int nTilesHigh, sf::Vector2f position)
 {
-	floorsprites = std::vector<std::vector<sf::Sprite> >(tileswide,std::vector<sf::Sprite>(tileshigh));
-	for (int row = 0; row < tileswide; row++)
+	m_floorSprites = std::vector<std::vector<sf::Sprite> >(nTilesWide,std::vector<sf::Sprite>(nTilesHigh));
+	for (int row = 0; row < nTilesWide; row++)
 	{
-		for (int col = 0; col < tileshigh; col++)
+		for (int col = 0; col < nTilesHigh; col++)
 		{
-			floorsprites[row][col].setTexture(*tilemap);
-			floorsprites[row][col].setTextureRect(texturerect);
-			floorsprites[row][col].setPosition(sf::Vector2f(position.x + row * 64, position.y + col * 64));
+			m_floorSprites[row][col].setTexture(*tilesTexture);
+			m_floorSprites[row][col].setTextureRect(textureRect);
+			m_floorSprites[row][col].setPosition(sf::Vector2f(position.x + row * 64, position.y + col * 64));
 		}
 	}
 

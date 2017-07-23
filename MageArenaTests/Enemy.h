@@ -3,11 +3,11 @@
 class Enemy : public PhysicsObject
 {
 public:
-	Enemy(std::vector<std::shared_ptr<GameObject>>* p_vec);
+	Enemy(std::vector<std::shared_ptr<GameObject>>* gameObjVector);
 	~Enemy();
-	void virtual Update(sf::RenderWindow* window, sf::Time* dt);
-	void virtual Draw(sf::RenderWindow* window);
+	void virtual update(sf::RenderWindow* window, sf::Time* dt);
+	void virtual draw(sf::RenderWindow* window);
 private:
-	sf::RectangleShape			m_enemybody;
+	sf::RectangleShape			m_enemyBody;
 };
 

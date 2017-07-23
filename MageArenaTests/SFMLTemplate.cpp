@@ -17,8 +17,8 @@ int main()
 	while (window.isOpen())
 	{
 		sf::Time dt = clock.restart();
-		gameManager.Update(&window,&dt);
-		gameManager.Draw(&window);
+		gameManager.update(&window,&dt);
+		gameManager.draw(&window);
 	}
 
 	return 0;

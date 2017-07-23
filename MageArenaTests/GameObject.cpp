@@ -3,6 +3,7 @@
 
 GameObject::GameObject()
 {
+	m_destroyed = false;
 }
 
 
@@ -10,11 +11,21 @@ GameObject::~GameObject()
 {
 }
 
-void GameObject::Update(sf::RenderWindow* window, sf::Time* dt)
+bool GameObject::getDestroyed()
 {
-	printf("In GameObject Update\n");
+	return m_destroyed;
 }
 
-void GameObject::Draw(sf::RenderWindow* window)
+void GameObject::setDestroyed(bool isDestroyed)
+{
+	m_destroyed = isDestroyed;
+}
+
+void GameObject::update(sf::RenderWindow* window, sf::Time* dt)
+{
+
+}
+
+void GameObject::draw(sf::RenderWindow* window)
 {
 }

@@ -9,18 +9,17 @@ class GameManager
 public:
 	GameManager(sf::RenderWindow* window);
 	~GameManager();
-	void Update(sf::RenderWindow* window, sf::Time* dt);
-	void Draw(sf::RenderWindow* window);
+	void update(sf::RenderWindow* window, sf::Time* dt);
+	void draw(sf::RenderWindow* window);
 private:
-	std::vector<std::shared_ptr<GameObject>> gameobjvector;
-	std::vector<std::shared_ptr<GameObject>> addvector;
-	std::vector<std::shared_ptr<GameObject>> delvector;	//Might not use this but keeping it for reminder
-	std::shared_ptr<CollisionManager> p_colptr;
+	std::vector<std::shared_ptr<GameObject>> m_gameObjects;
+	std::vector<std::shared_ptr<GameObject>> m_newGameObjects;
+	std::shared_ptr<CollisionManager> m_collisionManager;
 	std::shared_ptr<Player> m_player;
-	std::shared_ptr<Enemy> m_testdummy;
-	std::shared_ptr<Arena> p_arena;
+	std::shared_ptr<Enemy> m_testDummy;
+	std::shared_ptr<Arena> m_arena;
 	
-	int arenawidth;
-	int arenaheight;
+	int m_arenaWidth;
+	int m_arenaHeight;
 };
 

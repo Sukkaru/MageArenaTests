@@ -5,21 +5,21 @@
 GameManager::GameManager(sf::RenderWindow* window)
 {	
 
-	arenawidth = 1280;		//Must be multiple of 64
-	arenaheight = 768;		//Must be multiple of 64
-	p_colptr.reset(new CollisionManager(arenawidth,arenaheight));
+	m_arenaWidth = 1280;		//Must be multiple of 64
+	m_arenaHeight = 768;		//Must be multiple of 64
+	m_collisionManager.reset(new CollisionManager(m_arenaWidth,m_arenaHeight));
 	//Keep these above anything that uses them
-	m_testdummy.reset(new Enemy(&addvector)); //For testing
-	m_player.reset(new Player(&addvector, p_colptr));
+	m_testDummy.reset(new Enemy(&m_newGameObjects)); //For testing
+	m_player.reset(new Player(&m_newGameObjects, m_collisionManager));
 	//Add player and testdummy to the collision manager
-	p_colptr->addToGrid(m_player,m_player->getBBox());
-	p_colptr->addToGrid(m_testdummy,m_testdummy->getBBox());
+	m_collisionManager->addToGrid(m_player,m_player->getBoundingBox());
+	m_collisionManager->addToGrid(m_testDummy,m_testDummy->getBoundingBox());
 	
-	p_arena.reset(new Arena(p_colptr, arenawidth, arenaheight));
+	m_arena.reset(new Arena(m_collisionManager, m_arenaWidth, m_arenaHeight));
 
 	//Add player and testdummy to the GameObject vector	
-	addvector.push_back(m_player);
-	addvector.push_back(m_testdummy);
+	m_newGameObjects.push_back(m_player);
+	m_newGameObjects.push_back(m_testDummy);
 }
 
 
@@ -27,7 +27,7 @@ GameManager::~GameManager()
 {
 }
 
-void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
+void GameManager::update(sf::RenderWindow * window, sf::Time* dt)
 {
 	sf::Event event;
 	while (window->pollEvent(event))
@@ -41,54 +41,56 @@ void GameManager::Update(sf::RenderWindow * window, sf::Time* dt)
 		window->close();
 	}
 
-	if (addvector.size() > 0)
+	//Moves any new game objects into the game object vector, 
+	//this is done to prevent the game object vector iterator from becoming invalid 
+	if (m_newGameObjects.size() > 0)
 	{
-		for (auto & value : addvector)
+		for (auto & value : m_newGameObjects)
 		{
-			gameobjvector.push_back(value);
+			m_gameObjects.push_back(value);
 		}
-		addvector.clear();
+		m_newGameObjects.clear();
 	}
 
 
-	for (auto i = 0; i < gameobjvector.size(); i++)
+	for (auto i = 0; i < m_gameObjects.size(); i++)
 	{
 		//Check if the current object is a PhysicsObject
-		if (std::shared_ptr<PhysicsObject> p = std::dynamic_pointer_cast<PhysicsObject>(gameobjvector[i]))
+		if (std::shared_ptr<PhysicsObject> physicsObject = std::dynamic_pointer_cast<PhysicsObject>(m_gameObjects[i]))
 		{
 			//If the object is moving, update its position in the collision grid
-			if (p->getVelocity().x != 0 || p->getVelocity().y != 0)
+			if (physicsObject->getVelocity().x != 0 || physicsObject->getVelocity().y != 0)
 			{
-				p_colptr->updateGrid(p,p->getBBox(),p->getPrevBBox());
+				m_collisionManager->updateGrid(physicsObject,physicsObject->getBoundingBox(),physicsObject->getPreviousBoundingBox());
 			}
 			
 		}
-		p_colptr->checkCollisions();				//Check the collision grid for collisions
-		gameobjvector[i]->Update(window, dt);
-		//removes
-		if (gameobjvector[i]->getDestroyed())
+		m_collisionManager->checkCollisions();				//Check the collision grid for collisions
+		m_gameObjects[i]->update(window, dt);
+		//Removes all game objects flagged as destroyed
+		if (m_gameObjects[i]->getDestroyed())
 		{
 			//Remove the object from the collision grid
-			if (std::shared_ptr<PhysicsObject> p = std::dynamic_pointer_cast<PhysicsObject>(gameobjvector[i]))
+			if (std::shared_ptr<PhysicsObject> physicsObject = std::dynamic_pointer_cast<PhysicsObject>(m_gameObjects[i]))
 			{
-				p_colptr->delFromGrid(p,p->getBBox());
-				p_colptr->delFromGrid(p, p->getPrevBBox());
+				m_collisionManager->delFromGrid(physicsObject, physicsObject->getBoundingBox());
+				m_collisionManager->delFromGrid(physicsObject, physicsObject->getPreviousBoundingBox());
 			}
-			gameobjvector.erase(gameobjvector.begin() + i);
+			m_gameObjects.erase(m_gameObjects.begin() + i);
 			i--;
 		}
 		
 	}
 }
 
-void GameManager::Draw(sf::RenderWindow * window)
+void GameManager::draw(sf::RenderWindow * window)
 {
 	window->clear();
 	//Draw arena
-	p_arena->Draw(window);
-	for (auto & value : gameobjvector)
+	m_arena->draw(window);
+	for (auto & value : m_gameObjects)
 	{
-		value->Draw(window);
+		value->draw(window);
 	}
 	window->display();
 }

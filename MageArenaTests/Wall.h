@@ -4,17 +4,17 @@ class Wall :
 	public PhysicsObject
 {
 public:
-	Wall(sf::IntRect wallrect, sf::FloatRect boundingbox, sf::Texture* walltexture, sf::IntRect texturerect);
-	Wall(sf::IntRect wallrect, sf::Texture* walltexture, sf::IntRect texturerect);
+	Wall(sf::IntRect wallRect, sf::FloatRect boundingBox, sf::Texture* wallTexture, sf::IntRect textureRect);
+	Wall(sf::IntRect wallRect, sf::Texture* wallTexture, sf::IntRect textureRect);
 	
 	~Wall();
-	void virtual			Update(sf::RenderWindow * window, sf::Time* dt);
-	void virtual			Draw(sf::RenderWindow * window);
-	void virtual			resolveCollision(std::shared_ptr<PhysicsObject> otherobject, sf::FloatRect collisionrect);
+	void virtual			update(sf::RenderWindow * window, sf::Time* dt);
+	void virtual			draw(sf::RenderWindow * window);
+	void virtual			resolveCollision(std::shared_ptr<PhysicsObject> otherObject, sf::FloatRect collisionRect);
 
 private:
-	int numtileswide;
-	int numtileshigh;
-	std::vector<std::vector<sf::Sprite> > walltiles;
+	int m_nTilesWide;
+	int m_nTilesHigh;
+	std::vector<std::vector<sf::Sprite> > m_wallTiles;
 };
 

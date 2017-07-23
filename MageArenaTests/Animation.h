@@ -3,17 +3,17 @@
 class Animation
 {
 public:
-	Animation(sf::Texture* texture, sf::Vector2u texturerectsize, float switchtime);
+	Animation(sf::Texture* texture, sf::Vector2u textureRectSize, float switchTime);
 	~Animation();
 
-	void Update(float dt, int row, int endcol, int startcol = 0);
-	sf::IntRect getTextureRect();
+	void					update(float dt, int row, int endColumn, int startColumn = 0);
+	sf::IntRect				getTextureRect();
 private:
-	sf::Vector2u currentimage;
+	sf::Vector2u			m_currentImage;
 
-	float totaltime;
-	float switchtime;
-	sf::IntRect texturerect;
+	float					m_totalTime;
+	float					m_switchTime;
+	sf::IntRect				m_textureRect;
 
 };
 
